@@ -7,9 +7,12 @@ import Input from './Input';
 import List from './List';
 import ToggleAll from './ToggleAll';
 
+const basename =
+  process.env.NODE_ENV === 'development' ? undefined : '/react-pouchdb';
+
 export default () => (
   <Container>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <PouchDB name="todoapp">
         <section className={todoapp}>
           <header className={header}>
