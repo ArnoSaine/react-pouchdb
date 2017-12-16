@@ -12,8 +12,8 @@ import { PouchDB, Find } from 'react-pouchdb';
 <PouchDB name="dbname">
   <Find
     selector={{
-    name: { $gte: null }
-  }}
+      name: { $gte: null }
+    }}
     sort={['name']}
     render={({ db, docs }) => (
       <ul>
@@ -22,9 +22,9 @@ import { PouchDB, Find } from 'react-pouchdb';
             {doc.name}
             <button onClick={() => db.remove(doc)}>Remove</button>
           </li>
-      ))}
+        ))}
       </ul>
-  )}
+    )}
   />
 </PouchDB>
 ```
