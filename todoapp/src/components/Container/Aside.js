@@ -15,7 +15,7 @@ export default () => (
       {[
         {
           href: 'https://github.com/ArnoSaine/react-pouchdb',
-          children: 'React-PouchDB'
+          children: 'react-pouchdb'
         },
         {
           href: 'https://pouchdb.com',

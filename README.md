@@ -165,7 +165,7 @@ export default withDB(({ db, title }) => (
 
 ## Package dependencies
 
-The package expects `pouchdb` to be available. If you use `pouchdb-browser` or `pouchdb-node` import from `react-pouchdb/browser` or  `react-pouchdb/node` respectively.
+The package expects `pouchdb` to be available. If you use `pouchdb-browser` or `pouchdb-node` import from `react-pouchdb/browser` or `react-pouchdb/node` respectively.
 
 ## License
 
