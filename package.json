@@ -1,0 +1,68 @@
+{
+  "name": "react-pouchdb",
+  "version": "0.1.0",
+  "description": "React wrapper for PouchDB that also subscribes to changes.",
+  "main": "cjs",
+  "module": "es",
+  "scripts": {
+    "prebuild": "rimraf browser cjs es node",
+    "build": "npm run inbuild --",
+    "inbuild": "babel-node build.js --presets @babel/env -- --source-maps --ignore src/__tests__",
+    "test": "jest --coverage --verbose",
+    "dev": "npm test -- --watchAll",
+    "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es --ignore src/__tests__",
+    "dev:todoapp": "npm run build:todoapp && concurrently \"npm run build:todoapp -- --watch --skip-initial-build\" \"cd todoapp && npm run dev-server\"",
+    "preversion": "npm run build && npm test",
+    "postpublish": "cd todoapp && npm install react-pouchdb@latest --save-dev",
+    "deploy": "cd todoapp && npm run bundle && cd .. && gh-pages --dist todoapp/build",
+    "precommit": "lint-staged",
+    "prettier:write": "prettier --config .prettierrc.yml --write",
+    "prettier": "npm run prettier:write -- src/**/*.js src/**/*.json package.json",
+    "lint": "npm run prettier",
+    "prepack": "npm run lint && npm run build"
+  },
+  "keywords": ["react", "pouchdb", "couchdb"],
+  "author": {
+    "name": "Arno Saine",
+    "email": "arno@mowhi.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/node": "^7.0.0-beta.35",
+    "babel-7-jest": "^21.3.2",
+    "babel-plugin-transform-rename-import": "^2.1.1",
+    "concurrently": "^3.5.1",
+    "gh-pages": "^1.1.0",
+    "jest": "^21.2.1",
+    "library-util": "^0.1.3",
+    "pouchdb-browser": "^6.3.4",
+    "pouchdb-node": "^6.3.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "yargs": "^10.0.3"
+  },
+  "dependencies": {
+    "airbnb-prop-types": "^2.8.1",
+    "hoist-non-react-statics": "^2.3.1",
+    "json-stable-stringify": "^1.0.1",
+    "lodash": "^4.17.4",
+    "pouchdb-collate": "^6.3.4",
+    "pouchdb-find": "^6.3.4",
+    "pouchdb-selector-core": "^6.3.4",
+    "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "16 || 17"
+  },
+  "jest": {
+    "testMatch": ["**/src/**/__tests__/**/*.js?(x)"],
+    "testPathIgnorePatterns": ["/utils/.*\\.js"],
+    "transform": {
+      ".js$": "babel-7-jest"
+    }
+  },
+  "lint-staged": {
+    "**.js": ["npm run lint", "git add"]
+  }
+}

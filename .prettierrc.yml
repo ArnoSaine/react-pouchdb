@@ -1,0 +1,17 @@
+proseWrap: never
+overrides:
+- files:
+  - ".*.js"
+  - "*.js"
+  options:
+    bracketSpacing: true
+    semi: true
+    singleQuote: true
+    tabWidth: 2
+- files:
+  - ".*.json"
+  - "*.json"
+  options:
+    parser: json
+    printWidth: 999999999999999
+    tabWidth: 2

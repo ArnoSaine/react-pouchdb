@@ -1,0 +1,7 @@
+@media (min-width: 899px) {
+  .learn-bar {
+    margin-left: 150px;
+    margin-right: -150px;
+    padding-left: 0;
+  }
+}

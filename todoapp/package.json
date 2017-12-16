@@ -1,0 +1,33 @@
+{
+  "name": "react-pouchdb-todoapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "bundle": "cross-env NODE_ENV=production webpack -p --progress --config node_modules/frontend-app/lib/webpack/config",
+    "dev": "cross-env NODE_ENV=development webpack --progress --watch --config node_modules/frontend-app/lib/webpack/config",
+    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config node_modules/frontend-app/lib/webpack/config"
+  },
+  "author": {
+    "name": "Arno Saine",
+    "email": "arno@mowhi.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "classnames": "^2.2.5",
+    "frontend-app": "^1.2.0-beta.3",
+    "html-webpack-plugin": "2",
+    "html-webpack-template": "6",
+    "pouchdb-browser": "^6.3.4",
+    "react": "16",
+    "react-dom": "16",
+    "react-pouchdb": "^0.1.0",
+    "react-router-dom": "^4.2.2",
+    "todomvc-app-css": "^2.1.0",
+    "todomvc-common": "^1.0.4"
+  },
+  "config": {
+    "frontendApp": {
+      "type": "react"
+    }
+  }
+}

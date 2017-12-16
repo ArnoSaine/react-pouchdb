@@ -1,0 +1,10 @@
+/browser/
+/build/
+/cjs/
+/coverage/
+/es/
+/lib-test/
+/node/
+/node_modules/
+/test/
+/test-*/
