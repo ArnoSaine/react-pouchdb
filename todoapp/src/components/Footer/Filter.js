@@ -9,7 +9,7 @@ export default () => (
       { path: 'completed', title: 'Completed' }
     ].map(({ path, title }) => (
       <li key={path}>
-        <NavLink activeClassName={selected} exact to={`/${path}`}>
+        <NavLink activeClassName={selected} exact replace to={`/${path}`}>
           {title}
         </NavLink>
       </li>
