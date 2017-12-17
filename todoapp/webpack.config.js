@@ -5,6 +5,14 @@ const baseHref = '/react-pouchdb/';
 const publicPath =
   process.env.npm_lifecycle_event === 'bundle' ? '' : '/build/';
 
+const htmlWebpackPluginOptions = {
+  baseHref,
+  inject: false,
+  mobile: true,
+  template,
+  title: 'React PouchDB Todo App'
+};
+
 module.exports = {
   output: { publicPath },
   devServer: {
@@ -12,12 +20,10 @@ module.exports = {
     historyApiFallback: { index: publicPath }
   },
   plugins: [
+    new HtmlWebpackPlugin(htmlWebpackPluginOptions),
     new HtmlWebpackPlugin({
-      baseHref,
-      mobile: true,
-      inject: false,
-      template,
-      title: 'React PouchDB Todo App'
+      ...htmlWebpackPluginOptions,
+      filename: '404.html'
     })
   ]
 };
