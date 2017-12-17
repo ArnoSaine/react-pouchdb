@@ -83,7 +83,7 @@ Render whether the document exists or not. Function is called / element is clone
 <Get
   id="mydoc"
   children={({ doc, exists }) =>
-    exists ? <h1>{doc.title}</h1> : <h1>NotFound</h1>
+    exists ? <h1>{doc.title}</h1> : <h1>Not found</h1>
   }
 />
 ```
