@@ -21,11 +21,7 @@
     "lint": "npm run prettier",
     "prepack": "npm run lint && npm run build"
   },
-  "keywords": [
-    "react",
-    "pouchdb",
-    "couchdb"
-  ],
+  "keywords": ["react", "pouchdb", "couchdb"],
   "repository": {
     "type": "git",
     "url": "https://github.com/ArnoSaine/react-pouchdb.git"
@@ -65,20 +61,13 @@
     "react": "16 || 17"
   },
   "jest": {
-    "testMatch": [
-      "**/src/**/__tests__/**/*.js?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "/utils/.*\\.js"
-    ],
+    "testMatch": ["**/src/**/__tests__/**/*.js?(x)"],
+    "testPathIgnorePatterns": ["/utils/.*\\.js"],
     "transform": {
       ".js$": "babel-7-jest"
     }
   },
   "lint-staged": {
-    "**.js": [
-      "npm run lint",
-      "git add"
-    ]
+    "**.js": ["npm run lint", "git add"]
   }
 }
