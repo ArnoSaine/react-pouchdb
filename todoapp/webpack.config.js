@@ -1,12 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const template = require('html-webpack-template');
 
-const baseHref = '/react-pouchdb/';
+require('frontend-app/lib/webpack/config/main/styles').default[0].use[
+  process.env.NODE_ENV === 'production' ? 0 : 1
+].options.camelCase = true;
+
 const publicPath =
-  process.env.npm_lifecycle_event === 'bundle' ? '' : '/build/';
+  process.env.NODE_ENV === 'production' ? '/react-pouchdb/' : '/';
 
 const htmlWebpackPluginOptions = {
-  baseHref,
   inject: false,
   mobile: true,
   template,
