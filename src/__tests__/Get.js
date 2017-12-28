@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import PouchDBModule from 'pouchdb-node';
+import PouchDBModule from 'pouchdb';
 import { Get, PouchDB } from '..';
 import { closeDB, renderOrder } from './utils';
 
@@ -40,7 +40,7 @@ test(
 test(
   'update document, fetch specific revision, use other options',
   closeDB(closeDB => {
-    expect.assertions(4);
+    expect.assertions(5);
     const App = () => (
       <div>
         <Get
@@ -48,7 +48,7 @@ test(
           render={renderOrder(
             ({ db, doc }) => {
               expect(doc.a).toBe('moo');
-              db.post({ ...doc, a: 'moo2' });
+              db.put({ ...doc, a: 'moo2' });
             },
             ({ db, doc }) => {
               expect(doc.a).toBe('moo2');
@@ -63,6 +63,7 @@ test(
           rev={rev}
           render={({ doc }) => {
             expect(doc.a).toBe('moo');
+            expect(doc._revisions).toBeUndefined();
             return null;
           }}
         />
