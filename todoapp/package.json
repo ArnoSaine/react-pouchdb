@@ -1,6 +1,6 @@
 {
   "name": "react-pouchdb-todoapp",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "bundle": "cross-env NODE_ENV=production webpack -p --progress --config node_modules/frontend-app/lib/webpack/config",

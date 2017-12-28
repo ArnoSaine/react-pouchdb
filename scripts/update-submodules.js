@@ -16,7 +16,9 @@ const updateJsonSync = (file, updater) =>
   );
 });
 
-updateJsonSync('todoapp/package.json', value => ({
-  ...value,
-  version: process.env.npm_package_version
-}));
+['todoapp/package.json', 'todoapp/package-lock.json'].forEach(file =>
+  updateJsonSync(file, value => ({
+    ...value,
+    version: process.env.npm_package_version
+  }))
+);
