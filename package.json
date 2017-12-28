@@ -7,19 +7,20 @@
   "scripts": {
     "prebuild": "rimraf browser cjs es node",
     "build": "npm run inbuild --",
-    "inbuild": "babel-node build.js --presets @babel/env -- --source-maps --ignore src/__tests__",
     "test": "jest --coverage --verbose",
     "dev": "npm test -- --watchAll",
     "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es --ignore src/__tests__",
     "dev:todoapp": "npm run build:todoapp && concurrently \"npm run build:todoapp -- --watch --skip-initial-build\" \"cd todoapp && npm run dev-server\"",
     "//preversion": "npm run build && npm test",
+    "inbuild": "babel-node scripts/build.js --presets @babel/env,@babel/stage-0 -- --source-maps --ignore src/__tests__",
     "postpublish": "cd todoapp && npm install react-pouchdb@latest --save-dev",
     "deploy": "cd todoapp && npm run bundle && cd .. && gh-pages --dist todoapp/build",
     "precommit": "lint-staged",
     "prettier:write": "prettier --config .prettierrc.yml --write",
     "prettier": "npm run prettier:write -- src/**/*.js src/**/*.json package.json",
     "lint": "npm run prettier",
-    "prepack": "npm run lint && npm run build"
+    "prepack": "npm run lint && npm run build",
+    "version": "babel-node scripts/update-submodules.js --presets @babel/env,@babel/stage-0"
   },
   "keywords": ["react", "pouchdb", "couchdb"],
   "repository": {
