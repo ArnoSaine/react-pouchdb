@@ -22,7 +22,7 @@ export default () => (
           children: 'PouchDB'
         },
         {
-          href: 'http://couchdb.apache.org/',
+          href: 'http://couchdb.apache.org',
           children: 'CouchDB'
         }
       ].map(props => (
