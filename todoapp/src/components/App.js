@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { header, main, todoapp } from 'todomvc-app-css/index.css';
+import { main, todoapp } from 'todomvc-app-css/index.css';
 import { PouchDB } from 'react-pouchdb/browser';
 import Container from './Container';
 import Footer from './Footer';
@@ -15,7 +15,7 @@ export default () => (
     <BrowserRouter basename={basename}>
       <PouchDB name="todoapp">
         <section className={todoapp}>
-          <header className={header}>
+          <header>
             <h1>todos</h1>
           </header>
           <Input />
