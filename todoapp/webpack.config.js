@@ -1,10 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const template = require('html-webpack-template');
 
-require('frontend-app/lib/webpack/config/main/styles').default[0].use[
-  process.env.NODE_ENV === 'production' ? 0 : 1
-].options.camelCase = true;
-
 const publicPath =
   process.env.NODE_ENV === 'production' ? '/react-pouchdb/' : '/';
 
