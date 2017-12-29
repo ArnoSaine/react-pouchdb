@@ -7,7 +7,6 @@
   "scripts": {
     "prebuild": "rimraf browser cjs es node",
     "build": "npm run inbuild --",
-    "test": "jest --coverage --verbose",
     "dev": "npm test -- --watchAll",
     "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es --ignore src/__tests__",
     "dev:todoapp": "npm run build:todoapp && concurrently \"npm run build:todoapp -- --watch --skip-initial-build\" \"cd todoapp && npm run dev-server\"",
@@ -21,6 +20,7 @@
     "prettier": "npm run prettier:write -- src/**/*.js src/**/*.json package.json",
     "lint": "npm run prettier",
     "prepack": "npm run lint && npm run build",
+    "test": "jest --coverage --runInBand --verbose",
     "update-submodules": "babel-node scripts/update-submodules.js --presets @babel/env,@babel/stage-0",
     "version": "npm run update-submodules --"
   },
