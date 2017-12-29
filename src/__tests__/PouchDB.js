@@ -1,4 +1,4 @@
-import PouchDBModule from 'pouchdb-node';
+import PouchDBModule from 'pouchdb';
 import { instanceOf } from 'prop-types';
 import renderer from 'react-test-renderer';
 import { PouchDB, withDB } from '..';

@@ -5,21 +5,22 @@
   "main": "cjs",
   "module": "es",
   "scripts": {
-    "prebuild": "rimraf browser cjs es node",
     "build": "npm run inbuild --",
-    "dev": "npm test -- --watchAll",
     "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es --ignore src/__tests__",
+    "deploy": "cd todoapp && npm run bundle && cd .. && gh-pages --dist todoapp/build",
+    "dev": "npm test -- --watchAll",
     "dev:todoapp": "npm run build:todoapp && concurrently \"npm run build:todoapp -- --watch --skip-initial-build\" \"cd todoapp && npm run dev-server\"",
-    "//preversion": "npm run build && npm test",
+    "eslint": "eslint {{.,todoapp},{scripts,src,todoapp/src}/**}/*.js --fix",
     "inbuild": "babel-node scripts/build.js --presets @babel/env,@babel/stage-0 -- --source-maps --ignore src/__tests__",
+    "lint": "npm run eslint && npm run prettier",
     "postbuild": "npm run update-submodules",
     "postpublish": "cd todoapp && npm install react-pouchdb@latest --save-dev",
-    "deploy": "cd todoapp && npm run bundle && cd .. && gh-pages --dist todoapp/build",
+    "prebuild": "rimraf browser cjs es node",
     "precommit": "lint-staged",
-    "prettier:write": "prettier --config .prettierrc.yml --write",
-    "prettier": "npm run prettier:write -- src/**/*.js src/**/*.json package.json",
-    "lint": "npm run prettier",
-    "prepack": "npm run lint && npm run build",
+    "prepack": "npm run build",
+    "prettier": "npm run prettier:write -- {{.,todoapp},{scripts,src,todoapp/src}/**}/*.{js,json} !./package-lock.json",
+    "prettier:write": "prettier --config .prettierrc.js --write",
+    "preversion": "npm run lint && npm test",
     "test": "jest --coverage --runInBand --verbose",
     "update-submodules": "babel-node scripts/update-submodules.js --presets @babel/env,@babel/stage-0",
     "version": "npm run update-submodules --"
@@ -29,25 +30,14 @@
     "type": "git",
     "url": "https://github.com/ArnoSaine/react-pouchdb.git"
   },
+  "license": "ISC",
   "author": {
     "name": "Arno Saine",
     "email": "arno@mowhi.com"
   },
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/node": "^7.0.0-beta.35",
-    "babel-7-jest": "^21.3.2",
-    "babel-plugin-transform-rename-import": "^2.1.1",
-    "concurrently": "^3.5.1",
-    "gh-pages": "^1.1.0",
-    "jest": "^21.2.1",
-    "library-util": "^0.1.3",
-    "pouchdb-browser": "^6.3.4",
-    "pouchdb-node": "^6.3.4",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0",
-    "yargs": "^10.0.3"
+  "files": ["browser", "cjs", "es", "node"],
+  "peerDependencies": {
+    "react": "16 || 17"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.35",
@@ -60,17 +50,31 @@
     "pouchdb-selector-core": "^6.3.4",
     "prop-types": "^15.6.0"
   },
-  "peerDependencies": {
-    "react": "16 || 17"
+  "devDependencies": {
+    "@babel/node": "^7.0.0-beta.35",
+    "babel-7-jest": "^21.3.2",
+    "babel-plugin-transform-rename-import": "^2.1.1",
+    "concurrently": "^3.5.1",
+    "cross-spawn": "^5.1.0",
+    "fs-extra": "^5.0.0",
+    "gh-pages": "^1.1.0",
+    "jest": "^21.2.1",
+    "library-util": "^0.1.5",
+    "pouchdb": "^6.4.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "yargs": "^10.0.3"
   },
   "jest": {
-    "testMatch": ["**/src/**/__tests__/**/*.js?(x)"],
+    "testMatch": ["**/src/**/__tests__/**/*.js"],
     "testPathIgnorePatterns": ["/utils/.*\\.js"],
     "transform": {
       ".js$": "babel-7-jest"
     }
   },
   "lint-staged": {
-    "**.js": ["npm run lint", "git add"]
+    "*.js": ["eslint --fix", "npm run prettier:write", "git add"],
+    "*.{css,json,md}": ["prettier --write", "git add"]
   }
 }

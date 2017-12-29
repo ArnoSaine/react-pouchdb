@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import { newTodo } from 'todomvc-app-css/index.css';
 import { withDB } from 'react-pouchdb/browser';
 

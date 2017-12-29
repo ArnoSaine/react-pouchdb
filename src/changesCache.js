@@ -3,13 +3,13 @@ import stringify from 'json-stable-stringify';
 export const cache = new Map();
 
 function get(key, getDefaultValue) {
-  if (this.has(key)) {
-    return this.get(key);
-  } else {
-    const defaultValue = getDefaultValue();
-    this.set(key, defaultValue);
-    return defaultValue;
-  }
+  return this.has(key)
+    ? this.get(key)
+    : do {
+        const defaultValue = getDefaultValue();
+        this.set(key, defaultValue);
+        defaultValue;
+      };
 }
 
 const EVENT = 'change';

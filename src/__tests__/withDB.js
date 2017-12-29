@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import PouchDBModule from 'pouchdb-node';
+import PouchDBModule from 'pouchdb';
 import { PouchDB, withDB } from '..';
 import { closeDB } from './utils';
 

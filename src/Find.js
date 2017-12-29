@@ -53,7 +53,7 @@ export default class Find extends BaseComponent {
             const index = docs.findIndex(({ _id }) => doc._id === _id);
             const found = index !== -1;
             // Document was deleted or it does not match the selector?
-            if (doc._deleted || (selector && !matchesSelector(doc, selector))) {
+            if (deleted || (selector && !matchesSelector(doc, selector))) {
               if (found) {
                 // Remove.
                 docs.splice(index, 1);
@@ -63,7 +63,7 @@ export default class Find extends BaseComponent {
                   const { docs: [replacementDoc] } = await db.find({
                     ...options,
                     limit: 1,
-                    skip: (options.skip ?? 0) + length
+                    skip: (options.skip || 0) + length
                   });
                   if (replacementDoc) {
                     docs.push(replacementDoc);
@@ -107,7 +107,7 @@ export default class Find extends BaseComponent {
                 const { docs: [lastDoc] } = await db.find({
                   ...options,
                   limit: 1,
-                  skip: (options.skip ?? 0) + sortedIndex
+                  skip: (options.skip || 0) + sortedIndex
                 });
                 if (lastDoc?._id !== doc._id) {
                   docs[sortedIndex] = lastDoc;

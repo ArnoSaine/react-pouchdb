@@ -1,4 +1,4 @@
-const { outDir = 'node/cjs' } = require('yargs').argv;
+const { outDir = '' } = require('yargs').argv;
 
 const outDirParts = outDir.split('/');
 
