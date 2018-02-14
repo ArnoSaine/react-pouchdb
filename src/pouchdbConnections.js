@@ -15,10 +15,10 @@ export function create(options) {
 
 export function close(options) {
   const key = stringify(options);
-  const userCount = userCounts::get(key) - 1;
+  const userCount = userCounts.get(key) - 1;
   userCounts.set(key, userCount);
   if (!userCount) {
-    this.close();
+    dbs.get(key).close();
     dbs.delete(key);
   }
 }

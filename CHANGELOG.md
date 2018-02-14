@@ -1,3 +1,7 @@
+# 0.1.4
+
+* Fix closing the database on unmount.
+
 # 0.1.3
 
 * Pool PouchDB connections.
