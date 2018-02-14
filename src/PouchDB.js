@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { instanceOf, node, number, string } from 'prop-types';
 import PouchDBModule from 'pouchdb';
+import { create, close } from './pouchdbConnections';
 
 export const contextTypes = {
   db: instanceOf(PouchDBModule).isRequired
@@ -19,12 +20,11 @@ export default class PouchDB extends Component {
   static childContextTypes = contextTypes;
   constructor(props) {
     super(props);
-    const { maxListeners, name, ...options } = props;
-    const db = new PouchDBModule(name, options);
+    const { children, maxListeners, ...options } = props;
+    this.db = create(options);
     if (maxListeners) {
-      db.setMaxListeners(maxListeners);
+      this.db.setMaxListeners(maxListeners);
     }
-    this.db = db;
   }
   getChildContext() {
     const { db } = this;
@@ -33,7 +33,8 @@ export default class PouchDB extends Component {
     };
   }
   componentWillUnmount() {
-    this.db.close();
+    const { children, maxListeners, ...options } = this.props;
+    close(options);
   }
   render() {
     return this.props.children;

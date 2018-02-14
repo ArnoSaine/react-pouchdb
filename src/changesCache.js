@@ -1,16 +1,7 @@
 import stringify from 'json-stable-stringify';
+import get from './getWithDefaultValue';
 
 export const cache = new Map();
-
-function get(key, getDefaultValue) {
-  return this.has(key)
-    ? this.get(key)
-    : do {
-        const defaultValue = getDefaultValue();
-        this.set(key, defaultValue);
-        defaultValue;
-      };
-}
 
 const EVENT = 'change';
 

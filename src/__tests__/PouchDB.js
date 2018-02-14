@@ -2,7 +2,7 @@ import PouchDBModule from 'pouchdb';
 import { instanceOf } from 'prop-types';
 import renderer from 'react-test-renderer';
 import { PouchDB, withDB } from '..';
-import { closeDB } from './utils';
+import { asyncTest } from './utils';
 
 const withDBContext = Component =>
   Object.assign((...args) => Component(...args), {
@@ -13,7 +13,7 @@ const withDBContext = Component =>
 
 test(
   'provide database',
-  closeDB(closeDB => {
+  asyncTest(done => {
     expect.assertions(4);
     const App = withDBContext(
       (props, { db }) =>
@@ -22,7 +22,7 @@ test(
           expect(db.name).toBe('test');
           expect(db.__opts.revs_limit).toBeUndefined();
           expect(db._maxListeners).toBeUndefined();
-          closeDB(db);
+          done();
         }
     );
     renderer.create(
@@ -35,14 +35,14 @@ test(
 
 test(
   'set options',
-  closeDB(closeDB => {
+  asyncTest(done => {
     expect.assertions(1);
     const revsLimit = 4;
     const App = withDB(
       ({ db }) =>
         do {
           expect(db.__opts.revs_limit).toBe(revsLimit);
-          closeDB(db);
+          done();
         }
     );
     renderer.create(
@@ -55,14 +55,14 @@ test(
 
 test(
   'set maxListeners',
-  closeDB(closeDB => {
+  asyncTest(done => {
     expect.assertions(1);
     const maxListeners = 4;
     const App = withDB(
       ({ db }) =>
         do {
           expect(db._maxListeners).toBe(maxListeners);
-          closeDB(db);
+          done();
         }
     );
     renderer.create(

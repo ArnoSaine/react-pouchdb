@@ -1,28 +1,16 @@
 import renderer from 'react-test-renderer';
-import PouchDBModule from 'pouchdb';
 import property from 'lodash/property';
 import { Find, PouchDB, withDB } from '..';
-import { closeDB, renderOrder } from './utils';
+import { asyncTest, clean, renderOrder } from './utils';
 
-beforeEach(async () => {
-  try {
-    // Remove possible old documents.
-    const db = new PouchDBModule('test');
-    const { rows } = await db.allDocs();
-    await db.bulkDocs(
-      rows.map(({ id, value: { rev } }) => ({
-        _id: id,
-        _rev: rev,
-        _deleted: true
-      }))
-    );
-  } catch {}
-});
+clean();
 
 test(
   'selector',
-  closeDB(async closeDB => {
+  asyncTest(async done => {
     expect.assertions(6);
+    let _rev;
+    let _id;
     const App = withDB(() => (
       <Find
         selector={{
@@ -39,19 +27,21 @@ test(
           },
           async ({ db, docs }) => {
             expect(docs.length).toBe(2);
-            const { rev } = await db.put({ ...docs[0], a: 'moo2' });
-            db.put({ ...docs[0], _rev: rev, a: 'moo' });
+            const { id, rev } = await db.put({ ...docs[0], a: 'moo2' });
+            _rev = rev;
+            _id = id;
           },
-          ({ docs }) => {
+          ({ docs, db }) => {
             expect(docs.length).toBe(1);
+            db.put({ _id, _rev, a: 'moo' });
           },
           ({ db, docs }) => {
             expect(docs.length).toBe(2);
             db.remove(docs[0]);
           },
-          ({ db, docs }) => {
+          ({ docs }) => {
             expect(docs.length).toBe(1);
-            closeDB(db);
+            done();
           }
         )}
       />
@@ -66,7 +56,7 @@ test(
 
 test(
   'sort',
-  closeDB(async closeDB => {
+  asyncTest(async done => {
     expect.assertions(3);
     const App = withDB(() => (
       <Find
@@ -95,7 +85,7 @@ test(
             ]);
             db.put({ ...docs[0], a: true });
           },
-          ({ db, docs }) => {
+          ({ docs }) => {
             expect(docs.map(property('a'))).toEqual([
               'moo',
               123,
@@ -103,7 +93,7 @@ test(
               false,
               null
             ]);
-            closeDB(db);
+            done();
           }
         )}
       />
@@ -118,7 +108,7 @@ test(
 
 test(
   'limit',
-  closeDB(async closeDB => {
+  asyncTest(async done => {
     expect.assertions(7);
     const App = withDB(() => (
       <Find
@@ -158,9 +148,9 @@ test(
             expect(docs.map(property('a'))).toEqual([true, 123.01]);
             db.post({ a: 999 });
           },
-          ({ db, docs }) => {
+          ({ docs }) => {
             expect(docs.map(property('a'))).toEqual([true, 123.01]);
-            closeDB(db);
+            done();
           }
         )}
       />
@@ -175,7 +165,7 @@ test(
 
 test(
   'skip',
-  closeDB(async closeDB => {
+  asyncTest(async done => {
     expect.assertions(5);
     const App = withDB(() => (
       <Find
@@ -207,9 +197,9 @@ test(
             expect(docs.map(property('a'))).toEqual([false, 1.2, 123]);
             db.post({ a: 99 });
           },
-          ({ db, docs }) => {
+          ({ docs }) => {
             expect(docs.map(property('a'))).toEqual([false, 1.2, 99, 123]);
-            closeDB(db);
+            done();
           }
         )}
       />

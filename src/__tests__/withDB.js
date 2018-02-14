@@ -1,17 +1,17 @@
 import renderer from 'react-test-renderer';
 import PouchDBModule from 'pouchdb';
 import { PouchDB, withDB } from '..';
-import { closeDB } from './utils';
+import { asyncTest } from './utils';
 
 test(
   'provide database',
-  closeDB(closeDB => {
+  asyncTest(done => {
     expect.assertions(1);
     const App = withDB(
       ({ db }) =>
         do {
           expect(db).toBeInstanceOf(PouchDBModule);
-          closeDB(db);
+          done();
         }
     );
     renderer.create(

@@ -1,29 +1,21 @@
 import renderer from 'react-test-renderer';
 import PouchDBModule from 'pouchdb';
 import { Get, PouchDB } from '..';
-import { closeDB, renderOrder } from './utils';
+import { asyncTest, clean, renderOrder } from './utils';
 
-let rev;
-const db = new PouchDBModule('test');
+clean();
 
 test(
   'fetch document',
-  closeDB(async closeDB => {
+  asyncTest(async done => {
     expect.assertions(1);
-    try {
-      // Remove possible old document.
-      const db = new PouchDBModule('test');
-      const doc = await db.get('test');
-      await db.remove(doc);
-    } catch {}
     const App = () => (
       <Get
         id="test"
-        render={({ db, doc }) =>
+        render={({ doc }) =>
           do {
             expect(doc.a).toBe('moo');
-            rev = doc._rev;
-            closeDB(db);
+            done();
           }
         }
       />
@@ -33,14 +25,17 @@ test(
         <App />
       </PouchDB>
     );
+    const db = new PouchDBModule('test');
     db.post({ _id: 'test', a: 'moo' });
   })
 );
 
 test(
   'update document, fetch specific revision, use other options',
-  closeDB(closeDB => {
+  asyncTest(async done => {
     expect.assertions(5);
+    const db = new PouchDBModule('test');
+    const { rev } = await db.post({ _id: 'test', a: 'moo' });
     const App = () => (
       <div>
         <Get
@@ -50,10 +45,9 @@ test(
               expect(doc.a).toBe('moo');
               db.put({ ...doc, a: 'moo2' });
             },
-            ({ db, doc }) => {
+            ({ doc }) => {
               expect(doc.a).toBe('moo2');
-              rev = doc._rev;
-              setTimeout(() => closeDB(db), 1000);
+              setTimeout(() => done(), 1000);
             }
           )}
         />
@@ -89,9 +83,10 @@ test(
 const testAttachments = ({ name, props, format, value1, value2 }) =>
   test(
     `attachment, ${name}`,
-    closeDB(async closeDB => {
+    asyncTest(async done => {
       expect.assertions(3);
       const db = new PouchDBModule('test');
+      const { rev } = await db.post({ _id: 'test', a: 'moo' });
       await db.putAttachment(
         'test',
         'att.txt',
@@ -120,11 +115,10 @@ const testAttachments = ({ name, props, format, value1, value2 }) =>
                 expect(format(attachments['att.txt'].data)).toBe(value2);
                 db.removeAttachment(doc._id, 'att.txt', doc._rev);
               },
-            ({ attachments, db, doc }) =>
+            ({ attachments }) =>
               do {
                 expect(attachments).toBeUndefined();
-                rev = doc._rev;
-                closeDB(db);
+                done();
               }
           )}
         />
@@ -170,8 +164,8 @@ testAttachments({
 
 test(
   'remove document',
-  closeDB(closeDB => {
-    expect.assertions(4);
+  asyncTest(done => {
+    expect.assertions(5);
     const App = () => (
       <Get
         id="test"
@@ -179,14 +173,18 @@ test(
           ({ exists }) => {
             expect(exists).toBe(undefined);
           },
+          ({ db, exists }) => {
+            expect(exists).toBe(false);
+            db.post({ _id: 'test' });
+          },
           ({ db, doc, exists }) => {
             expect(exists).toBe(true);
             db.remove(doc);
           },
-          ({ db, doc, exists }) => {
+          ({ doc, exists }) => {
             expect(exists).toBe(false);
             expect(doc._deleted).toBe(true);
-            closeDB(db);
+            done();
           }
         )}
       />
