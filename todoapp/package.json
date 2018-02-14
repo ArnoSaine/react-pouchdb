@@ -20,7 +20,7 @@
     "pouchdb-browser": "^6.3.4",
     "react": "16",
     "react-dom": "16",
-    "react-pouchdb": "^0.1.2",
+    "react-pouchdb": "^0.1.4",
     "react-router-dom": "^4.2.2",
     "todomvc-app-css": "^2.1.0",
     "todomvc-common": "^1.0.4"
