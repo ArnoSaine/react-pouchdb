@@ -5,8 +5,6 @@
 # 0.1.3
 
 * Pool PouchDB connections.
-* Reorganize scripts.
-* Edit ESLint configuration.
 
 # 0.1.2
 
