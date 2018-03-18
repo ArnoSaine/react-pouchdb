@@ -49,7 +49,7 @@ export default class Find extends BaseComponent {
             return_docs: false
           },
           async ({ deleted, doc }) => {
-            const { docs } = this.state;
+            const docs = [...this.state.docs];
             const index = docs.findIndex(({ _id }) => doc._id === _id);
             const found = index !== -1;
             // Document was deleted or it does not match the selector?
