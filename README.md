@@ -7,14 +7,14 @@ React wrapper for PouchDB that also subscribes to changes.
 ## Example
 
 ```js
-import { PouchDB, Find } from 'react-pouchdb';
+import { PouchDB, Find } from "react-pouchdb";
 
 <PouchDB name="dbname">
   <Find
     selector={{
       name: { $gte: null }
     }}
-    sort={['name']}
+    sort={["name"]}
     render={({ db, docs }) => (
       <ul>
         {docs.map(doc => (
@@ -26,7 +26,7 @@ import { PouchDB, Find } from 'react-pouchdb';
       </ul>
     )}
   />
-</PouchDB>
+</PouchDB>;
 ```
 
 ## API
@@ -35,13 +35,13 @@ import { PouchDB, Find } from 'react-pouchdb';
 
 Connect to a database.
 
-##### `name: string`
+**`name: string`**
 
-##### `maxListeners: number`
+**`maxListeners: number`**
 
 Similar change requests are pooled, but you might still need to increase the number of `maxListeners`.
 
-##### `...rest: any`
+**`...rest: any`**
 
 Other props are passed to [PouchDB](https://pouchdb.com/api.html#create_database) constructor as second argument.
 
@@ -55,11 +55,11 @@ Other props are passed to [PouchDB](https://pouchdb.com/api.html#create_database
 
 Get document and listen to changes.
 
-##### `id: string`
+**`id: string`**
 
 `docId`.
 
-##### `component`
+**`component`**
 
 Component is rendered with props `db`, `doc` and `exists`, if the document is found and/or updated. If the document is deleted, component will unmount.
 
@@ -67,15 +67,15 @@ Component is rendered with props `db`, `doc` and `exists`, if the document is fo
 <Get id="mydoc" component={Title} />
 ```
 
-##### `render: func`
+**`render: func`**
 
 `render` function is called with props `db`, `doc` and `exists`, if the document is found and/or updated. If the document is deleted, component will unmount.
 
 ```js
-<Get id="mydoc" render={({doc}) => <h1>{doc.title}</h1>} />
+<Get id="mydoc" render={({ doc }) => <h1>{doc.title}</h1>} />
 ```
 
-##### `children: func|element`
+**`children: func|element`**
 
 Render whether the document exists or not. Function is called / element is cloned with props `db`, `doc` and `exists`.
 
@@ -88,7 +88,7 @@ Render whether the document exists or not. Function is called / element is clone
 />
 ```
 
-##### `attachments: bool|string`
+**`attachments: bool|string`**
 
 Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s.
 
@@ -99,13 +99,13 @@ Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s
   render={({ attachments, doc }) => (
     <>
       <h1>{doc.title}</h1>
-      <code>{attachments['att.txt'].data}</code>
+      <code>{attachments["att.txt"].data}</code>
     </>
   )}
 />
 ```
 
-##### `...rest: any`
+**`...rest: any`**
 
 Other props are passed to [`db.get`](https://pouchdb.com/api.html#fetch_document) method as second argument. Note that if you provide props **other** than `attachments`, `ajax` or `binary`, live changes are disabled.
 
@@ -113,21 +113,21 @@ Other props are passed to [`db.get`](https://pouchdb.com/api.html#fetch_document
 
 Find documents and listen to changes.
 
-##### `selector: object`
+**`selector: object`**
 
-##### `sort: array`
+**`sort: array`**
 
-##### `limit: number`
+**`limit: number`**
 
-##### `skip: number`
+**`skip: number`**
 
 See [`db.find`](https://pouchdb.com/api.html#query_index).
 
-##### `component`
+**`component`**
 
-##### `render: func`
+**`render: func`**
 
-##### `children: func|element`
+**`children: func|element`**
 
 Render methods will be passed `db` and `docs` props. `db` is the [PouchDB](https://pouchdb.com/api.html) instance.
 
@@ -136,7 +136,7 @@ Render methods will be passed `db` and `docs` props. `db` is the [PouchDB](https
   selector={{
     name: { $gte: null }
   }}
-  sort={['name']}
+  sort={["name"]}
   render={({ docs }) => (
     <ul>{docs.map(doc => <li key={doc._id}>{doc.name}</li>)}</ul>
   )}
@@ -148,7 +148,7 @@ Render methods will be passed `db` and `docs` props. `db` is the [PouchDB](https
 Higher-order component for accessing the [PouchDB](https://pouchdb.com/api.html) instance anywhere in the `<PouchDB>` children. Note that for convenience `<Get>` and `<Find>` render methods will be passed the `db` prop as well.
 
 ```js
-import { withDB } from 'react-pouchdb';
+import { withDB } from "react-pouchdb";
 
 export default withDB(({ db, title }) => (
   <button
@@ -166,7 +166,3 @@ export default withDB(({ db, title }) => (
 ## Package dependencies
 
 The package expects `pouchdb` to be available. If you use `pouchdb-browser` or `pouchdb-node` import from `react-pouchdb/browser` or `react-pouchdb/node` respectively.
-
-## License
-
-ISC
