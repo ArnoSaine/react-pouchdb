@@ -1,3 +1,3 @@
-export { default as asyncTest } from './asyncTest';
-export { default as clean } from './clean';
-export { default as renderOrder } from './renderOrder';
+export asyncTest from './asyncTest';
+export clean from './clean';
+export renderOrder from './renderOrder';

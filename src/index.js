@@ -1,5 +1,5 @@
-export { default as Get } from './Get';
-export { default as Find } from './Find';
-export { default as PouchDB } from './PouchDB';
-export { default as withDB } from './withDB';
+export Get from './Get';
+export Find from './Find';
+export PouchDB from './PouchDB';
+export withDB from './withDB';
 export * as DBContext from './DBContext';
