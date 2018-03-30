@@ -5,13 +5,10 @@ import { withDB } from 'react-pouchdb/browser';
 
 export default withDB(
   class Item extends Component {
+    static getDerivedStateFromProps({ doc: { title } }) {
+      return { value: title };
+    }
     state = { value: this.props.doc.title };
-    componentWillReceiveProps({ doc: { title } }) {
-      this.setValue(title);
-    }
-    setValue(value) {
-      this.setState({ value });
-    }
     setInputRef = input => {
       this.input = input;
     };
@@ -30,7 +27,7 @@ export default withDB(
     edit = () => {
       this.setState({ editing: true }, () => this.input.focus());
     };
-    handleChange = ({ target: { value } }) => this.setValue(value);
+    handleChange = ({ target: { value } }) => this.setState({ value });
     toggleComplete = () => {
       const { db, doc, doc: { completed } } = this.props;
       db.put({

@@ -7,12 +7,12 @@ export default class BaseComponent extends Component {
   static contextTypes = contextTypes;
   componentDidMount() {
     this._isMounted = true;
-    this._listen(this.props);
+    this._listen();
   }
-  componentWillReceiveProps(props) {
-    if (shouldUpdate(this.props, props)) {
+  componentDidUpdate(prevProps) {
+    if (shouldUpdate(prevProps, this.props)) {
       this.unlisten();
-      this._listen(props);
+      this._listen();
     }
   }
   componentWillUnmount() {
@@ -26,8 +26,8 @@ export default class BaseComponent extends Component {
     this.setState(state);
     return true;
   }
-  _listen(props) {
-    this.listen(omit(props));
+  _listen() {
+    this.listen(omit(this.props));
   }
   unlisten() {
     const { cancel } = this;
