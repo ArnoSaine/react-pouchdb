@@ -1,17 +1,15 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 import classNames from 'classnames';
 import styles from 'todomvc-app-css/index.css';
 import { withDB } from 'react-pouchdb/browser';
 
 export default withDB(
   class Item extends Component {
-    static getDerivedStateFromProps({ doc: { title } }) {
-      return { value: title };
+    static getDerivedStateFromProps({ doc: { title } }, { editing }) {
+      return editing ? null : { value: title };
     }
     state = { value: this.props.doc.title };
-    setInputRef = input => {
-      this.input = input;
-    };
+    inputRef = createRef();
     save = () => {
       const { props: { db, doc }, state: { value } } = this;
       this.setState({ editing: false });
@@ -25,7 +23,7 @@ export default withDB(
       db.remove(doc);
     };
     edit = () => {
-      this.setState({ editing: true }, () => this.input.focus());
+      this.setState({ editing: true }, () => this.inputRef.current.focus());
     };
     handleChange = ({ target: { value } }) => this.setState({ value });
     toggleComplete = () => {
@@ -60,7 +58,7 @@ export default withDB(
           </div>
           <input
             className={styles.edit}
-            ref={this.setInputRef}
+            ref={this.inputRef}
             type="text"
             value={value}
             onChange={this.handleChange}
