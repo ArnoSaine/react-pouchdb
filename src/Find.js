@@ -6,13 +6,14 @@ import { forbidExtraProps } from 'airbnb-prop-types';
 import { number, object, array } from 'prop-types';
 import BaseComponent from './BaseComponent';
 import changesCache from './changesCache';
-import renderProps, { propTypes } from './renderProps';
+import renderProps from './renderProps';
+import withDB from './withDB';
 
 PouchDB.plugin(find);
 
-export default class Find extends BaseComponent {
+class Find extends BaseComponent {
   static propTypes = forbidExtraProps({
-    ...propTypes,
+    ...BaseComponent.propTypes,
     limit: number,
     selector: object.isRequired,
     skip: number,
@@ -22,7 +23,7 @@ export default class Find extends BaseComponent {
     docs: []
   };
   async listen(options) {
-    const { context: { db } } = this;
+    const { props: { db } } = this;
     const { selector, limit, skip, sort } = options;
     if (selector) {
       if (sort) {
@@ -137,7 +138,9 @@ export default class Find extends BaseComponent {
     }
   }
   render() {
-    const { context: { db }, props, state: { docs } } = this;
-    return renderProps(props, docs, { db, docs });
+    const { props: { db, ...otherProps }, state: { docs } } = this;
+    return renderProps(otherProps, docs, { db, docs });
   }
 }
+
+export default withDB(Find);

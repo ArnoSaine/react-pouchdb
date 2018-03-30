@@ -1,18 +1,27 @@
-import { func } from 'prop-types';
+import PouchDBModule from 'pouchdb';
+import { instanceOf, func } from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
-import { contextTypes } from './PouchDB';
+import { Consumer } from './DBContext';
+
+export const propTypes = {
+  db: instanceOf(PouchDBModule).isRequired
+};
 
 const withDB = Component =>
   hoistStatics(
     Object.assign(
-      (props, context) => {
+      props => {
         const { wrappedComponentRef, ...remainingProps } = props;
         return (
-          <Component
-            {...remainingProps}
-            {...context}
-            ref={wrappedComponentRef}
-          />
+          <Consumer>
+            {db => (
+              <Component
+                {...remainingProps}
+                db={db}
+                ref={wrappedComponentRef}
+              />
+            )}
+          </Consumer>
         );
       },
       {
@@ -20,8 +29,7 @@ const withDB = Component =>
         WrappedComponent: Component,
         propTypes: {
           wrappedComponentRef: func
-        },
-        contextTypes
+        }
       }
     ),
     Component

@@ -1,10 +1,13 @@
 import { Component } from 'react';
-import { contextTypes } from './PouchDB';
 import shouldUpdate from './shouldUpdate';
-import { omit } from './renderProps';
+import { omit, propTypes as renderPropTypes } from './renderProps';
+import { propTypes as dbPropTypes } from './withDB';
 
 export default class BaseComponent extends Component {
-  static contextTypes = contextTypes;
+  static propTypes = {
+    ...renderPropTypes,
+    ...dbPropTypes
+  };
   componentDidMount() {
     this._isMounted = true;
     this._listen();

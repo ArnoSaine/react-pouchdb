@@ -1,22 +1,23 @@
 import { bool, oneOf, string } from 'prop-types';
 import BaseComponent from './BaseComponent';
-import renderProps, { propTypes } from './renderProps';
 import attachmentsAsUint8Arrays from './attachmentsAsUint8Arrays';
 import changesCache from './changesCache';
+import renderProps from './renderProps';
+import withDB from './withDB';
 
 const UINT8ARRAY = 'u8a';
 const ALLOWED_LIVE_OPTIONS = ['attachments', 'ajax', 'binary', 'id'];
 
-export default class Get extends BaseComponent {
+class Get extends BaseComponent {
   static propTypes = {
-    ...propTypes,
+    ...BaseComponent.propTypes,
     attachments: oneOf([true, false, UINT8ARRAY]),
     binary: bool,
     id: string.isRequired
   };
   state = {};
   async listen(options) {
-    const { context: { db } } = this;
+    const { props: { db } } = this;
     const { id, attachments, ...otherOptions } = options;
     const optionsWithAttachmentAndBinaryOption = {
       binary: attachments === UINT8ARRAY,
@@ -48,7 +49,7 @@ export default class Get extends BaseComponent {
     }
   }
   async get(id, options) {
-    const { context: { db } } = this;
+    const { props: { db } } = this;
     try {
       return await this.nextState(await db.get(id, options));
     } catch {
@@ -68,7 +69,9 @@ export default class Get extends BaseComponent {
     };
   }
   render() {
-    const { context: { db }, props, state, state: { exists } } = this;
-    return renderProps(props, exists, { db, ...state });
+    const { props: { db, ...otherProps }, state, state: { exists } } = this;
+    return renderProps(otherProps, exists, { db, ...state });
   }
 }
+
+export default withDB(Get);

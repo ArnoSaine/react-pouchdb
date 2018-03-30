@@ -1,29 +1,24 @@
 import PouchDBModule from 'pouchdb';
-import { instanceOf } from 'prop-types';
 import renderer from 'react-test-renderer';
-import { PouchDB, withDB } from '..';
+import { DBContext, PouchDB, withDB } from '..';
 import { asyncTest } from './utils';
-
-const withDBContext = Component =>
-  Object.assign((...args) => Component(...args), {
-    contextTypes: {
-      db: instanceOf(PouchDBModule).isRequired
-    }
-  });
 
 test(
   'provide database',
   asyncTest(done => {
     expect.assertions(4);
-    const App = withDBContext(
-      (props, { db }) =>
-        do {
-          expect(db).toBeInstanceOf(PouchDBModule);
-          expect(db.name).toBe('test');
-          expect(db.__opts.revs_limit).toBeUndefined();
-          expect(db._maxListeners).toBeUndefined();
-          done();
+    const App = () => (
+      <DBContext.Consumer>
+        {db =>
+          do {
+            expect(db).toBeInstanceOf(PouchDBModule);
+            expect(db.name).toBe('test');
+            expect(db.__opts.revs_limit).toBeUndefined();
+            expect(db._maxListeners).toBeUndefined();
+            done();
+          }
         }
+      </DBContext.Consumer>
     );
     renderer.create(
       <PouchDB name="test">
