@@ -13,8 +13,8 @@ const basename =
 
 const App = () => (
   <Container>
-    <BrowserRouter basename={basename}>
-      <PouchDB name="todoapp">
+    <PouchDB name="todoapp">
+      <BrowserRouter basename={basename}>
         <section className={todoapp}>
           <header>
             <h1>todos</h1>
@@ -26,8 +26,8 @@ const App = () => (
             <Footer />
           </section>
         </section>
-      </PouchDB>
-    </BrowserRouter>
+      </BrowserRouter>
+    </PouchDB>
   </Container>
 );
 
