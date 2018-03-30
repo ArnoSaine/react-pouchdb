@@ -1,3 +1,7 @@
+# 0.1.6
+
+* Update `peerDependencies`: Remove compatibility with React 17.
+
 # 0.1.5
 
 * [#3](https://github.com/ArnoSaine/react-pouchdb/pull/3) Immutable manipulation on docs array in find. ([@bkniffler](https://github.com/bkniffler))
