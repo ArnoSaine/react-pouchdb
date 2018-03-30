@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "private": true,
   "scripts": {
-    "bundle": "cross-env NODE_ENV=production webpack -p --progress",
+    "build": "cross-env NODE_ENV=production webpack -p --progress",
     "dev": "cross-env NODE_ENV=development webpack --mode development --progress --watch",
     "dev-server": "cross-env NODE_ENV=development webpack-dev-server --mode development --inline --hot"
   },
