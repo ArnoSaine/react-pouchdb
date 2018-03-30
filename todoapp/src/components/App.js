@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { main, todoapp } from 'todomvc-app-css/index.css';
+import { hot } from 'react-hot-loader';
 import { PouchDB } from 'react-pouchdb/browser';
 import Container from './Container';
 import Footer from './Footer';
@@ -10,7 +11,7 @@ import ToggleAll from './ToggleAll';
 const basename =
   process.env.NODE_ENV === 'development' ? undefined : '/react-pouchdb';
 
-export default () => (
+const App = () => (
   <Container>
     <BrowserRouter basename={basename}>
       <PouchDB name="todoapp">
@@ -29,3 +30,5 @@ export default () => (
     </BrowserRouter>
   </Container>
 );
+
+export default hot(module)(App);

@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const template = require('html-webpack-template');
+const config = require('frontend-app/cjs/webpack/config').default;
 
 const publicPath =
   process.env.NODE_ENV === 'production' ? '/react-pouchdb/' : '/';
@@ -11,7 +12,7 @@ const htmlWebpackPluginOptions = {
   title: 'React PouchDB Todo App'
 };
 
-module.exports = {
+module.exports = config.merge({
   output: { publicPath },
   devServer: {
     proxy: {},
@@ -24,4 +25,4 @@ module.exports = {
       filename: '404.html'
     })
   ]
-};
+});

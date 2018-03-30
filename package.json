@@ -37,34 +37,34 @@
   },
   "files": ["browser", "cjs", "es", "node"],
   "peerDependencies": {
-    "react": "16 || 17"
+    "react": "^16.3"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.35",
+    "@babel/runtime": "^7.0.0-beta.42",
     "airbnb-prop-types": "^2.8.1",
-    "hoist-non-react-statics": "^2.3.1",
+    "hoist-non-react-statics": "^2.5.0",
     "json-stable-stringify": "^1.0.1",
-    "lodash": "^4.17.4",
-    "pouchdb-collate": "^6.3.4",
-    "pouchdb-find": "^6.3.4",
-    "pouchdb-selector-core": "^6.3.4",
-    "prop-types": "^15.6.0"
+    "lodash": "^4.17.5",
+    "pouchdb-collate": "^6.4.3",
+    "pouchdb-find": "^6.4.3",
+    "pouchdb-selector-core": "^6.4.3",
+    "prop-types": "^15.6.1"
   },
   "devDependencies": {
-    "@babel/node": "^7.0.0-beta.35",
-    "babel-7-jest": "^21.3.2",
+    "@babel/node": "^7.0.0-beta.42",
+    "babel-7-jest": "^21.3.3",
     "babel-plugin-transform-rename-import": "^2.1.1",
     "concurrently": "^3.5.1",
-    "cross-spawn": "^5.1.0",
+    "cross-spawn": "^6.0.5",
     "fs-extra": "^5.0.0",
     "gh-pages": "^1.1.0",
-    "jest": "^21.2.1",
-    "library-util": "^0.1.5",
-    "pouchdb": "^6.4.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0",
-    "yargs": "^10.0.3"
+    "jest": "^22.4.3",
+    "library-util": "^0.1.7",
+    "pouchdb": "^6.4.3",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-test-renderer": "^16.3.0",
+    "yargs": "^11.0.0"
   },
   "jest": {
     "testMatch": ["**/src/**/__tests__/**/*.js"],
@@ -75,6 +75,6 @@
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "npm run prettier:write", "git add"],
-    "*.{css,json,md}": ["prettier --write", "git add"]
+    "*.{css,json,md}": ["npm run prettier:write", "git add"]
   }
 }
