@@ -1,3 +1,7 @@
+# 0.2.0
+
+* Use new React 16.3 context and ref APIs. Ready for React 17.
+
 # 0.1.6
 
 * Update `peerDependencies`: Remove compatibility with React 17.

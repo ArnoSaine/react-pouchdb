@@ -1,6 +1,6 @@
 {
   "name": "react-pouchdb-todoapp",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p --progress",
@@ -21,7 +21,7 @@
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-hot-loader": "^4.0.0",
-    "react-pouchdb": "^0.1.5",
+    "react-pouchdb": "^0.2.0",
     "react-router-dom": "^4.2.2",
     "todomvc-app-css": "^2.1.1",
     "todomvc-common": "^1.0.5"
