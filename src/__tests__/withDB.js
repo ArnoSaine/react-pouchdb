@@ -8,11 +8,10 @@ test(
   asyncTest(done => {
     expect.assertions(1);
     const App = withDB(
-      ({ db }) =>
-        do {
-          expect(db).toBeInstanceOf(PouchDBModule);
-          done();
-        }
+      ({ db }) => do {
+        expect(db).toBeInstanceOf(PouchDBModule);
+        done();
+      }
     );
     renderer.create(
       <PouchDB name="test">

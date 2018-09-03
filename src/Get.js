@@ -15,9 +15,13 @@ class Get extends BaseComponent {
     binary: bool,
     id: string.isRequired
   };
+
   state = {};
+
   async listen(options) {
-    const { props: { db } } = this;
+    const {
+      props: { db }
+    } = this;
     const { id, attachments, ...otherOptions } = options;
     const optionsWithAttachmentAndBinaryOption = {
       binary: attachments === UINT8ARRAY,
@@ -48,8 +52,11 @@ class Get extends BaseComponent {
       }
     }
   }
+
   async get(id, options) {
-    const { props: { db } } = this;
+    const {
+      props: { db }
+    } = this;
     try {
       return await this.nextState(await db.get(id, options));
     } catch {
@@ -58,6 +65,7 @@ class Get extends BaseComponent {
       };
     }
   }
+
   async nextState(doc) {
     return {
       attachments:
@@ -68,8 +76,13 @@ class Get extends BaseComponent {
       exists: !doc._deleted
     };
   }
+
   render() {
-    const { props: { db, ...otherProps }, state, state: { exists } } = this;
+    const {
+      props: { db, ...otherProps },
+      state,
+      state: { exists }
+    } = this;
     return renderProps(otherProps, exists, { db, ...state });
   }
 }

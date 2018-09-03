@@ -2,6 +2,7 @@
   "extends": ["./node_modules/library-util/eslintrc.json"],
   "rules": {
     "jsx-a11y/anchor-has-content": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/no-autofocus": "off",
     "operator-assignment": ["error", "never"]

@@ -2,6 +2,7 @@ import changes, { cache } from '../changesCache';
 
 class DB {
   _activeListenersCount = 0;
+
   changes() {
     this._activeListenersCount = this._activeListenersCount + 1;
     return {

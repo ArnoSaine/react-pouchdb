@@ -11,7 +11,11 @@ const filterByCompletedField = {
 export default () => (
   <Route
     path="/:filter?"
-    render={({ match: { params: { filter } } }) => (
+    render={({
+      match: {
+        params: { filter }
+      }
+    }) => (
       <Find
         selector={{
           timestamp: { $gte: null },
@@ -20,7 +24,9 @@ export default () => (
         sort={['timestamp']}
         render={({ docs }) => (
           <ul className={todoList}>
-            {docs.map(doc => <Item key={doc._id} doc={doc} />)}
+            {docs.map(doc => (
+              <Item key={doc._id} doc={doc} />
+            ))}
           </ul>
         )}
       />

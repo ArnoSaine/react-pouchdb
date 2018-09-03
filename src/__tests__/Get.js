@@ -12,12 +12,10 @@ test(
     const App = () => (
       <Get
         id="test"
-        render={({ doc }) =>
-          do {
-            expect(doc.a).toBe('moo');
-            done();
-          }
-        }
+        render={({ doc }) => do {
+          expect(doc.a).toBe('moo');
+          done();
+        }}
       />
     );
     renderer.create(
@@ -99,27 +97,24 @@ const testAttachments = ({ name, props, format, value1, value2 }) =>
           id="test"
           {...props}
           render={renderOrder(
-            ({ attachments, db, doc }) =>
-              do {
-                expect(format(attachments['att.txt'].data)).toBe(value1);
-                db.putAttachment(
-                  'test',
-                  'att.txt',
-                  doc._rev,
-                  Buffer.from('Moo2?', 'utf8'),
-                  'text/plain'
-                );
-              },
-            ({ attachments, db, doc }) =>
-              do {
-                expect(format(attachments['att.txt'].data)).toBe(value2);
-                db.removeAttachment(doc._id, 'att.txt', doc._rev);
-              },
-            ({ attachments }) =>
-              do {
-                expect(attachments).toBeUndefined();
-                done();
-              }
+            ({ attachments, db, doc }) => do {
+              expect(format(attachments['att.txt'].data)).toBe(value1);
+              db.putAttachment(
+                'test',
+                'att.txt',
+                doc._rev,
+                Buffer.from('Moo2?', 'utf8'),
+                'text/plain'
+              );
+            },
+            ({ attachments, db, doc }) => do {
+              expect(format(attachments['att.txt'].data)).toBe(value2);
+              db.removeAttachment(doc._id, 'att.txt', doc._rev);
+            },
+            ({ attachments }) => do {
+              expect(attachments).toBeUndefined();
+              done();
+            }
           )}
         />
       );

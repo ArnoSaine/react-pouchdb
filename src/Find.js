@@ -19,11 +19,15 @@ class Find extends BaseComponent {
     skip: number,
     sort: array
   });
+
   state = {
     docs: []
   };
+
   async listen(options) {
-    const { props: { db } } = this;
+    const {
+      props: { db }
+    } = this;
     const { selector, limit, skip, sort } = options;
     if (selector) {
       if (sort) {
@@ -61,7 +65,9 @@ class Find extends BaseComponent {
                 const { length } = docs;
                 // At the limit?
                 if (length + 1 === limit) {
-                  const { docs: [replacementDoc] } = await db.find({
+                  const {
+                    docs: [replacementDoc]
+                  } = await db.find({
                     ...options,
                     limit: 1,
                     skip: (options.skip || 0) + length
@@ -105,7 +111,9 @@ class Find extends BaseComponent {
               // is set and limit was reached?
               if (found && sortedIndex + 1 === limit) {
                 // Get the actual last document.
-                const { docs: [lastDoc] } = await db.find({
+                const {
+                  docs: [lastDoc]
+                } = await db.find({
                   ...options,
                   limit: 1,
                   skip: (options.skip || 0) + sortedIndex
@@ -117,7 +125,9 @@ class Find extends BaseComponent {
               // `skip` option is set and document supposed to be first?
               if (skip && sortedIndex === 0) {
                 // Get the actual first document.
-                const { docs: [firstDoc] } = await db.find({
+                const {
+                  docs: [firstDoc]
+                } = await db.find({
                   ...options,
                   limit: 1
                 });
@@ -137,8 +147,12 @@ class Find extends BaseComponent {
       }
     }
   }
+
   render() {
-    const { props: { db, ...otherProps }, state: { docs } } = this;
+    const {
+      props: { db, ...otherProps },
+      state: { docs }
+    } = this;
     return renderProps(otherProps, docs, { db, docs });
   }
 }

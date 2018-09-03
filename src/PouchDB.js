@@ -9,10 +9,12 @@ export default class PouchDB extends Component {
     maxListeners: number,
     name: string.isRequired
   };
+
   static defaultProps = {
     children: null,
     maxListeners: undefined
   };
+
   constructor(props) {
     super(props);
     const { children, maxListeners, ...options } = props;
@@ -21,10 +23,12 @@ export default class PouchDB extends Component {
       this.db.setMaxListeners(maxListeners);
     }
   }
+
   componentWillUnmount() {
     const { children, maxListeners, ...options } = this.props;
     close(options);
   }
+
   render() {
     return <Provider value={this.db}>{this.props.children}</Provider>;
   }

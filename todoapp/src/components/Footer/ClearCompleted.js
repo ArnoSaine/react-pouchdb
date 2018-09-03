@@ -13,6 +13,7 @@ export default () => (
           onClick={() =>
             db.bulkDocs(docs.map(doc => ({ ...doc, _deleted: true })))
           }
+          type="button"
         >
           Clear completed ({length})
         </button>
