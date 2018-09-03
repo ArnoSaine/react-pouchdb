@@ -1,3 +1,7 @@
+# 0.2.1
+
+- Update dependencies.
+
 # 0.2.0
 
 - Use new React 16.3 context and ref APIs. Ready for React 17.
