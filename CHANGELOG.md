@@ -1,6 +1,10 @@
+# 0.3.0
+
+- Update dependencies (major).
+
 # 0.2.1
 
-- Update dependencies.
+- Update dependencies (minor).
 
 # 0.2.0
 
