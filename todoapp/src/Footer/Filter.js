@@ -1,15 +1,15 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { filters, selected } from 'todomvc-app-css/index.css';
 
 export default () => (
-  <ul className={filters}>
+  <ul className="filters">
     {[
       { path: '', title: 'All' },
       { path: 'active', title: 'Active' },
       { path: 'completed', title: 'Completed' }
     ].map(({ path, title }) => (
       <li key={path}>
-        <NavLink activeClassName={selected} exact replace to={`/${path}`}>
+        <NavLink activeClassName="selected" exact replace to={`/${path}`}>
           {title}
         </NavLink>
       </li>

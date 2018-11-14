@@ -2,33 +2,30 @@
   "name": "react-pouchdb-todoapp",
   "version": "0.3.0",
   "private": true,
-  "scripts": {
-    "build": "cross-env NODE_ENV=production webpack -p --progress",
-    "dev": "cross-env NODE_ENV=development webpack --mode development --progress --watch",
-    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --mode development --inline --hot"
-  },
-  "author": {
-    "name": "Arno Saine",
-    "email": "arno@mowhi.com"
-  },
-  "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "classnames": "^2.2.6",
-    "frontend-app": "^2.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "html-webpack-template": "^6.2.0",
     "pouchdb-browser": "^7.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-hot-loader": "^4.3.5",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
     "react-pouchdb": "^0.3.0",
     "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
     "todomvc-app-css": "^2.1.2",
     "todomvc-common": "^1.0.5"
   },
-  "config": {
-    "frontendApp": {
-      "type": "react"
-    }
-  }
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

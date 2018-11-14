@@ -1,5 +1,5 @@
 import PouchDB from 'pouchdb';
-import stringify from 'json-stable-stringify';
+import stringify from 'fast-json-stable-stringify';
 import get from './getWithDefaultValue';
 
 const dbs = new Map();

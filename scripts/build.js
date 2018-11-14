@@ -1,4 +1,4 @@
-import { sync } from 'cross-spawn';
+import spawn from 'cross-spawn';
 import flatten from 'lodash/flatten';
 
 flatten(
@@ -6,7 +6,7 @@ flatten(
     ['es', 'cjs'].map(target => [...path, target].join('/'))
   )
 ).forEach(outDir =>
-  sync(
+  spawn(
     'npx',
     [...`babel src --out-dir ${outDir}`.split(' '), ...process.argv.slice(5)],
     {

@@ -1,7 +1,7 @@
-import { learn } from 'todomvc-common/base.css';
+import React from 'react';
 
 export default () => (
-  <aside className={learn}>
+  <aside className="learn">
     <header>
       <h3>react-pouchdb</h3>
       <h5>Example</h5>
