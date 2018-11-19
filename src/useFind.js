@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { collate } from 'pouchdb-collate';
 import { matchesSelector } from 'pouchdb-selector-core';
 import changesCache from './changesCache';
-import useStateIfMounted from './useStateIfMounted';
 import useDB from './useDB';
-import getRequest from './getRequest';
+import useListen from './useListen';
 
 export default function useFind(db, options = db) {
   db =
@@ -15,25 +13,25 @@ export default function useFind(db, options = db) {
     }) ?? db;
   const { selector, limit, skip, sort } = options;
 
-  const { optionsKey, takeValue } = getRequest(db, options, async () => {
-    if (sort) {
-      await db.createIndex({
-        index: {
-          fields: sort.map(
-            field => (typeof field === 'object' ? Object.keys(field)[0] : field)
-          )
-        }
-      });
-    }
-    return (await db.find(options)).docs;
-  });
-
-  const [docs, setDocs] = useStateIfMounted();
-  useEffect(
-    () => {
-      const value = takeValue();
-      setDocs(value);
-      const mutableDocs = [...value];
+  return useListen(
+    db,
+    options,
+    async () => {
+      if (sort) {
+        await db.createIndex({
+          index: {
+            fields: sort.map(
+              field =>
+                typeof field === 'object' ? Object.keys(field)[0] : field
+            )
+          }
+        });
+      }
+      return (await db.find(options)).docs;
+    },
+    (docs, setDocs) => {
+      setDocs(docs);
+      const mutableDocs = [...docs];
       // To find deleted and other non-matching documents, listen all changes and use selector in 'change' event.
       return db::changesCache(
         {
@@ -130,8 +128,6 @@ export default function useFind(db, options = db) {
           }
         }
       );
-    },
-    [db, optionsKey]
+    }
   );
-  return docs;
 }

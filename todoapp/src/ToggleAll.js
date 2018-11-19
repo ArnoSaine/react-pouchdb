@@ -8,30 +8,23 @@ export default function ToggleAll() {
     }
   });
   const { bulkDocs } = useDB();
-  return docs
+  return docs.length
     ? (() => {
-        const { length } = docs;
-        return length
-          ? (() => {
-              const completed = docs.every(({ completed }) => completed);
-              return (
-                <>
-                  <input
-                    id="toggle-all"
-                    className="toggle-all"
-                    checked={completed}
-                    onChange={() =>
-                      bulkDocs(
-                        docs.map(doc => ({ ...doc, completed: !completed }))
-                      )
-                    }
-                    type="checkbox"
-                  />
-                  <label htmlFor="toggle-all" />
-                </>
-              );
-            })()
-          : null;
+        const completed = docs.every(({ completed }) => completed);
+        return (
+          <>
+            <input
+              id="toggle-all"
+              className="toggle-all"
+              checked={completed}
+              onChange={() =>
+                bulkDocs(docs.map(doc => ({ ...doc, completed: !completed })))
+              }
+              type="checkbox"
+            />
+            <label htmlFor="toggle-all" />
+          </>
+        );
       })()
     : null;
 }

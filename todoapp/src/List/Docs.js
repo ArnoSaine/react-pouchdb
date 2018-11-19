@@ -18,11 +18,11 @@ export default function Docs({
       completed: filterByCompletedField[filter]
     }
   });
-  return docs ? (
+  return (
     <ul className="todo-list">
       {docs.map(doc => (
         <Item key={doc._id} doc={doc} />
       ))}
     </ul>
-  ) : null;
+  );
 }

@@ -8,20 +8,14 @@ export default function Counter() {
       completed: true
     }
   });
-  return docs
-    ? (() => {
-        const { length } = docs;
-        return length ? (
-          <button
-            className="clear-completed"
-            onClick={() =>
-              bulkDocs(docs.map(doc => ({ ...doc, _deleted: true })))
-            }
-            type="button"
-          >
-            Clear completed ({length})
-          </button>
-        ) : null;
-      })()
-    : null;
+  const { length } = docs;
+  return length ? (
+    <button
+      className="clear-completed"
+      onClick={() => bulkDocs(docs.map(doc => ({ ...doc, _deleted: true })))}
+      type="button"
+    >
+      Clear completed ({length})
+    </button>
+  ) : null;
 }

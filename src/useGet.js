@@ -1,28 +1,26 @@
-import { useEffect } from 'react';
 import attachmentsAsUint8Arrays from './attachmentsAsUint8Arrays';
 import changesCache from './changesCache';
-import useStateIfMounted from './useStateIfMounted';
 import useDB from './useDB';
-import getRequest from './getRequest';
+import useListen from './useListen';
 
 const UINT8ARRAY = 'u8a';
 const ALLOWED_LIVE_OPTIONS = ['attachments', 'ajax', 'binary', 'id'];
 
-export default function useGet(db, options = db) {
-  async function nextState(doc) {
-    return {
-      attachments:
-        options.attachments === UINT8ARRAY
-          ? await attachmentsAsUint8Arrays(doc._attachments)
-          : doc._attachments,
-      doc,
-      exists: !doc._deleted
-    };
-  }
+async function nextState(binary, doc) {
+  return {
+    attachments: binary
+      ? await attachmentsAsUint8Arrays(doc._attachments)
+      : doc._attachments,
+    doc,
+    exists: !doc._deleted
+  };
+}
 
+export default function useGet(db, options = db) {
   const { id, attachments, ...otherOptions } = options;
+  const binary = attachments === UINT8ARRAY;
   const optionsWithAttachmentAndBinaryOption = {
-    binary: attachments === UINT8ARRAY,
+    binary,
     ...otherOptions,
     attachments: !!attachments
   };
@@ -32,24 +30,25 @@ export default function useGet(db, options = db) {
       example: 'useGet(db, options)',
       test: arguments.length === 1
     }) ?? db;
-  const { optionsKey, value } = getRequest(db, options, async () => {
-    try {
-      return await nextState(
-        await db.get(id, {
-          ...optionsWithAttachmentAndBinaryOption,
-          local_seq: true
-        })
-      );
-    } catch {
-      return {
-        exists: false
-      };
-    }
-  });
-
-  const [doc, setDoc] = useStateIfMounted(value);
-  useEffect(
-    () => {
+  return useListen(
+    db,
+    options,
+    async () => {
+      try {
+        return await nextState(
+          binary,
+          await db.get(id, {
+            ...optionsWithAttachmentAndBinaryOption,
+            local_seq: true
+          })
+        );
+      } catch {
+        return {
+          exists: false
+        };
+      }
+    },
+    (doc, setDoc) => {
       // Live?
       if (
         Object.keys(options).every(option =>
@@ -64,11 +63,9 @@ export default function useGet(db, options = db) {
             since: doc._local_seq,
             doc_ids: [id]
           },
-          async ({ doc }) => setDoc(await nextState(doc))
+          async ({ doc }) => setDoc(await nextState(binary, doc))
         );
       }
-    },
-    [db, optionsKey]
+    }
   );
-  return doc;
 }
