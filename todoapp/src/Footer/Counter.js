@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFind } from 'react-pouchdb/browser';
 
 export default function Counter() {

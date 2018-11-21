@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFind } from 'react-pouchdb/browser';
 import Item from './Item';
 

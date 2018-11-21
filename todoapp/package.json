@@ -3,13 +3,14 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
+    "@arnosaine/react-scripts": "^0.1.0",
+    "@visma/create-react-app-template": "^0.1.0",
     "classnames": "^2.2.6",
     "pouchdb-browser": "^7.0.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-pouchdb": "^0.3.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
     "todomvc-app-css": "^2.1.2",
     "todomvc-common": "^1.0.5"
   },
@@ -19,13 +20,5 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }

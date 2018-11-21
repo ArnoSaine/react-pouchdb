@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDB } from 'react-pouchdb/browser';
 
 export default function Input() {

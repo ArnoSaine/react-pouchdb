@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npm run inbuild --",
     "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es --ignore src/__tests__",
-    "deploy": "cd todoapp && npm run build && cd .. && gh-pages --dist todoapp/dist",
+    "deploy": "cd todoapp && npm run build && cd .. && gh-pages --dist todoapp/build",
     "dev": "npm test -- --watchAll",
     "dev:todoapp": "concurrently \"npm run watch\" \"npm link && cd todoapp && npm link react-pouchdb && npm start\"",
     "eslint": "eslint {{.,todoapp},{scripts,src,todoapp/src}/**}/*.js --fix",

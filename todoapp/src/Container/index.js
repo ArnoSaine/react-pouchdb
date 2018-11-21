@@ -1,4 +1,3 @@
-import React from 'react';
 import Aside from './Aside';
 import styles from './styles.module.css';
 

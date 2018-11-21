@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { PouchDB } from 'react-pouchdb/browser';
 import Container from './Container';

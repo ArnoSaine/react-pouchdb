@@ -1,4 +1,3 @@
-import React from 'react';
 import ClearCompleted from './ClearCompleted';
 import Counter from './Counter';
 import Filter from './Filter';
