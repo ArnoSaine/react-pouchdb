@@ -1,8 +1,15 @@
 {
-  "main.css": "/react-pouchdb/main.89bfd23576b67b80a67a.css",
-  "main.js": "/react-pouchdb/bundle.89bfd23576b67b80a67a.js",
-  "main.css.map": "/react-pouchdb/main.89bfd23576b67b80a67a.css.map",
-  "main.js.map": "/react-pouchdb/bundle.89bfd23576b67b80a67a.js.map",
-  "index.html": "/react-pouchdb/index.html",
-  "404.html": "/react-pouchdb/404.html"
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }
