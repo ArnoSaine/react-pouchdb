@@ -6,9 +6,9 @@ import Footer from './Footer';
 import Input from './Input';
 import List from './List';
 import ToggleAll from './ToggleAll';
+import { homepage } from '../package.json';
 
-const basename =
-  process.env.NODE_ENV === 'development' ? undefined : '/react-pouchdb';
+const basename = process.env.NODE_ENV === 'development' ? undefined : homepage;
 
 function App() {
   return (
