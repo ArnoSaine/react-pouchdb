@@ -12,20 +12,20 @@ export default () => (
     <ul>
       {[
         {
-          href: 'https://github.com/ArnoSaine/react-pouchdb',
-          children: 'react-pouchdb'
+          url: 'https://github.com/ArnoSaine/react-pouchdb',
+          text: 'react-pouchdb'
         },
         {
-          href: 'https://pouchdb.com',
-          children: 'PouchDB'
+          url: 'https://pouchdb.com',
+          text: 'PouchDB'
         },
         {
-          href: 'http://couchdb.apache.org',
-          children: 'CouchDB'
+          url: 'http://couchdb.apache.org',
+          text: 'CouchDB'
         }
-      ].map(props => (
-        <li key={props.href}>
-          <a {...props} />
+      ].map(({ text, url }) => (
+        <li key={url}>
+          <a href={url}>{text}</a>
         </li>
       ))}
     </ul>
