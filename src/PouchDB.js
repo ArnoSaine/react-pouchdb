@@ -17,15 +17,12 @@ export default class PouchDB extends Component {
 
   constructor(props) {
     super(props);
-    const { children, maxListeners, ...options } = props;
+    const { children, ...options } = props;
     this.db = create(options);
-    if (maxListeners) {
-      this.db.setMaxListeners(maxListeners);
-    }
   }
 
   componentWillUnmount() {
-    const { children, maxListeners, ...options } = this.props;
+    const { children, ...options } = this.props;
     close(options);
   }
 

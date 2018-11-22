@@ -1,16 +1,21 @@
+import PouchDB from 'pouchdb';
+import find from 'pouchdb-find';
 import { collate } from 'pouchdb-collate';
 import { matchesSelector } from 'pouchdb-selector-core';
 import changesCache from './changesCache';
 import useDB from './useDB';
 import useListen from './useListen';
 
+PouchDB.plugin(find);
+
 export default function useFind(db, options = db) {
-  db =
-    useDB({
-      callee: 'useFind',
-      example: 'useFind(db, options)',
-      test: arguments.length === 1
-    }) ?? db;
+  if (arguments.length < 2) {
+    db = undefined;
+  }
+  db = useDB(db, {
+    callee: 'useFind',
+    example: 'useFind(db, options)'
+  });
   const { selector, limit, skip, sort } = options;
 
   return useListen(

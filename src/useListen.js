@@ -42,7 +42,7 @@ export default function useListen(db, options, get, listener) {
     () => new Request({ optionsKey, requests })
   );
 
-  if (!request.value) {
+  if (!('value' in request)) {
     request.value = (async () => {
       request.value = await get();
     })();

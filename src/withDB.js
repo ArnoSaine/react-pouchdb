@@ -1,23 +1,24 @@
 import { forwardRef } from 'react';
-import PouchDBModule from 'pouchdb';
-import { instanceOf } from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
-import { Consumer } from './DBContext';
+import useDB from './useDB';
 
-export const propTypes = {
-  db: instanceOf(PouchDBModule).isRequired
-};
-
-const withDB = Component =>
-  forwardRef(
+export default function withDB(db, Component = db) {
+  if (arguments.length < 2) {
+    db = undefined;
+  }
+  return forwardRef(
     hoistStatics(
       Object.assign(
         (props, ref) => (
-          <Consumer>
-            {db => <Component {...props} db={db} ref={ref} />}
-          </Consumer>
+          <Component
+            {...props}
+            db={useDB(db, {
+              callee: 'withDB',
+              example: 'withDB(name|options, Component)'
+            })}
+            ref={ref}
+          />
         ),
-
         {
           displayName: `withDB(${Component.displayName || Component.name})`,
           WrappedComponent: Component
@@ -26,5 +27,4 @@ const withDB = Component =>
       Component
     )
   );
-
-export default withDB;
+}

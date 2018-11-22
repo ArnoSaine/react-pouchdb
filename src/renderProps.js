@@ -1,6 +1,7 @@
 import { Children, cloneElement, createElement } from 'react';
 import { func, element, oneOfType } from 'prop-types';
 import lodashOmit from 'lodash/omit';
+import useDB from './useDB';
 
 export const propTypes = {
   children: oneOfType([element, func]),
@@ -9,13 +10,33 @@ export const propTypes = {
 };
 const propNames = Object.keys(propTypes);
 
-export default ({ children, component, render }, ready, props) => {
+export default (useDBOperation, error) => ({
+  db,
+  children,
+  component,
+  render,
+  ...otherProps
+}) => {
+  const props = {
+    db: useDB(db, error)
+  };
+  try {
+    Object.assign(
+      props,
+      db ? useDBOperation(db, otherProps) : useDBOperation(otherProps)
+    );
+  } catch (error) {
+    if (component || render) {
+      throw error;
+    }
+  }
+
   if (component) {
-    return ready ? createElement(component, props) : null;
+    return createElement(component, props);
   }
 
   if (render) {
-    return ready ? render(props) : null;
+    return render(props);
   }
 
   if (typeof children === 'function') {

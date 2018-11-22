@@ -7,16 +7,22 @@ const UINT8ARRAY = 'u8a';
 const ALLOWED_LIVE_OPTIONS = ['attachments', 'ajax', 'binary', 'id'];
 
 async function nextState(binary, doc) {
-  return {
-    attachments: binary
-      ? await attachmentsAsUint8Arrays(doc._attachments)
-      : doc._attachments,
-    doc,
-    exists: !doc._deleted
-  };
+  return binary && doc
+    ? {
+        ...doc,
+        _attachments: await attachmentsAsUint8Arrays(doc._attachments)
+      }
+    : doc;
 }
 
 export default function useGet(db, options = db) {
+  if (arguments.length < 2) {
+    db = undefined;
+  }
+  db = useDB(db, {
+    callee: 'useGet',
+    example: 'useGet(db, options)'
+  });
   const { id, attachments, ...otherOptions } = options;
   const binary = attachments === UINT8ARRAY;
   const optionsWithAttachmentAndBinaryOption = {
@@ -24,29 +30,18 @@ export default function useGet(db, options = db) {
     ...otherOptions,
     attachments: !!attachments
   };
-  db =
-    useDB({
-      callee: 'useGet',
-      example: 'useGet(db, options)',
-      test: arguments.length === 1
-    }) ?? db;
   return useListen(
     db,
     options,
     async () => {
+      let doc;
       try {
-        return await nextState(
-          binary,
-          await db.get(id, {
-            ...optionsWithAttachmentAndBinaryOption,
-            local_seq: true
-          })
-        );
-      } catch {
-        return {
-          exists: false
-        };
-      }
+        doc = await db.get(id, {
+          ...optionsWithAttachmentAndBinaryOption,
+          local_seq: true
+        });
+      } catch {}
+      return nextState(binary, doc);
     },
     (doc, setDoc) => {
       // Live?
@@ -60,7 +55,7 @@ export default function useGet(db, options = db) {
             ...optionsWithAttachmentAndBinaryOption,
             live: true,
             include_docs: true,
-            since: doc._local_seq,
+            since: doc?._local_seq,
             doc_ids: [id]
           },
           async ({ doc }) => setDoc(await nextState(binary, doc))
