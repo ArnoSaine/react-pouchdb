@@ -1,3 +1,12 @@
+# 1.0.0-alpha.0
+
+- Add Hooks API.
+- Add optional `db` prop to `<Get>` and `<Find>`.
+- **Breaking change:** remove `exists` prop from `<Get>` render methods. Use `!!doc`.
+- **Breaking change:** remove `attachment` prop from `<Get>` render methods. Use `doc._attachments`.
+- **Breaking change:** `component` and `render` render props require the use of `<Suspense>` as a parent component.
+- **Breaking change:** `<Get>` render props are called even if document does not exist.
+
 # 0.3.0
 
 - Update dependencies (major).
