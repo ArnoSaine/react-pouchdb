@@ -14,7 +14,7 @@
     "inbuild": "babel-node scripts/build.js --presets @babel/env -- --source-maps --ignore src/__tests__",
     "lint": "npm run eslint && npm run prettier",
     "postbuild": "npm run update-submodules",
-    "postpublish": "cd todoapp && npm install react-pouchdb@latest --save-dev",
+    "postpublish": "cd todoapp && npm install react-pouchdb@latest --save",
     "prebuild": "rimraf browser cjs es node",
     "precommit": "lint-staged",
     "prepack": "npm run build",
