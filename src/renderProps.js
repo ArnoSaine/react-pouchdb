@@ -1,14 +1,5 @@
 import { Children, cloneElement, createElement } from 'react';
-import { func, element, oneOfType } from 'prop-types';
-import lodashOmit from 'lodash/omit';
 import useDB from './useDB';
-
-export const propTypes = {
-  children: oneOfType([element, func]),
-  component: func,
-  render: func
-};
-const propNames = Object.keys(propTypes);
 
 export default (useDBOperation, error) => ({
   db,
@@ -49,5 +40,3 @@ export default (useDBOperation, error) => ({
     return cloneElement(children, props);
   }
 };
-
-export const omit = props => lodashOmit(props, propNames);
