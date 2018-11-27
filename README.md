@@ -52,6 +52,7 @@ import { PouchDB, Find } from "react-pouchdb";
 ### Hooks
 
 ```js
+import { Suspense } from "react";
 import { useFind, useDB } from "react-pouchdb";
 
 function MyComponent() {
