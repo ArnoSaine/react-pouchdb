@@ -1,3 +1,7 @@
+# 0.3.1
+
+- Update package-lock.json.
+
 # 0.3.0
 
 - Update dependencies (major).
