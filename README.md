@@ -2,7 +2,9 @@
 
 React wrapper for PouchDB that also subscribes to changes.
 
-[TodoMVC](https://arnosaine.github.io/react-pouchdb/) example.
+[TodoMVC example](https://arnosaine.github.io/react-pouchdb/)
+
+[Alpha release with new Hooks API](https://www.npmjs.com/package/react-pouchdb/v/next)
 
 ## Example
 
@@ -138,7 +140,11 @@ Render methods will be passed `db` and `docs` props. `db` is the [PouchDB](https
   }}
   sort={["name"]}
   render={({ docs }) => (
-    <ul>{docs.map(doc => <li key={doc._id}>{doc.name}</li>)}</ul>
+    <ul>
+      {docs.map(doc => (
+        <li key={doc._id}>{doc.name}</li>
+      ))}
+    </ul>
   )}
 />
 ```
