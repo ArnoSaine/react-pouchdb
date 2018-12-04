@@ -2,7 +2,7 @@
 
 React wrapper for PouchDB that also subscribes to changes.
 
-[TodoMVC](https://arnosaine.github.io/react-pouchdb/) example.
+[TodoMVC example](https://arnosaine.github.io/react-pouchdb/)
 
 ## Contents
 
