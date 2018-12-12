@@ -1,3 +1,7 @@
+# 0.3.2
+
+- Fix #5: Using `<Find />` with `sort` option and remote database.
+
 # 0.3.1
 
 - Update package-lock.json.
