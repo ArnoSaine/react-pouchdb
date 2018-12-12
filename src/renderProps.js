@@ -7,7 +7,11 @@ export const propTypes = {
   component: func,
   render: func
 };
-const propNames = Object.keys(propTypes);
+const propNames = [
+  ...Object.keys(propTypes),
+  // db prop set by withDB must also be omitted.
+  'db'
+];
 
 export default ({ children, component, render }, ready, props) => {
   if (component) {
