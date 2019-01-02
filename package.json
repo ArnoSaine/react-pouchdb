@@ -11,7 +11,7 @@
     "dev": "npm test -- --watchAll",
     "dev:todoapp": "concurrently \"npm run watch\" \"npm link && cd todoapp && npm link react-pouchdb && npm start\"",
     "eslint": "eslint {{.,todoapp},{scripts,src,todoapp/src}/**}/*.js --fix",
-    "inbuild": "babel-node scripts/build.js --presets @babel/env -- --source-maps --ignore src/__tests__",
+    "inbuild": "node --experimental-modules scripts/build --source-maps --ignore src/__tests__",
     "lint": "npm run eslint && npm run prettier",
     "postbuild": "npm run update-submodules",
     "postpublish": "cd todoapp && npm install react-pouchdb@latest --save",
@@ -21,7 +21,7 @@
     "prettier:write": "prettier --config .prettierrc.js --write",
     "preversion": "npm run lint && npm test",
     "test": "jest --coverage --runInBand --verbose",
-    "update-submodules": "babel-node scripts/update-submodules.js --presets @babel/env",
+    "update-submodules": "node --experimental-modules scripts/update-submodules",
     "version": "npm run update-submodules --",
     "watch": "npm run build && concurrently \"npm run inbuild -- --watch --skip-initial-build\" \"npm run update-submodules\""
   },
@@ -51,7 +51,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
-    "@babel/node": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-transform-rename-import": "^2.3.0",
