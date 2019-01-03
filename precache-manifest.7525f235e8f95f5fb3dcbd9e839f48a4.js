@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/react-pouchdb/static/js/runtime~main.ce3e21fc.js"
   },
   {
-    "revision": "a076f6c4f060eb8dc42cce0a412d07e6",
+    "revision": "231804f1b0132525d6b1507e34499c52",
     "url": "/react-pouchdb/index.html"
   }
 ];
