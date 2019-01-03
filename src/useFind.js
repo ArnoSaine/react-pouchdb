@@ -35,8 +35,11 @@ export default function useFind(db, options = db) {
       return (await db.find(options)).docs;
     },
     (docs, setDocs) => {
-      setDocs(docs);
-      const mutableDocs = [...docs];
+      // setDocs(docs);
+      let mutableDocs;
+      if (docs) {
+        mutableDocs = [...docs];
+      }
       // To find deleted and other non-matching documents, listen all changes and use selector in 'change' event.
       return db::changesCache(
         {
@@ -47,7 +50,7 @@ export default function useFind(db, options = db) {
           return_docs: false
         },
         async ({ deleted, doc }) => {
-          const index = mutableDocs.findIndex(({ _id }) => doc._id === _id);
+          const index = mutableDocs?.findIndex(({ _id }) => doc._id === _id);
           const found = index !== -1;
           // Document was deleted or it does not match the selector?
           if (deleted || (selector && !matchesSelector(doc, selector))) {
@@ -76,6 +79,9 @@ export default function useFind(db, options = db) {
               mutableDocs[index] = doc;
             } else {
               // Create.
+              if (!mutableDocs) {
+                mutableDocs = [];
+              }
               mutableDocs.push(doc);
             }
             if (sort) {

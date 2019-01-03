@@ -33,16 +33,14 @@ export default function useGet(db, options = db) {
   return useListen(
     db,
     options,
-    async () => {
-      let doc;
-      try {
-        doc = await db.get(id, {
+    async () =>
+      nextState(
+        binary,
+        await db.get(id, {
           ...optionsWithAttachmentAndBinaryOption,
           local_seq: true
-        });
-      } catch {}
-      return nextState(binary, doc);
-    },
+        })
+      ),
     (doc, setDoc) => {
       // Live?
       if (

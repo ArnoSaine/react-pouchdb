@@ -44,7 +44,12 @@ export default function useListen(db, options, get, listener) {
 
   if (!('value' in request)) {
     request.value = (async () => {
-      request.value = await get();
+      try {
+        request.value = await get();
+      } catch (error) {
+        request.value = undefined;
+        throw error;
+      }
     })();
   }
 
