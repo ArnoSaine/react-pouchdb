@@ -1,7 +1,7 @@
 {
   "main.css": "/react-pouchdb/static/css/main.90b2a809.chunk.css",
-  "main.js": "/react-pouchdb/static/js/main.57466150.chunk.js",
-  "main.js.map": "/react-pouchdb/static/js/main.57466150.chunk.js.map",
+  "main.js": "/react-pouchdb/static/js/main.f1c52390.chunk.js",
+  "main.js.map": "/react-pouchdb/static/js/main.f1c52390.chunk.js.map",
   "static/css/1.b39b6cc8.chunk.css": "/react-pouchdb/static/css/1.b39b6cc8.chunk.css",
   "static/js/1.703edd1c.chunk.js": "/react-pouchdb/static/js/1.703edd1c.chunk.js",
   "static/js/1.703edd1c.chunk.js.map": "/react-pouchdb/static/js/1.703edd1c.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/main.90b2a809.chunk.css.map": "/react-pouchdb/static/css/main.90b2a809.chunk.css.map",
   "static/css/1.b39b6cc8.chunk.css.map": "/react-pouchdb/static/css/1.b39b6cc8.chunk.css.map",
   "index.html": "/react-pouchdb/index.html",
-  "precache-manifest.daa415253e3a300bda3edc47a6210d33.js": "/react-pouchdb/precache-manifest.daa415253e3a300bda3edc47a6210d33.js",
+  "precache-manifest.086f56faa574c7bdc23d570bb8502d4a.js": "/react-pouchdb/precache-manifest.086f56faa574c7bdc23d570bb8502d4a.js",
   "service-worker.js": "/react-pouchdb/service-worker.js"
 }
