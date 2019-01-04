@@ -7,7 +7,7 @@ import yargs from 'yargs';
 const {
   argv,
   argv: { outDir }
-} = yargs(process.argv.slice(5));
+} = yargs(process.argv.slice(2));
 
 const args = flatten(
   Object.entries(
