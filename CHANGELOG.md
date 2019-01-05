@@ -1,3 +1,9 @@
+# 1.0.0-alpha.1
+
+- Update DB connection when `<PouchDB />` props change
+- Fix infinite suspense loop if database request throws error
+- Update dependencies
+
 # 1.0.0-alpha.0
 
 - Add Hooks API.

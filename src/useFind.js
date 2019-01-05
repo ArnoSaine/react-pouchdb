@@ -25,9 +25,8 @@ export default function useFind(db, options = db) {
       if (sort) {
         await db.createIndex({
           index: {
-            fields: sort.map(
-              field =>
-                typeof field === 'object' ? Object.keys(field)[0] : field
+            fields: sort.map(field =>
+              typeof field === 'object' ? Object.keys(field)[0] : field
             )
           }
         });
@@ -85,12 +84,11 @@ export default function useFind(db, options = db) {
               mutableDocs.push(doc);
             }
             if (sort) {
-              const sortOrders = sort.map(
-                prop =>
-                  typeof prop === 'object'
-                    ? Object.entries(prop)[0]
-                    : // Default sort order is 'asc'
-                      [prop, 'asc']
+              const sortOrders = sort.map(prop =>
+                typeof prop === 'object'
+                  ? Object.entries(prop)[0]
+                  : // Default sort order is 'asc'
+                    [prop, 'asc']
               );
               mutableDocs.sort((a, b) => {
                 for (const [prop, order] of sortOrders) {
