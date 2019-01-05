@@ -1,5 +1,5 @@
 {
-  "extends": ["./node_modules/library-util/eslintrc.json"],
+  "extends": ["./node_modules/@postinumero/configuration/eslintrc.json"],
   "rules": {
     "jsx-a11y/anchor-has-content": "off",
     "jsx-a11y/label-has-associated-control": "off",

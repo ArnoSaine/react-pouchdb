@@ -1,1 +1,1 @@
-module.exports = require('library-util/prettierrc.json');
+module.exports = require('@postinumero/configuration/prettierrc.json');
