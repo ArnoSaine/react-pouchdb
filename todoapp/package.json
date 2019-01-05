@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.0",
   "private": true,
   "dependencies": {
-    "@arnosaine/react-scripts": "^0.1.0",
+    "@arnosaine/react-scripts": "^0.1.2",
     "@visma/create-react-app-template": "^0.1.0",
     "classnames": "^2.2.6",
     "pouchdb-browser": "^7.0.0",
