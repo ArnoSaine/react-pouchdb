@@ -15,7 +15,8 @@ export default function Docs({
     selector: {
       timestamp: { $gte: null },
       completed: filterByCompletedField[filter]
-    }
+    },
+    sort: ['timestamp']
   });
   return (
     <ul className="todo-list">
