@@ -14,7 +14,7 @@
     "inbuild": "node --experimental-modules scripts/build --source-maps --ignore src/__tests__",
     "lint": "npm run eslint && npm run prettier",
     "postbuild": "npm run update-submodules",
-    "postpublish": "cd todoapp && npm install react-pouchdb@latest --save",
+    "postpublish": "cd todoapp && npm install react-pouchdb@next",
     "prebuild": "rimraf browser cjs es node",
     "prepack": "npm run build",
     "prettier": "npm run prettier:write -- {{.,todoapp},{scripts,src,todoapp/src}/**}/*.{js,json} !./package-lock.json",
