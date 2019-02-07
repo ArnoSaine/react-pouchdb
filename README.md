@@ -7,47 +7,19 @@ React wrapper for PouchDB that also subscribes to changes.
 ## Contents
 
 - [Examples](#examples)
-  - [Components](#components)
   - [Hooks](#hooks)
+  - [Components](#components)
 - [API](#api)
-  - [`<PouchDB>`](#pouchdb)
-  - [`<Get>`](#get)
-  - [`<Find>`](#find)
   - [`useGet`](#usegetdb-options)
   - [`useFind`](#usefinddb-options)
   - [`useDB`](#usedbdb)
+  - [`<PouchDB>`](#pouchdb)
+  - [`<Get>`](#get)
+  - [`<Find>`](#find)
   - [`withDB`](#withdbdb-component)
 - [Package dependencies](#package-dependencies)
 
 ## Examples
-
-### Components
-
-```js
-import { Suspense } from "react";
-import { PouchDB, Find } from "react-pouchdb";
-
-<PouchDB name="dbname">
-  <Suspense fallback="loading...">
-    <Find
-      selector={{
-        name: { $gte: null }
-      }}
-      sort={["name"]}
-      render={({ db, docs }) => (
-        <ul>
-          {docs.map(doc => (
-            <li key={doc._id}>
-              {doc.name}
-              <button onClick={() => db.remove(doc)}>Remove</button>
-            </li>
-          ))}
-        </ul>
-      )}
-    />
-  </Suspense>
-</PouchDB>;
-```
 
 ### Hooks
 
@@ -83,7 +55,107 @@ function MyComponent() {
 </PouchDB>;
 ```
 
+### Components
+
+```js
+import { Suspense } from "react";
+import { PouchDB, Find } from "react-pouchdb";
+
+<PouchDB name="dbname">
+  <Suspense fallback="loading...">
+    <Find
+      selector={{
+        name: { $gte: null }
+      }}
+      sort={["name"]}
+      render={({ db, docs }) => (
+        <ul>
+          {docs.map(doc => (
+            <li key={doc._id}>
+              {doc.name}
+              <button onClick={() => db.remove(doc)}>Remove</button>
+            </li>
+          ))}
+        </ul>
+      )}
+    />
+  </Suspense>
+</PouchDB>;
+```
+
 ## API
+
+### `useGet([db,] options)`
+
+Get document and listen to changes.
+
+**`db: string|object` (optional)**
+
+Override context value or use as an alternative to `<PouchDB>`.
+
+**`options: object`**
+
+Options to [`get`](https://pouchdb.com/api.html#fetch_document). If **other** than `attachments`, `ajax` or `binary` options are set, live changes are disabled.
+
+**`options.attachments: string|object` (optional)**
+
+Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s.
+
+```js
+import { useGet } from "react-pouchdb";
+
+function MyComponent() {
+  const doc = useGet({ id: "mydoc" });
+  return <div>{doc.name}</div>;
+}
+```
+
+### `useFind([db,] options)`
+
+Find documents and listen to changes.
+
+**`db: string|object`**
+
+Override context value or use as an alternative to `<PouchDB>`.
+
+**`options: object`**
+
+Options to [`find`](https://pouchdb.com/api.html#query_index).
+
+```js
+import { useFind } from "react-pouchdb";
+
+function MyComponent() {
+  const docs = useFind({
+    selector: {
+      name: { $gte: null }
+    },
+    sort: ["name"]
+  });
+  return (
+    <ul>
+      {docs.map(doc => (
+        <li key={doc._id}>{doc.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### `useDB([db])`
+
+**`db: string|object`**
+
+Override context value or use as an alternative to `<PouchDB>`.
+
+```js
+import { useDB } from "react-pouchdb";
+
+function MyComponent({ title }) {
+  const db = useDB();
+  return <button onClick={() => db.post({ title })}>Add</button>;
+}
+```
 
 ### `<PouchDB>`
 
@@ -164,7 +236,7 @@ Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s
 
 **`...rest: any`**
 
-Other props are passed to [`db.get`](https://pouchdb.com/api.html#fetch_document) method as second argument. Note that if you provide props **other** than `attachments`, `ajax` or `binary`, live changes are disabled.
+Other props are passed to [`get`](https://pouchdb.com/api.html#fetch_document) method as second argument. If **other** than `attachments`, `ajax` or `binary` props are provided, live changes are disabled.
 
 ### `<Find>`
 
@@ -186,7 +258,7 @@ Override context value or use as an alternative to `<PouchDB>`.
 
 **`skip: number`**
 
-See [`db.find`](https://pouchdb.com/api.html#query_index).
+See [`find`](https://pouchdb.com/api.html#query_index).
 
 **`component`**
 
@@ -212,53 +284,9 @@ Render props are as in `<Get>` component. Render methods will be passed `db` and
 />
 ```
 
-### `useGet([db,] options)`
-
-```js
-import { useGet } from "react-pouchdb";
-
-function MyComponent() {
-  const doc = useGet({ id: "mydoc" });
-  return <div>{doc.name}</div>;
-}
-```
-
-### `useFind([db,] options)`
-
-```js
-import { useFind } from "react-pouchdb";
-
-function MyComponent() {
-  const docs = useFind({
-    selector: {
-      name: { $gte: null }
-    },
-    sort: ["name"]
-  });
-  return (
-    <ul>
-      {docs.map(doc => (
-        <li key={doc._id}>{doc.name}</li>
-      ))}
-    </ul>
-  );
-}
-```
-
-### `useDB([db])`
-
-```js
-import { useDB } from "react-pouchdb";
-
-function MyComponent({ title }) {
-  const db = useDB();
-  <button onClick={() => db.post({ title })}>Add</button>;
-}
-```
-
 ### `withDB([db,] Component)`
 
-Higher-order component for accessing the [PouchDB](https://pouchdb.com/api.html) instance anywhere in the `<PouchDB>` children. Note that for convenience `<Get>` and `<Find>` render methods will be passed the `db` prop as well.
+Higher-order component for accessing the PouchDB instance anywhere in the `<PouchDB>` children. Note that for convenience `<Get>` and `<Find>` render methods will be passed the `db` prop as well.
 
 ```js
 import { withDB } from "react-pouchdb";
