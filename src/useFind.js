@@ -70,7 +70,7 @@ export default function useFind(db, options = db) {
                   docs.push(replacementDoc);
                 }
               }
-              setDocs(mutableDocs);
+              setDocs([...mutableDocs]);
             }
           } else {
             if (found) {
@@ -133,7 +133,7 @@ export default function useFind(db, options = db) {
             if (mutableDocs.length > limit) {
               mutableDocs.splice(limit);
             }
-            setDocs(mutableDocs);
+            setDocs([...mutableDocs]);
           }
         }
       );
