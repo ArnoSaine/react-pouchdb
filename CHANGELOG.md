@@ -13,6 +13,10 @@
 - **Breaking change:** `component` and `render` render props require the use of `<Suspense>` as a parent component.
 - **Breaking change:** `<Get>` render props are called even if document does not exist.
 
+# 0.3.2
+
+- Fix #5: Using `<Find />` with `sort` option and remote database.
+
 # 0.3.1
 
 - Update package-lock.json.
