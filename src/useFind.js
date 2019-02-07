@@ -34,7 +34,6 @@ export default function useFind(db, options = db) {
       return (await db.find(options)).docs;
     },
     (docs, setDocs) => {
-      // setDocs(docs);
       let mutableDocs;
       if (docs) {
         mutableDocs = [...docs];

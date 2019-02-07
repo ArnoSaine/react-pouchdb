@@ -62,20 +62,17 @@ export default function useListen(db, options, get, listener) {
 
   const [_, setState] = useStateIfMounted();
 
-  useEffect(
-    () => {
-      request.increaseListenerCount();
-      const cancel = listener(value, value => {
-        request.value = value;
-        setState(value);
-      });
-      return () => {
-        request.decreaseListenerCount();
-        cancel();
-      };
-    },
-    [db, optionsKey]
-  );
+  useEffect(() => {
+    request.increaseListenerCount();
+    const cancel = listener(value, value => {
+      request.value = value;
+      setState(value);
+    });
+    return () => {
+      request.decreaseListenerCount();
+      cancel();
+    };
+  }, [db, optionsKey]);
 
   return value;
 }
