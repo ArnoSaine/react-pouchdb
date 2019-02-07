@@ -25,7 +25,11 @@
     "version": "npm run update-submodules --",
     "watch": "npm run build && concurrently \"npm run inbuild -- --watch --skip-initial-build\" \"npm run update-submodules\""
   },
-  "keywords": ["react", "pouchdb", "couchdb"],
+  "keywords": [
+    "react",
+    "pouchdb",
+    "couchdb"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ArnoSaine/react-pouchdb.git"
@@ -35,14 +39,19 @@
     "name": "Arno Saine",
     "email": "arno@mowhi.com"
   },
-  "files": ["browser", "cjs", "es", "node"],
+  "files": [
+    "browser",
+    "cjs",
+    "es",
+    "node"
+  ],
   "peerDependencies": {
     "react": "^16.7 || 17"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.5",
+    "@babel/runtime": "^7.3.1",
     "fast-json-stable-stringify": "^2.0.0",
-    "hoist-non-react-statics": "^3.2.0",
+    "hoist-non-react-statics": "^3.3.0",
     "lodash": "^4.17.11",
     "pouchdb-collate": "^7.0.0",
     "pouchdb-find": "^7.0.0",
@@ -58,24 +67,35 @@
     "fs-extra": "^7.0.1",
     "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
-    "library-util": "^0.2.0",
+    "library-util": "^0.3.0",
     "pouchdb": "^7.0.0",
     "pouchdb-browser": "^7.0.0",
-    "react": "16.7.0-alpha.2",
-    "react-dom": "16.7.0-alpha.2",
-    "react-test-renderer": "^16.6.3",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-test-renderer": "^16.8.1",
     "yargs": "^12.0.5"
   },
   "jest": {
-    "testMatch": ["**/src/**/__tests__/**/*.js"],
-    "testPathIgnorePatterns": ["/utils/.*\\.js"],
+    "testMatch": [
+      "**/src/**/__tests__/**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/utils/.*\\.js"
+    ],
     "transform": {
       ".js$": "babel-jest"
     }
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "npm run prettier:write", "git add"],
-    "*.{css,json,md}": ["npm run prettier:write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "npm run prettier:write",
+      "git add"
+    ],
+    "*.{css,json,md}": [
+      "npm run prettier:write",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
