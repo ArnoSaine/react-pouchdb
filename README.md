@@ -97,7 +97,7 @@ Override context value or use as an alternative to `<PouchDB>`.
 
 Options to [`get`](https://pouchdb.com/api.html#fetch_document). If **other** than `attachments`, `ajax` or `binary` options are set, live changes are disabled.
 
-**`options.attachments: string|object` (optional)**
+**`options.attachments: bool|string` (optional)**
 
 Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s.
 
