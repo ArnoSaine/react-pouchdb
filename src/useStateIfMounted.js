@@ -15,7 +15,6 @@ export default function useStateIfMounted(...args) {
       if (isMountRef.current) {
         setValue(value);
       }
-      return isMountRef.current;
     }
   ];
 }
