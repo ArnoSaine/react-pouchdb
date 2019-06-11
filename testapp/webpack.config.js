@@ -1,10 +1,13 @@
 import Dotenv from 'dotenv-webpack';
+import path from 'path';
 
 export default env => config => {
   const {
     plugins,
-    resolve: { modules }
+    resolve: { alias, modules }
   } = config;
+
+  alias.react = path.resolve('./node_modules/react');
 
   plugins.push(new Dotenv());
 
