@@ -1,0 +1,39 @@
+{
+  "name": "testapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@arnosaine/react-scripts": "3.0.1",
+    "react": "^16.8.6",
+    "react-app-polyfill": "^1.0.1",
+    "react-dom": "^16.8.6",
+    "react-pouchdb": "^1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint {.,src/**}/*.{js,mjs} --fix",
+    "lint": "npm run eslint && npm run prettier",
+    "prepack": "npm run build",
+    "prettier": "npm run prettier:write -- {.,src/**}/*.{css,graphql,html,js,json,less,md,mdx,mjs,scss,ts,yaml} !./package-lock.json",
+    "prettier:write": "prettier --config .prettierrc.js --write",
+    "preversion": "npm run lint"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "dotenv-webpack": "^1.7.0"
+  }
+}
