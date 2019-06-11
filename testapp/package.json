@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@arnosaine/react-scripts": "3.0.1",
+    "pouchdb-browser": "^7.0.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.6",
