@@ -1,5 +1,5 @@
 import { PouchDB, Get, Find } from 'react-pouchdb/browser';
-import ErrorBoundaryAndSuspenseOrder from './ErrorBoundaryAndSuspenseOrder';
+import Test from './Test';
 import InitializeDB from './InitializeDB';
 
 function App() {
@@ -7,14 +7,12 @@ function App() {
     <>
       <h1>Test React PouchDB</h1>
       <InitializeDB>
-        <ErrorBoundaryAndSuspenseOrder>
-          <h3>Get document</h3>
+        <Test description="Get document">
           <PouchDB name="test">
             <Get id="a" render={({ doc }) => (doc ? doc.value : 'not found')} />
           </PouchDB>
-        </ErrorBoundaryAndSuspenseOrder>
-        <ErrorBoundaryAndSuspenseOrder>
-          <h3>Find document</h3>
+        </Test>
+        <Test description="Find document">
           <PouchDB name="test">
             <Find
               selector={{
@@ -23,7 +21,7 @@ function App() {
               render={({ docs }) => docs?.[0]?.value ?? 'not found'}
             />
           </PouchDB>
-        </ErrorBoundaryAndSuspenseOrder>
+        </Test>
       </InitializeDB>
     </>
   );
