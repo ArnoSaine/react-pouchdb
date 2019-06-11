@@ -8,6 +8,7 @@
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.6",
+    "react-error-boundary": "^1.2.5",
     "react-pouchdb": "^1.0.0"
   },
   "scripts": {

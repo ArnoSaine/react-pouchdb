@@ -1,5 +1,5 @@
-import { Suspense } from 'react';
 import { PouchDB, Get } from 'react-pouchdb/browser';
+import ErrorBoundaryAndSuspenseOrder from './ErrorBoundaryAndSuspenseOrder';
 import InitializeDB from './InitializeDB';
 
 function App() {
@@ -7,11 +7,11 @@ function App() {
     <>
       <h1>Test React PouchDB</h1>
       <InitializeDB>
-        <PouchDB name="test">
-          <Suspense fallback="loading...">
+        <ErrorBoundaryAndSuspenseOrder>
+          <PouchDB name="test">
             <Get id="a" render={({ doc }) => (doc ? doc.value : 'not found')} />
-          </Suspense>
-        </PouchDB>
+          </PouchDB>
+        </ErrorBoundaryAndSuspenseOrder>
       </InitializeDB>
     </>
   );
