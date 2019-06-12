@@ -1,18 +1,14 @@
-import { useState, useEffect } from 'react';
-import PouchDB from 'pouchdb-browser';
+import { useEffect } from 'react';
 import sleep from 'sleep';
+import { useDB } from 'react-pouchdb/browser';
 
 export default function InitializeDB({ children }) {
-  const [initialized, setInitialized] = useState(false);
+  const db = useDB();
   useEffect(() => {
     (async () => {
-      let db = new PouchDB('test');
-      await db.destroy();
-      setInitialized(true);
-      db = new PouchDB('test');
       await sleep(1000);
       await db.put({ _id: 'a', value: 'created' });
     })();
-  }, []);
-  return initialized ? children : null;
+  }, [db]);
+  return children;
 }
