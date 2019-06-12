@@ -1,7 +1,8 @@
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
+import { useTestRender } from '..';
 
 function Fallback() {
-  return 'error';
+  return useTestRender('error');
 }
 
 export default function ErrorBoundary({ children }) {

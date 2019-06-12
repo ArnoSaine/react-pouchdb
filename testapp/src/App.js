@@ -1,7 +1,8 @@
-import { PouchDB, Get, Find } from 'react-pouchdb/browser';
-import Test from './Test';
+import { PouchDB, useFind, useGet } from 'react-pouchdb/browser';
+import { useTestRender, ErrorBoundaryAndSuspenseOrder } from './Test';
 import DestroyDB from './DestroyDB';
 import InitializeDB from './InitializeDB';
+import { deepStrictEqual } from 'assert';
 
 function App() {
   return (
@@ -10,20 +11,22 @@ function App() {
       <DestroyDB>
         <PouchDB name="test">
           <InitializeDB>
-            <Test description="Get document">
-              <Get
-                id="a"
-                render={({ doc }) => (doc ? doc.value : 'not found')}
-              />
-            </Test>
-            <Test description="Find document">
-              <Find
-                selector={{
-                  _id: 'a'
-                }}
-                render={({ docs }) => docs?.[0]?.value ?? 'not found'}
-              />
-            </Test>
+            <ErrorBoundaryAndSuspenseOrder
+              message="Get document"
+              test={actual =>
+                deepStrictEqual(actual, ['loading', 'not found', 'created'])
+              }
+            >
+              <GetDocument />
+            </ErrorBoundaryAndSuspenseOrder>
+            <ErrorBoundaryAndSuspenseOrder
+              message="Find document"
+              test={actual =>
+                deepStrictEqual(actual, ['loading', 'not found', 'created'])
+              }
+            >
+              <FindDocument />
+            </ErrorBoundaryAndSuspenseOrder>
           </InitializeDB>
         </PouchDB>
       </DestroyDB>
@@ -32,3 +35,13 @@ function App() {
 }
 
 export default App;
+
+function GetDocument() {
+  return useTestRender(useGet({ id: 'a' })?.value ?? 'not found');
+}
+
+function FindDocument() {
+  return useTestRender(
+    useFind({ selector: { _id: 'a' } })?.[0]?.value ?? 'not found'
+  );
+}
