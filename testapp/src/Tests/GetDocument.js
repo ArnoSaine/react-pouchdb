@@ -2,19 +2,17 @@ import { useGet } from 'react-pouchdb/browser';
 import { useTestRender, ErrorBoundaryAndSuspenseOrder } from 'Test';
 import { deepStrictEqual } from 'assert';
 
-export default function FindDocument() {
+export default function GetDocument({ id, message, expected }) {
   return (
     <ErrorBoundaryAndSuspenseOrder
-      message="Get document"
-      test={actual =>
-        deepStrictEqual(actual, ['loading', 'not found', 'created'])
-      }
+      message={message}
+      test={actual => deepStrictEqual(actual, expected)}
     >
-      <Test />
+      <Test id={id} />
     </ErrorBoundaryAndSuspenseOrder>
   );
 }
 
-function Test() {
-  return useTestRender(useGet({ id: 'a' })?.value ?? 'not found');
+function Test({ id }) {
+  return useTestRender(useGet({ id })?.value ?? 'not found');
 }
