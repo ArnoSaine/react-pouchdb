@@ -4,18 +4,17 @@ import Suspense from './Suspense';
 
 export default function ErrorBoundaryAndSuspenseOrder({
   children,
+  message,
   ...otherProps
 }) {
   return (
     <>
-      <h2>ErrorBoundary > Suspense</h2>
-      <Test {...otherProps}>
+      <Test message={`ErrorBoundary > Suspense: ${message}`} {...otherProps}>
         <ErrorBoundary>
           <Suspense>{children}</Suspense>
         </ErrorBoundary>
       </Test>
-      <h2>Suspense > ErrorBoundary</h2>
-      <Test {...otherProps}>
+      <Test message={`Suspense > ErrorBoundary: ${message}`} {...otherProps}>
         <Suspense>
           <ErrorBoundary>{children}</ErrorBoundary>
         </Suspense>

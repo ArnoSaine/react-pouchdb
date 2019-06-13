@@ -8,7 +8,7 @@ export default function Test({ message, test, children }) {
     <Context.Provider
       value={useCallback(value => setActual(actual => [...actual, value]), [])}
     >
-      <h3>{message}</h3>
+      <h2>{message}</h2>
       <pre>
         {JSON.stringify(
           useMemo(() => {
