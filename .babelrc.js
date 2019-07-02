@@ -4,7 +4,7 @@ const outDirParts = outDir.split('/');
 
 const options = {
   presets: ['library-util/cjs/babel-preset'],
-  plugins: []
+  plugins: ['codegen']
 };
 
 const target = ['browser', 'node'].find(target => outDirParts.includes(target));
