@@ -1,5 +1,5 @@
 import stringify from 'fast-json-stable-stringify';
-import get from './getWithDefaultValue';
+import get from '@postinumero/map-get-with-default';
 
 export const cache = new Map();
 

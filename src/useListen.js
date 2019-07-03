@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import stringify from 'fast-json-stable-stringify';
-import getWithDefaultValue from './getWithDefaultValue';
+import getWithDefaultValue from '@postinumero/map-get-with-default';
 import useStateIfMounted from './useStateIfMounted';
 
 const databaseRequests = new Map();

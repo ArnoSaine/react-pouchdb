@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb';
 import stringify from 'fast-json-stable-stringify';
-import get from './getWithDefaultValue';
+import get from '@postinumero/map-get-with-default';
 
 const dbs = new Map();
 const userCounts = new Map();
