@@ -1,27 +1,30 @@
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useEffect } from 'react';
 import PouchDB from 'pouchdb';
 import stringify from 'fast-json-stable-stringify';
 import DBContext from './DBContext';
-import { create, close } from './pouchdbConnections';
+import createPouchDB from './createPouchDB';
+import createStore from './createStore';
+
+const store = createStore();
 
 export function useDBOptions(options) {
-  const key = stringify(options);
-  const [prevOptions, setPrevOptions] = useState(options);
-  const [prevKey, setPrevKey] = useState(key);
-  const [db, setDB] = useState(options ? () => create(options) : undefined);
-
-  if (key !== prevKey) {
-    if (prevOptions) {
-      close(prevOptions);
-    }
-    if (options) {
-      setDB(create(options));
-    }
-    setPrevOptions(options);
-    setPrevKey(key);
-  }
-
-  return db;
+  const optionsObject =
+    typeof options === 'string' ? { name: options } : options;
+  const key = stringify(optionsObject);
+  const optionsMemoized = useMemo(() => optionsObject, [key]);
+  const dependencies = [optionsMemoized];
+  const [value, cleanup] = useMemo(
+    () =>
+      key === undefined
+        ? []
+        : store([key], () => [
+            optionsMemoized ? createPouchDB(optionsMemoized) : undefined,
+            value => value?.close()
+          ]),
+    dependencies
+  );
+  useEffect(() => cleanup, dependencies);
+  return value;
 }
 
 export function useDBContext() {
@@ -37,7 +40,7 @@ export default function useDB(
   const dbOptions = useDBOptions(options);
   const dbContext = useDBContext();
 
-  const db = dbInstance || dbOptions || dbContext;
+  const db = dbInstance ?? dbOptions ?? dbContext;
 
   if (!db) {
     throw new Error(

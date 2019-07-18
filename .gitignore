@@ -1,6 +1,7 @@
 /browser/
 /build/
 /cjs/
+/concurrent/
 /coverage/
 /es/
 /node/

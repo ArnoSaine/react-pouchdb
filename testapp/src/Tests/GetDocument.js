@@ -1,18 +1,14 @@
-import { useGet } from 'react-pouchdb/browser';
-import { useTestRender, ErrorBoundaryAndSuspenseOrder } from 'Test';
-import { deepStrictEqual } from 'assert';
+import { useTestRender, SynchronousAndConcurrentAPIs } from 'Test';
 
-export default function GetDocument({ id, message, expected }) {
+export default function GetDocument({ id, ...otherProps }) {
   return (
-    <ErrorBoundaryAndSuspenseOrder
-      message={message}
-      test={actual => deepStrictEqual(actual, expected)}
-    >
-      <Test id={id} />
-    </ErrorBoundaryAndSuspenseOrder>
+    <SynchronousAndConcurrentAPIs {...otherProps}>
+      {api => <Test {...{ api, id }} />}
+    </SynchronousAndConcurrentAPIs>
   );
 }
 
-function Test({ id }) {
-  return useTestRender(useGet({ id })?.value ?? 'not found');
+function Test({ api: { useGet }, ...otherProps }) {
+  const doc = useGet(otherProps);
+  return useTestRender(doc ? (doc._deleted ? 'deleted' : doc.value) : doc);
 }

@@ -1,0 +1,11 @@
+{
+  "get": true,
+  "find": true,
+  "existing": true,
+  "missing": true,
+  "synchronous": true,
+  "concurrent": true,
+  "errorBoundaryBeforeSuspense": true,
+  "suspenseBeforeErrorBoundary": true,
+  "sleep": 200
+}

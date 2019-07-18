@@ -5,6 +5,14 @@
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/no-autofocus": "off",
-    "operator-assignment": ["error", "never"]
+    "operator-assignment": ["error", "never"],
+    "no-param-reassign": "off",
+    "camelcase": [
+      "error",
+      {
+        "allow": ["_local_seq"],
+        "properties": "never"
+      }
+    ]
   }
 }

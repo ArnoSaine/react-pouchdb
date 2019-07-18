@@ -3,7 +3,7 @@ const { outDir = '' } = require('yargs').argv;
 const outDirParts = outDir.split('/');
 
 const options = {
-  presets: ['library-util/cjs/babel-preset'],
+  presets: ['library-util/cjs/babel-preset', '@babel/preset-flow'],
   plugins: ['codegen']
 };
 

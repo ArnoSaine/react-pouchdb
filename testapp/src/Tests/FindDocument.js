@@ -1,18 +1,16 @@
-import { useFind } from 'react-pouchdb/browser';
-import { useTestRender, ErrorBoundaryAndSuspenseOrder } from 'Test';
-import { deepStrictEqual } from 'assert';
+import { useTestRender, SynchronousAndConcurrentAPIs } from 'Test';
 
-export default function FindDocument({ selector, message, expected }) {
+export default function FindDocument({ selector, ...otherProps }) {
   return (
-    <ErrorBoundaryAndSuspenseOrder
-      message={message}
-      test={actual => deepStrictEqual(actual, expected)}
-    >
-      <Test selector={selector} />
-    </ErrorBoundaryAndSuspenseOrder>
+    <SynchronousAndConcurrentAPIs {...otherProps}>
+      {api => <Test {...{ api, selector }} />}
+    </SynchronousAndConcurrentAPIs>
   );
 }
 
-function Test({ selector }) {
-  return useTestRender(useFind({ selector })?.[0]?.value ?? 'not found');
+function Test({ api: { useFind }, ...otherProps }) {
+  const docs = useFind(otherProps);
+  return useTestRender(
+    docs ? (docs.length ? docs[0].value : 'empty array') : docs
+  );
 }

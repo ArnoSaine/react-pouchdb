@@ -29,4 +29,6 @@ export default function Test({ message, test, children }) {
 }
 
 export ErrorBoundaryAndSuspenseOrder from './ErrorBoundaryAndSuspenseOrder';
+export SynchronousAndConcurrentAPIs from './SynchronousAndConcurrentAPIs';
 export useTestRender from './useTestRender';
+export config from './config';
