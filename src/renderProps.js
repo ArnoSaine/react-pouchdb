@@ -31,7 +31,5 @@ export default (useDBOperation, error) =>
         : children(props);
     }
 
-    if (children && Children.count(children)) {
-      return cloneElement(children, props);
-    }
+    return cloneElement(Children.only(children), props);
   };
