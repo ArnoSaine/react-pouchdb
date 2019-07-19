@@ -6,13 +6,12 @@
   "module": "es",
   "scripts": {
     "build": "npm run inbuild --",
-    "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es --ignore src/__tests__",
+    "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es",
     "deploy": "cd todoapp && npm run build && cd .. && gh-pages --dist todoapp/build",
-    "dev": "npm test -- --watchAll",
     "dev:testapp": "concurrently \"npm run watch\" \"npm link && cd testapp && npm link react-pouchdb && npm start\"",
     "dev:todoapp": "concurrently \"npm run watch\" \"npm link && cd todoapp && npm link react-pouchdb && npm start\"",
     "eslint": "eslint {{.,testapp,todoapp},{scripts,src,testapp/src,todoapp/src}/**}/*.js --fix",
-    "inbuild": "node --experimental-modules scripts/build --source-maps --ignore src/__tests__",
+    "inbuild": "node --experimental-modules scripts/build --source-maps",
     "lint": "npm run eslint && npm run prettier",
     "postbuild": "npm run update-submodules",
     "postpublish": "cd testapp && npm install react-pouchdb@latest && cd ../todoapp && npm install react-pouchdb@latest",
@@ -20,8 +19,7 @@
     "prepack": "npm run build",
     "prettier": "npm run prettier:write -- {{.,testapp,todoapp},{scripts,src,testapp/src,todoapp/src}/**}/*.{js,json} !./package-lock.json",
     "prettier:write": "prettier --config .prettierrc.js --write",
-    "preversion": "npm run lint && npm test",
-    "test": "jest --coverage --runInBand --verbose",
+    "preversion": "npm run lint",
     "update-submodules": "node --experimental-modules scripts/update-submodules",
     "version": "npm run update-submodules --",
     "watch": "npm run build && concurrently \"npm run inbuild -- --watch --skip-initial-build\" \"npm run update-submodules\""
@@ -63,33 +61,18 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-flow": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "babel-plugin-codegen": "^3.0.0",
     "babel-plugin-transform-rename-import": "^2.3.0",
     "concurrently": "^4.1.0",
     "cross-spawn": "^6.0.5",
     "fs-extra": "^7.0.1",
     "gh-pages": "^2.0.1",
-    "jest": "^23.6.0",
     "library-util": "^0.3.0",
     "pouchdb": "^7.0.0",
     "pouchdb-browser": "^7.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-test-renderer": "^16.8.3",
     "yargs": "^13.2.1"
-  },
-  "jest": {
-    "testMatch": [
-      "**/src/**/__tests__/**/*.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/utils/.*\\.js"
-    ],
-    "transform": {
-      ".js$": "babel-jest"
-    }
   },
   "lint-staged": {
     "*.js": [
