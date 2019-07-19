@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, createContext, useEffect } from 'react';
-import { over } from 'lodash';
+import over from 'lodash/over';
 
 const { Suspense } = React;
 
@@ -11,7 +11,7 @@ const Context = createContext();
 // Each callback is invoked when Suspense component unmounts.
 React.Suspense = function ReactPouchDBSuspenseCleanupContext(props) {
   const handlers = useMemo(() => new Set(), []);
-  useEffect(() => over(handlers), []);
+  useEffect(() => over([...handlers]), []);
   return (
     <Context.Provider value={handlers}>
       <Suspense {...props} />

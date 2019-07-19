@@ -1,3 +1,5 @@
+import over from 'lodash/over';
+
 export default function createSubscription(subscribe, remove) {
   let value;
   let unsubscribe;
@@ -9,7 +11,7 @@ export default function createSubscription(subscribe, remove) {
       if (!updaters.size) {
         unsubscribe = subscribe(nextValue => {
           value = [null, nextValue];
-          updaters.forEach(update => update());
+          over([...updaters])();
         });
       }
       updaters.add(update);
