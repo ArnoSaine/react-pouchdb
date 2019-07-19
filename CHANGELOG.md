@@ -1,3 +1,12 @@
+# 2.0.0-beta.0
+
+- Add concurrent API variant
+- **Breaking change:** In case of missing document `useGet` returns `null` (same for `doc` value in `<Get>`)
+- **Breaking change:** In case of removed document `useGet` returns `{"_id": ..., "_rev": ..., "_deleted": true}` (same for `doc` value in `<Get>`)
+- **Breaking change:** Remove `render` and `component` render props from `<Get>` and `<Find>` → Use `children` render prop
+- **Breaking change:** `children` render prop behaves like `render` and `component` render prop in v1
+- Update dependencies
+
 # 1.0.0
 
 - Add Hooks API

@@ -1,6 +1,6 @@
 {
   "name": "react-pouchdb-todoapp",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.0",
   "private": true,
   "dependencies": {
     "@arnosaine/react-scripts": "^0.2.0",
