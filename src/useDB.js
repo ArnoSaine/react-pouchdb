@@ -45,8 +45,8 @@ export default function useDB(
   if (!db) {
     throw new Error(
       callee
-        ? `\`${callee}\` was called without \`db\` and database is not in context. Provide database using <PouchDB /> or \`${example}\``
-        : 'Database is not in context. Provide database using <PouchDB />'
+        ? `\`${callee}\` was called without \`db\` and database is not in context. Provide database using <PouchDB> or \`${example}\``
+        : 'Database is not in context. Provide database using <PouchDB>'
     );
   }
   return db;

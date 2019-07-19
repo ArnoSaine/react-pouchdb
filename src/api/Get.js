@@ -3,6 +3,6 @@ import renderProps from '../renderProps';
 
 export default useGet =>
   renderProps(flow([useGet, doc => ({ doc })]), {
-    callee: '<Get />',
+    callee: '<Get>',
     example: '<Get db={name|options} ... />'
   });
