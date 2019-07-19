@@ -17,6 +17,9 @@ React wrapper for PouchDB that also subscribes to changes.
   - [`<Get>`](#get)
   - [`<Find>`](#find)
   - [`withDB`](#withdbdb-component)
+- [API Variants](#api-variants)
+  - [Synchronous](#synchronous)
+  - [Concurrent](#concurrent)
 - [Package dependencies](#package-dependencies)
 
 ## Examples
@@ -68,7 +71,7 @@ import { PouchDB, Find } from "react-pouchdb";
         name: { $gte: null }
       }}
       sort={["name"]}
-      render={({ db, docs }) => (
+      children={({ db, docs }) => (
         <ul>
           {docs.map(doc => (
             <li key={doc._id}>
@@ -101,6 +104,15 @@ Options to [`get`](https://pouchdb.com/api.html#fetch_document). If **other** th
 
 Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s.
 
+**Returns**
+
+| Value | Description | Example |
+| --- | --- | --- |
+| undefined | Request is pending (only in [Concurrent API](#concurrent)) | `undefined` |
+| null | Missing document | `null` |
+| Document | Found document | `{"_id": ...,"_rev": ..., ...}` |
+| Deleted document | Deleted document | `{"_id": ..., "_rev": ..., "_deleted": true}` |
+
 ```js
 import { useGet } from "react-pouchdb";
 
@@ -114,13 +126,20 @@ function MyComponent() {
 
 Find documents and listen to changes.
 
-**`db: string|object`**
+**`db: string|object` (optional)**
 
 Override context value or use as an alternative to `<PouchDB>`.
 
 **`options: object`**
 
 Options to [`find`](https://pouchdb.com/api.html#query_index).
+
+**Returns**
+
+| Value | Description | Example |
+| --- | --- | --- |
+| undefined | Request is pending (only in [Concurrent API](#concurrent)) | `undefined` |
+| Array | List of documents | `[{"_id": ...,"_rev": ..., ...}, ...]` |
 
 ```js
 import { useFind } from "react-pouchdb";
@@ -144,7 +163,7 @@ function MyComponent() {
 
 ### `useDB([db])`
 
-**`db: string|object`**
+**`db: string|object` (optional)**
 
 Override context value or use as an alternative to `<PouchDB>`.
 
@@ -181,7 +200,7 @@ Other props are passed to [PouchDB constructor](https://pouchdb.com/api.html#cre
 
 Get document and listen to changes.
 
-**`db: string|object`**
+**`db: string|object` (optional)**
 
 Override context value or use as an alternative to `<PouchDB>`.
 
@@ -193,28 +212,12 @@ Override context value or use as an alternative to `<PouchDB>`.
 
 `docId`.
 
-**`component`**
+**`children: func|component|element`**
 
-_Component_ is rendered with props `db` and `doc` when the initial request completes and when the document is updated. If the document is not found, `doc` is `undefined`.
-
-```js
-<Get id="mydoc" component={Title} />
-```
-
-**`render: func`**
-
-`render` function is called with props `db` and `doc` when the initial request completes and when the document is updated. If the document is not found, `doc` is `undefined`.
+Function is called / component is rendered / element is cloned with props `db` and `doc`. See [`useGet`](#usegetdb-options) return value for possible values for `doc`.
 
 ```js
-<Get id="mydoc" render={({ doc }) => <h1>{doc.title}</h1>} />
-```
-
-**`children: func|element`**
-
-Render while the request is pending, completed and document is updated. Function is called / component is rendered / element is cloned with props `db` and `doc`.
-
-```js
-<Get id="mydoc" children={({ doc }) => (doc ? <h1>{doc.title}</h1> : null)} />
+<Get id="mydoc" children={({ doc }) => <h1>{doc.title}</h1>} />
 ```
 
 **`attachments: bool|string`**
@@ -225,7 +228,7 @@ Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s
 <Get
   attachments
   id="mydoc"
-  render={({ doc }) => (
+  children={({ doc }) => (
     <>
       <h1>{doc.title}</h1>
       <code>{doc._attachments["att.txt"].data}</code>
@@ -242,7 +245,7 @@ Other props are passed to [`get`](https://pouchdb.com/api.html#fetch_document) m
 
 Find documents and listen to changes.
 
-**`db: string|object`**
+**`db: string|object` (optional)**
 
 Override context value or use as an alternative to `<PouchDB>`.
 
@@ -260,13 +263,9 @@ Override context value or use as an alternative to `<PouchDB>`.
 
 See [`find`](https://pouchdb.com/api.html#query_index).
 
-**`component`**
+**`children: func|component|element`**
 
-**`render: func`**
-
-**`children: func|element`**
-
-Render props are as in `<Get>` component. Render methods will be passed `db` and `docs` props.
+Function is called / component is rendered / element is cloned with props `db` and `docs`. See [`useFind`](#usefinddb-options) return value for possible values for `docs`.
 
 ```js
 <Find
@@ -274,7 +273,7 @@ Render props are as in `<Get>` component. Render methods will be passed `db` and
     name: { $gte: null }
   }}
   sort={["name"]}
-  render={({ docs }) => (
+  children={({ docs }) => (
     <ul>
       {docs.map(doc => (
         <li key={doc._id}>{doc.name}</li>
@@ -296,6 +295,30 @@ const MyComponent = withDB(({ db, title }) => (
 ));
 ```
 
+## API Variants
+
+### Synchronous
+
+Requests to are made sequentially. The benefit is that API returns only after request has been completed and with completed response value.
+
+Import from `react-pouchdb` to use the Synchronous API. Example:
+
+```js
+import { useFind, useDB } from "react-pouchdb";
+```
+
+### Concurrent
+
+Requests are made simultaneously. The drawback is that while a request is pending, API returns `undefined`, which user must handle correctly, i.e. render `null` and use `<Suspense>` to show loading indicator.
+
+Import from `react-pouchdb/concurrent` to use the Concurrent API. Example:
+
+```js
+import { useFind, useDB } from "react-pouchdb/concurrent";
+```
+
 ## Package dependencies
 
-The package expects `pouchdb` to be available. If you use `pouchdb-browser` or `pouchdb-node` import from `react-pouchdb/browser` or `react-pouchdb/node` respectively.
+The package expects `pouchdb` to be available. If you use `pouchdb-browser` or `pouchdb-node`, import from `react-pouchdb/browser` or `react-pouchdb/node` respectively.
+
+If you use `pouchdb-browser` or `pouchdb-node` and [Concurrent API](#concurrent), import from `react-pouchdb/browser/concurrent` or `react-pouchdb/node/concurrent`.
