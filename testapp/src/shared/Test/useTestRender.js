@@ -9,7 +9,7 @@ export default function useTestRender(value) {
       ? 'null'
       : value === undefined
       ? 'undefined'
-      : 'test error'
+      : 'test failure'
   );
   return null;
 }
