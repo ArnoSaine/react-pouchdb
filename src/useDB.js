@@ -19,7 +19,9 @@ export function useDBOptions(options) {
         ? []
         : store([key], () => [
             optionsMemoized ? createPouchDB(optionsMemoized) : undefined,
-            value => value?.close()
+            value => {
+              value?.close();
+            }
           ]),
     dependencies
   );
