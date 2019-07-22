@@ -6,13 +6,21 @@ export default function createSubscription(subscribe, remove) {
   return {
     getCurrentValue: () => value,
     subscribe: update => {
-      if (!updaters.size) {
-        unsubscribe = subscribe(nextValue => {
-          value = [null, nextValue];
-          updaters.forEach(updater => updater());
-        });
-      }
-      updaters.add(update);
+      (async () => {
+        updaters.add(update);
+        if (updaters.size === 1) {
+          try {
+            unsubscribe = await subscribe(nextValue => {
+              value = [null, nextValue];
+              updaters.forEach(updater => updater());
+            });
+          } catch (error) {
+            value = [error];
+            updaters.forEach(updater => updater());
+          }
+        }
+      })();
+
       return () => {
         updaters.delete(update);
         if (!updaters.size) {
