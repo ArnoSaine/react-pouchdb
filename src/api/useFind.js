@@ -92,7 +92,7 @@ export default useListen =>
               });
             }
             const sortedIndex = docs.findIndex(({ _id }) => doc._id === _id);
-            // Document update, new place supposed to be last, `limit` option is set and limit was reached?
+            // Document update, new place is supposed to be last, `limit` option is set and limit was reached?
             if (found && sortedIndex + 1 === limit) {
               // Get the actual last document.
               const {
@@ -106,7 +106,7 @@ export default useListen =>
                 docs[sortedIndex] = lastDoc;
               }
             }
-            // `skip` option is set and document supposed to be first?
+            // `skip` option is set and document is supposed to be first?
             if (skip && sortedIndex === 0) {
               // Get the actual first document.
               const {
