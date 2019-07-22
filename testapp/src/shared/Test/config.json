@@ -7,5 +7,6 @@
   "concurrent": true,
   "errorBoundaryBeforeSuspense": true,
   "suspenseBeforeErrorBoundary": true,
+  "dontSwallowErrors": true,
   "sleep": 200
 }

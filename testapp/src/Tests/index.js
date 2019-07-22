@@ -1,6 +1,7 @@
 import { config } from 'Test';
 import FindDocument from './FindDocument';
 import GetDocument from './GetDocument';
+import DontSwallowErrors from './DontSwallowErrors';
 
 export default function Tests() {
   return (
@@ -77,6 +78,7 @@ export default function Tests() {
           }}
         />
       )}
+      {config.dontSwallowErrors && <DontSwallowErrors />}
     </>
   );
 }
