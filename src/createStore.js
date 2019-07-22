@@ -7,12 +7,12 @@ export default function createStore() {
   return (path, create) => {
     function remove({ onCleanup, value, parent }) {
       onCleanup?.(value);
-      (function removeChild(path, { parent, children }) {
+      (function removeChild({ parent, children }) {
         children.delete(path.pop());
-        if (!children.size) {
-          removeChild(path, parent);
+        if (!children.size && parent) {
+          removeChild(parent);
         }
-      })([...path], parent);
+      })(parent);
     }
     const item = path.reduce(
       (parent, key) =>
