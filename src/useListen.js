@@ -16,9 +16,10 @@ export default createListenHook(subscription => {
           unsubscribe();
         }
       }
-      suspenseContextCleanupHandlers.add(cleanup);
+      // A Suspense component higher in the tree is required, but we will let React to throw error when component suspends
+      suspenseContextCleanupHandlers?.add(cleanup);
       await gettingInitialValue;
-      suspenseContextCleanupHandlers.delete(cleanup);
+      suspenseContextCleanupHandlers?.delete(cleanup);
       resolve();
     });
   }
