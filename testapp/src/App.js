@@ -10,7 +10,10 @@ function App() {
     <>
       <h1>Test React PouchDB</h1>
       <DestroyDB name={dbName}>
-        <PouchDB name={dbName}>
+        <PouchDB
+          name={dbName}
+          synchronousAPIInitialSubscriptionCleanupDelay={5000}
+        >
           <TestSequence>
             <Tests />
           </TestSequence>
