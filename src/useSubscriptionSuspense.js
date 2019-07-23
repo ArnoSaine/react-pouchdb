@@ -19,16 +19,18 @@ export default function useSubscriptionSuspense(subscription) {
       }
       if (!suspender.current) {
         suspender.current = new Promise(resolve => {
-          const unsubscribe = subscription.subscribe(() => {
-            resolve();
-            unsubscribe();
-          });
+          const unsubscribe = subscription.subscribe(
+            function checkForUpdates() {
+              resolve();
+              unsubscribe();
+            }
+          );
         });
       }
       if (initializing.current) {
         return;
       }
       throw suspender.current;
-    }, [subscription.getCurrentValue])
+    }, [subscription])
   });
 }
