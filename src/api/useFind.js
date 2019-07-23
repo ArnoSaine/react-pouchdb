@@ -4,14 +4,12 @@ import { collate } from 'pouchdb-collate';
 import { matchesSelector } from 'pouchdb-selector-core';
 import changes from '../changes';
 import useDB from '../useDB';
+import reverseArgs from '../reverseArgs';
 
 PouchDB.plugin(find);
 
 export default useListen =>
-  function useFind(db, options = db) {
-    if (arguments.length < 2) {
-      db = undefined;
-    }
+  reverseArgs(function useFind(options, db) {
     db = useDB(db, {
       callee: 'useFind',
       example: 'useFind(db, options)'
@@ -127,4 +125,4 @@ export default useListen =>
         }
       );
     });
-  };
+  });

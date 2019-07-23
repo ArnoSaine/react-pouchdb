@@ -3,6 +3,7 @@ import stringify from 'fast-json-stable-stringify';
 import attachmentsAsUint8Arrays from '../attachmentsAsUint8Arrays';
 import changes from '../changes';
 import useDB from '../useDB';
+import reverseArgs from '../reverseArgs';
 
 const UINT8ARRAY = 'u8a';
 const ALLOWED_LIVE_OPTIONS = ['attachments', 'ajax', 'binary', 'id'];
@@ -17,10 +18,7 @@ async function nextState(binary, doc) {
 }
 
 export default useListen =>
-  function useGet(db, options = db) {
-    if (arguments.length < 2) {
-      db = undefined;
-    }
+  reverseArgs(function useGet(options, db) {
     db = useDB(db, {
       callee: 'useGet',
       example: 'useGet(db, options)'
@@ -70,4 +68,4 @@ export default useListen =>
         );
       }
     });
-  };
+  });

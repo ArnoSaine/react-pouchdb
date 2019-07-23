@@ -1,11 +1,9 @@
 import { forwardRef } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import useDB from './useDB';
+import reverseArgs from './reverseArgs';
 
-export default function withDB(db, Component = db) {
-  if (arguments.length < 2) {
-    db = undefined;
-  }
+export default reverseArgs(function withDB(Component, db) {
   return forwardRef(
     hoistStatics(
       Object.assign(
@@ -27,4 +25,4 @@ export default function withDB(db, Component = db) {
       Component
     )
   );
-}
+});
