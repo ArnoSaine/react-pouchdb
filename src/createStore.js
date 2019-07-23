@@ -1,34 +1,39 @@
 import get from '@postinumero/map-get-with-default';
 
 export default function createStore() {
-  const root = {
-    children: new Map()
-  };
+  const root = new Map();
   return (path, create) => {
-    function remove({ onCleanup, value, parent }) {
+    function remove({ onCleanup, value }) {
       onCleanup?.(value);
-      (function removeChild({ parent, children }) {
-        children.delete(path.pop());
-        if (!children.size && parent) {
-          removeChild(parent);
+      let parent = root;
+      const chain = path.map(key => {
+        const item = { parent, key };
+        parent = parent.get(key);
+        return item;
+      });
+      (function removeChild() {
+        const { parent, key } = chain.pop();
+        parent.delete(key);
+        if (!parent.size && chain.length) {
+          removeChild();
         }
-      })(parent);
+      })();
     }
-    const item = path.reduce(
-      (parent, key) =>
-        parent.children::get(key, () => {
-          const [value, onCleanup] = create(() => remove(item));
-          const item = {
-            value,
-            onCleanup,
-            parent,
-            referenceCounter: 0,
-            children: new Map()
-          };
-          return item;
-        }),
+    const pathCopy = [...path];
+    const lastKey = pathCopy.pop();
+    const leaf = pathCopy.reduce(
+      (parent, key) => parent::get(key, () => new Map()),
       root
     );
+    const item = leaf::get(lastKey, () => {
+      const [value, onCleanup] = create(() => remove(item));
+      const item = {
+        value,
+        onCleanup,
+        referenceCounter: 0
+      };
+      return item;
+    });
     item.referenceCounter = item.referenceCounter + 1;
     return [
       item.value,
