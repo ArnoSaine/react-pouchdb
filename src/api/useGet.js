@@ -33,6 +33,16 @@ export default useListen =>
       }),
       [binary, stringify(otherOptions), !!attachments]
     );
+    const changesOptions = useMemo(
+      () => ({
+        ...optionsWithAttachmentAndBinaryOption,
+        live: true,
+        include_docs: true,
+        since: 'now',
+        doc_ids: [id]
+      }),
+      [optionsWithAttachmentAndBinaryOption, id]
+    );
     return useListen(db, options, async setValue => {
       try {
         setValue(
@@ -54,18 +64,9 @@ export default useListen =>
           ALLOWED_LIVE_OPTIONS.includes(option)
         )
       ) {
-        return db::changes(
-          {
-            ...optionsWithAttachmentAndBinaryOption,
-            live: true,
-            include_docs: true,
-            since: 'now',
-            doc_ids: [id]
-          },
-          async ({ doc }) => {
-            setValue(await nextState(binary, doc));
-          }
-        );
+        return db::changes(changesOptions, async ({ doc }) => {
+          setValue(await nextState(binary, doc));
+        });
       }
     });
   });

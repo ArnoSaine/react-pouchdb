@@ -8,6 +8,14 @@ import reverseArgs from '../reverseArgs';
 
 PouchDB.plugin(find);
 
+const changesOptions = {
+  live: true,
+  include_docs: true,
+  since: 'now',
+  // Documents are kept in memory. 'complete' event can return an empty array.
+  return_docs: false
+};
+
 export default useListen =>
   reverseArgs(function useFind(options, db) {
     db = useDB(db, {
@@ -30,13 +38,7 @@ export default useListen =>
       setValue(docs);
       // To find deleted and other non-matching documents, listen all changes and use selector in 'change' event.
       return db::changes(
-        {
-          live: true,
-          include_docs: true,
-          since: 'now',
-          // Documents are kept in memory. 'complete' event can return an empty array.
-          return_docs: false
-        },
+        changesOptions, //
         async ({ deleted, doc }) => {
           const index = docs?.findIndex(({ _id }) => doc._id === _id);
           const found = index !== -1;
