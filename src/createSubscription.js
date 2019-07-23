@@ -1,16 +1,15 @@
 export default function createSubscription(subscribe, remove) {
   let value;
-  let unsubscribe;
+  let subscribing;
   const updaters = new Set();
-
   return {
     getCurrentValue: () => value,
     subscribe: update => {
-      (async () => {
-        updaters.add(update);
-        if (updaters.size === 1) {
+      updaters.add(update);
+      if (updaters.size === 1) {
+        subscribing = (async () => {
           try {
-            unsubscribe = await subscribe(nextValue => {
+            return await subscribe(nextValue => {
               value = [null, nextValue];
               updaters.forEach(updater => updater());
             });
@@ -18,13 +17,14 @@ export default function createSubscription(subscribe, remove) {
             value = [error];
             updaters.forEach(updater => updater());
           }
-        }
-      })();
+        })();
+      }
 
-      return () => {
+      return async () => {
         updaters.delete(update);
         if (!updaters.size) {
           remove();
+          const unsubscribe = await subscribing;
           unsubscribe?.();
         }
       };
