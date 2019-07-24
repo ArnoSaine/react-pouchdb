@@ -1,3 +1,9 @@
+# 2.0.0-beta.1
+
+- Optimize caching change requests
+- Fix memory leak in listening changes
+- Fix [#7](https://github.com/ArnoSaine/react-pouchdb/issues/7): Show errors from PouchDB
+
 # 2.0.0-beta.0
 
 - Add concurrent API variant
@@ -21,7 +27,7 @@
 
 # 0.3.2
 
-- Fix #5: Using `<Find />` with `sort` option and remote database.
+- Fix [#5](https://github.com/ArnoSaine/react-pouchdb/issues/5): Using `<Find />` with `sort` option and remote database
 
 # 0.3.1
 
