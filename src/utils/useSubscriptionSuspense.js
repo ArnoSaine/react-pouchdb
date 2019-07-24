@@ -1,8 +1,7 @@
 import { useRef, useEffect, useCallback } from 'react';
-import { useSubscription } from './packages/use-subscription';
+import { useSubscription } from '../packages/use-subscription';
 
-// Like use-subscription, but if current value is undefined, this will suspend
-// right after first render until value is received.
+// Like use-subscription, but if current value is undefined, this will return undefined, and suspend right after first render until value is received.
 export default function useSubscriptionSuspense(subscription) {
   const initializing = useRef(true);
   const suspender = useRef();

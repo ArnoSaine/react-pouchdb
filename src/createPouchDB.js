@@ -2,7 +2,7 @@ import PouchDB from 'pouchdb';
 
 export default function createPouchDB({
   // Time to wait for suspended component to actually mount and subscribe.
-  synchronousAPIInitialSubscriptionCleanupDelay = 30000,
+  synchronousAPIInitialSubscriptionCleanupDelay,
   maxListeners,
   ...options
 }) {

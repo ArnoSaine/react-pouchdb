@@ -1,4 +1,4 @@
-import useSubscriptionSuspense from '../useSubscriptionSuspense';
+import useSubscriptionSuspense from '../utils/useSubscriptionSuspense';
 import createListenHook from '../createListenHook';
 
 export default createListenHook(useSubscriptionSuspense);
