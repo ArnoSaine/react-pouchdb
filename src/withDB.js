@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
+import reverseArgs from './utils/reverseArgs';
 import useDB from './useDB';
-import reverseArgs from './reverseArgs';
 
 export default reverseArgs(function withDB(Component, db) {
   return forwardRef(

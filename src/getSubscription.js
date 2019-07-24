@@ -1,5 +1,5 @@
+import createStore from './utils/createStore';
 import createSubscription from './createSubscription';
-import createStore from './createStore';
 
 const store = createStore();
 

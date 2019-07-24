@@ -2,9 +2,9 @@ import PouchDB from 'pouchdb';
 import find from 'pouchdb-find';
 import { collate } from 'pouchdb-collate';
 import { matchesSelector } from 'pouchdb-selector-core';
+import reverseArgs from '../utils/reverseArgs';
 import changes from '../changes';
 import useDB from '../useDB';
-import reverseArgs from '../reverseArgs';
 
 PouchDB.plugin(find);
 

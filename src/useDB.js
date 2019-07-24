@@ -1,9 +1,9 @@
 import { useContext, useMemo, useEffect } from 'react';
 import PouchDB from 'pouchdb';
 import stringify from 'fast-json-stable-stringify';
+import createStore from './utils/createStore';
 import DBContext from './DBContext';
 import createPouchDB from './createPouchDB';
-import createStore from './createStore';
 
 const store = createStore();
 

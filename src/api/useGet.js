@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import stringify from 'fast-json-stable-stringify';
+import reverseArgs from '../utils/reverseArgs';
 import attachmentsAsUint8Arrays from '../attachmentsAsUint8Arrays';
 import changes from '../changes';
 import useDB from '../useDB';
-import reverseArgs from '../reverseArgs';
 
 const UINT8ARRAY = 'u8a';
 const ALLOWED_LIVE_OPTIONS = ['attachments', 'ajax', 'binary', 'id'];

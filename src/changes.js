@@ -1,5 +1,5 @@
+import createStore from './utils/createStore';
 import processQueue from './utils/processQueue';
-import createStore from './createStore';
 
 const store = createStore();
 
