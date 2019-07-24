@@ -1,3 +1,4 @@
+import processQueue from './utils/processQueue';
 import createStore from './createStore';
 
 const store = createStore();
@@ -12,9 +13,10 @@ export default function changes(options, handleChange) {
       }
     ];
   });
-  eventEmitter.on('change', handleChange);
+  const handleChangeQueued = processQueue(handleChange);
+  eventEmitter.on('change', handleChangeQueued);
   return function cancel() {
-    eventEmitter.removeListener('change', handleChange);
+    eventEmitter.removeListener('change', handleChangeQueued);
     cleanup();
   };
 }
