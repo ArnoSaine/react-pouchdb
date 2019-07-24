@@ -28,7 +28,7 @@ React wrapper for PouchDB that also subscribes to changes.
 
 ```js
 import { Suspense } from "react";
-import { useFind, useDB } from "react-pouchdb";
+import { PouchDB, useFind, useDB } from "react-pouchdb";
 
 function MyComponent() {
   const docs = useFind({
@@ -94,7 +94,7 @@ Get document and listen to changes.
 
 **`db: string|object` (optional)**
 
-Override context value or use as an alternative to `<PouchDB>`.
+Override the context value or use as an alternative to `<PouchDB>`.
 
 **`options: object`**
 
@@ -110,7 +110,7 @@ Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s
 | --- | --- | --- |
 | undefined | Request is pending (only in [Concurrent API](#concurrent)) | `undefined` |
 | null | Missing document | `null` |
-| Document | Found document | `{"_id": ...,"_rev": ..., ...}` |
+| Document | Found document | `{"_id": ..., "_rev": ..., ...}` |
 | Deleted document | Deleted document | `{"_id": ..., "_rev": ..., "_deleted": true}` |
 
 ```js
@@ -128,7 +128,7 @@ Find documents and listen to changes.
 
 **`db: string|object` (optional)**
 
-Override context value or use as an alternative to `<PouchDB>`.
+Override the context value or use as an alternative to `<PouchDB>`.
 
 **`options: object`**
 
@@ -139,7 +139,7 @@ Options to [`find`](https://pouchdb.com/api.html#query_index).
 | Value | Description | Example |
 | --- | --- | --- |
 | undefined | Request is pending (only in [Concurrent API](#concurrent)) | `undefined` |
-| Array | List of documents | `[{"_id": ...,"_rev": ..., ...}, ...]` |
+| Array | List of documents | `[{"_id": ..., "_rev": ..., ...}, ...]` |
 
 ```js
 import { useFind } from "react-pouchdb";
@@ -163,9 +163,11 @@ function MyComponent() {
 
 ### `useDB([db])`
 
+Get the PouchDB instance from the context.
+
 **`db: string|object` (optional)**
 
-Override context value or use as an alternative to `<PouchDB>`.
+Override the context value or use as an alternative to `<PouchDB>`.
 
 ```js
 import { useDB } from "react-pouchdb";
@@ -178,17 +180,17 @@ function MyComponent({ title }) {
 
 ### `<PouchDB>`
 
-Connect to a database and provide it from context to other components and hooks.
+Connect to a database and provide it from the context to other components and hooks.
 
 **`name: string`**
 
 **`maxListeners: number`**
 
-Similar change requests are pooled, but you might still need to increase the number of `maxListeners`.
+Similar change requests are detected and cached. You might still need to increase the number of `maxListeners`, if you use `useGet` / `<Get>` with lots of different options.
 
 **`...rest: any`**
 
-Other props are passed to [PouchDB constructor](https://pouchdb.com/api.html#create_database) as second argument.
+Other props are passed to [PouchDB constructor](https://pouchdb.com/api.html#create_database) as a second argument.
 
 ```js
 <PouchDB name="dbname">
@@ -202,7 +204,7 @@ Get document and listen to changes.
 
 **`db: string|object` (optional)**
 
-Override context value or use as an alternative to `<PouchDB>`.
+Override the context value or use as an alternative to `<PouchDB>`.
 
 ```js
 <Get db="dbname" id="mydoc" ... />
@@ -247,7 +249,7 @@ Find documents and listen to changes.
 
 **`db: string|object` (optional)**
 
-Override context value or use as an alternative to `<PouchDB>`.
+Override the context value or use as an alternative to `<PouchDB>`.
 
 ```js
 <Find db="dbname" selector={...} ... />
@@ -299,7 +301,7 @@ const MyComponent = withDB(({ db, title }) => (
 
 ### Synchronous
 
-Requests to are made sequentially. The benefit is that API returns only after request has been completed and with completed response value.
+It is guaranteed that the API returns with a final response value from PouchDB. Because of this, requests are made sequentially.
 
 Import from `react-pouchdb` to use the Synchronous API. Example:
 
@@ -309,7 +311,7 @@ import { useFind, useDB } from "react-pouchdb";
 
 ### Concurrent
 
-Requests are made simultaneously. The drawback is that while a request is pending, API returns `undefined`, which user must handle correctly, i.e. render `null` and use `<Suspense>` to show loading indicator.
+Requests are made simultaneously. The drawback is that while a request is pending, the API returns `undefined`, which user must handle without error, i.e. render `null` and use `<Suspense>` to show a loading indicator.
 
 Import from `react-pouchdb/concurrent` to use the Concurrent API. Example:
 
