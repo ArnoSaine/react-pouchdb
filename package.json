@@ -66,12 +66,12 @@
     "concurrently": "^4.1.1",
     "cross-spawn": "^6.0.5",
     "fs-extra": "^8.1.0",
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.1.1",
     "library-util": "^0.5.0",
     "pouchdb": "^7.1.1",
     "pouchdb-browser": "^7.1.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "yargs": "^13.3.0"
   },
   "lint-staged": {

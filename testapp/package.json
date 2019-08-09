@@ -5,10 +5,10 @@
   "dependencies": {
     "@arnosaine/react-scripts": "3.0.1",
     "assert": "^2.0.0",
-    "pouchdb-browser": "^7.0.0",
-    "react": "^16.8.6",
+    "pouchdb-browser": "^7.1.1",
+    "react": "^16.9.0",
     "react-app-polyfill": "^1.0.1",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.9.0",
     "react-error-boundary": "^1.2.5",
     "react-pouchdb": "^2.0.0-beta.1"
   },
