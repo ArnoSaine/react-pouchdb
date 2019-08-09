@@ -35,7 +35,8 @@ export default useListen =>
         });
       }
       let { docs } = await db.find(options);
-      setValue([...docs]);
+      const update = () => setValue([...docs]);
+      update();
       // To find deleted and other non-matching documents, listen all changes and use selector in 'change' event.
       return db::changes(
         changesOptions, //
@@ -61,7 +62,7 @@ export default useListen =>
                   docs.push(replacementDoc);
                 }
               }
-              setValue([...docs]);
+              update();
             }
           } else {
             if (found) {
@@ -122,7 +123,7 @@ export default useListen =>
             if (docs.length > limit) {
               docs.splice(limit);
             }
-            setValue([...docs]);
+            update();
           }
         }
       );
