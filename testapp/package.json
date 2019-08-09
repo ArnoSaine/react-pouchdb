@@ -1,5 +1,5 @@
 {
-  "name": "testapp",
+  "name": "react-pouchdb-testapp",
   "version": "2.0.0-beta.1",
   "private": true,
   "dependencies": {
