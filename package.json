@@ -53,6 +53,7 @@
     "@postinumero/map-get-with-default": "^0.1.0",
     "fast-json-stable-stringify": "^2.0.0",
     "hoist-non-react-statics": "^3.3.0",
+    "lodash": "^4.17.15",
     "pouchdb-collate": "^7.1.1",
     "pouchdb-find": "^7.1.1",
     "pouchdb-selector-core": "^7.1.1"
@@ -67,7 +68,6 @@
     "fs-extra": "^8.1.0",
     "gh-pages": "^2.0.1",
     "library-util": "^0.5.0",
-    "lodash": "^4.17.15",
     "pouchdb": "^7.1.1",
     "pouchdb-browser": "^7.1.1",
     "react": "^16.8.6",
