@@ -4,10 +4,10 @@ import createListenHook from './createListenHook';
 export default createListenHook(
   (
     subscription,
-    { reactPouchDBOptions: { synchronousAPIInitialSubscriptionCleanupDelay } }
+    { reactPouchDBOptions: { synchronousAPITemporarySubscriptionCleanupDelay } }
   ) =>
     useSubscriptionImmediateSuspense(
       subscription,
-      synchronousAPIInitialSubscriptionCleanupDelay
+      synchronousAPITemporarySubscriptionCleanupDelay
     )
 );

@@ -2,7 +2,7 @@ import PouchDB from 'pouchdb';
 
 export default function createPouchDB({
   // Time to wait for suspended component to actually mount and subscribe.
-  synchronousAPIInitialSubscriptionCleanupDelay,
+  synchronousAPITemporarySubscriptionCleanupDelay,
   maxListeners,
   ...options
 }) {
@@ -15,6 +15,6 @@ export default function createPouchDB({
     db.setMaxListeners(maxListeners);
   }
   return Object.assign(db, {
-    reactPouchDBOptions: { synchronousAPIInitialSubscriptionCleanupDelay }
+    reactPouchDBOptions: { synchronousAPITemporarySubscriptionCleanupDelay }
   });
 }
