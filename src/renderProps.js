@@ -18,7 +18,7 @@ export default (valueToProps, error) => useAPI => {
     );
 
     if (typeof children === 'function') {
-      return children.prototype?.render
+      return children.prototype?.isReactComponent
         ? createElement(children, props)
         : children(props);
     }
