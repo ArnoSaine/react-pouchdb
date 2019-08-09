@@ -1,6 +1,6 @@
 {
   "name": "react-pouchdb",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "React wrapper for PouchDB that also subscribes to changes.",
   "main": "cjs",
   "module": "es",

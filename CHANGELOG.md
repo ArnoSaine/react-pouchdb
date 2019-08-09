@@ -1,3 +1,9 @@
+# 2.0.0-beta.2
+
+- Fix excessive re-rendering from `bulkDocs`
+- Fix keeping original docs array always internal
+- Update dependencies
+
 # 2.0.0-beta.1
 
 - Optimize caching change requests
