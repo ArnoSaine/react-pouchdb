@@ -35,7 +35,7 @@ export default useListen =>
         });
       }
       let { docs } = await db.find(options);
-      setValue(docs);
+      setValue([...docs]);
       // To find deleted and other non-matching documents, listen all changes and use selector in 'change' event.
       return db::changes(
         changesOptions, //
