@@ -10,7 +10,7 @@
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.9.0",
     "react-error-boundary": "^1.2.5",
-    "react-pouchdb": "^2.0.0-beta.1"
+    "react-pouchdb": "^2.0.0-beta.2"
   },
   "scripts": {
     "start": "react-scripts start",
