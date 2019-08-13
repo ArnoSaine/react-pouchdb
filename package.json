@@ -56,7 +56,8 @@
     "lodash": "^4.17.15",
     "pouchdb-collate": "^7.1.1",
     "pouchdb-find": "^7.1.1",
-    "pouchdb-selector-core": "^7.1.1"
+    "pouchdb-selector-core": "^7.1.1",
+    "use-subscription": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
