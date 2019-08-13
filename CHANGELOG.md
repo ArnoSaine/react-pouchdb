@@ -1,3 +1,7 @@
+# 2.0.0-beta.3
+
+- Use use-subscription
+
 # 2.0.0-beta.2
 
 - Fix excessive re-rendering from `bulkDocs`

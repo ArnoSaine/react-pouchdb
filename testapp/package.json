@@ -1,6 +1,6 @@
 {
   "name": "react-pouchdb-testapp",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "private": true,
   "dependencies": {
     "@arnosaine/react-scripts": "3.0.1",
@@ -10,7 +10,7 @@
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.9.0",
     "react-error-boundary": "^1.2.5",
-    "react-pouchdb": "^2.0.0-beta.2"
+    "react-pouchdb": "^2.0.0-beta.3"
   },
   "scripts": {
     "start": "react-scripts start",
