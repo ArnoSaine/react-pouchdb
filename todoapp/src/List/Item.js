@@ -13,7 +13,7 @@ export default function Item({ doc, doc: { completed = false, title } }) {
       inputRef.current.focus();
       setFocus(false);
     }
-  });
+  }, [focus, setFocus]);
 
   function handleSave() {
     setIsEditing(false);
