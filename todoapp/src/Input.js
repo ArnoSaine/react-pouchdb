@@ -1,7 +1,9 @@
 import { useDB } from 'react-pouchdb/browser';
+import useT from 'useT';
 
 export default function Input() {
   const { post } = useDB();
+  const t = useT();
   return (
     <input
       autoFocus
@@ -13,7 +15,7 @@ export default function Input() {
           target.value = '';
         }
       }}
-      placeholder="What needs to be done?"
+      placeholder={t('placeholder')}
       type="text"
     />
   );

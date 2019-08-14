@@ -1,6 +1,13 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = env => config => {
-  config.resolve.alias.react = path.resolve('./node_modules/react');
+export default env => config => {
+  const {
+    resolve: { alias, modules }
+  } = config;
+
+  alias.react = path.resolve('./node_modules/react');
+
+  modules.push('shared');
+
   return config;
 };

@@ -1,4 +1,5 @@
 import { useFind } from 'react-pouchdb/browser';
+import useT from 'useT';
 
 export default function Counter() {
   const docs = useFind({
@@ -6,10 +7,8 @@ export default function Counter() {
       completed: { $ne: true }
     }
   });
-  const { length } = docs;
+  const t = useT();
   return (
-    <span className="todo-count">
-      {length} {length === 1 ? 'item' : 'items'} left
-    </span>
+    <span className="todo-count">{t('todoCount', { count: docs.length })}</span>
   );
 }

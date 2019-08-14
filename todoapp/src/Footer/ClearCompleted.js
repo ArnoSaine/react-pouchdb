@@ -1,4 +1,5 @@
 import { useDB, useFind } from 'react-pouchdb/browser';
+import useT from 'useT';
 
 export default function Counter() {
   const { bulkDocs } = useDB();
@@ -7,6 +8,7 @@ export default function Counter() {
       completed: true
     }
   });
+  const t = useT();
   const { length } = docs;
   return length ? (
     <button
@@ -14,7 +16,7 @@ export default function Counter() {
       onClick={() => bulkDocs(docs.map(doc => ({ ...doc, _deleted: true })))}
       type="button"
     >
-      Clear completed ({length})
+      {t('clearCompleted', { length })}
     </button>
   ) : null;
 }
