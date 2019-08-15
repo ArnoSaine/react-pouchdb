@@ -98,7 +98,7 @@ Override the context value or use as an alternative to `<PouchDB>`.
 
 **`options: object`**
 
-Options to [`get`](https://pouchdb.com/api.html#fetch_document). If **other** than `attachments`, `ajax` or `binary` options are set, live changes are disabled.
+Options to [`get`](https://pouchdb.com/api.html#fetch_document). If **other** than `id`, `attachments`, `ajax` or `binary` options are set, live changes are disabled.
 
 **`options.attachments: bool|string` (optional)**
 

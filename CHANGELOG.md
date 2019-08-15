@@ -1,3 +1,7 @@
+# 2.0.0
+
+- (No changes)
+
 # 2.0.0-beta.3
 
 - Use use-subscription
