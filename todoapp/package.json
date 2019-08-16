@@ -8,6 +8,7 @@
     "classnames": "^2.2.6",
     "i18next": "^17.0.11",
     "i18next-browser-languagedetector": "^3.0.3",
+    "jsoneditor": "^6.3.0",
     "pouchdb-browser": "^7.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

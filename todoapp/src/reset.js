@@ -6,8 +6,6 @@ export default function reset(put, resource) {
       header: 'todos',
       resourceEditorHeader: 'Resource Editor',
       resetResource: 'Reset',
-      resourceKey: 'Key',
-      resourceValue: 'Value',
       loading: 'loading',
       placeholder: 'What needs to be done?',
       clearCompleted: 'Clear completed ({{length}})',
