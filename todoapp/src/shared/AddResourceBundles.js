@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import useResetResourceBundle, { dbName } from 'useResetResourceBundle';
+import useResetResourceBundles, { dbName } from 'useResetResourceBundles';
 import { useFind } from 'react-pouchdb/browser';
 import { availableLanguages } from '../i18n';
 
-export default function AddResourceBundle() {
+export default function AddResourceBundles() {
   const { i18n } = useTranslation();
   const resources = useFind(dbName, {
     selector: { _id: { $in: i18n.languages } }
@@ -22,7 +22,7 @@ function useAddAvailableResourceBundles() {
   const resources = useFind(dbName, {
     selector: {}
   });
-  const reset = useResetResourceBundle();
+  const reset = useResetResourceBundles();
   useEffect(() => {
     (async () => {
       if (

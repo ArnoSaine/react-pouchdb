@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDB, useGet } from 'react-pouchdb/browser';
 import useT from 'useT';
 import JSONEditorComponent from 'JSONEditorComponent';
-import useResetResourceBundle, { dbName } from 'useResetResourceBundle';
+import useResetResourceBundles, { dbName } from 'useResetResourceBundles';
 
 export default function Editor({ lng }) {
   const t = useT();
@@ -17,7 +17,7 @@ export default function Editor({ lng }) {
     },
     [put, resource]
   );
-  const reset = useResetResourceBundle();
+  const reset = useResetResourceBundles();
   return (
     resource && (
       <>

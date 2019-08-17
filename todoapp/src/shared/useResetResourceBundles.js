@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDB } from 'react-pouchdb/browser';
 import { availableLanguages } from '../i18n';
 
-export default function useResetResourceBundle() {
+export default function useResetResourceBundles() {
   const { allDocs, bulkDocs } = useDB(dbName);
   return useCallback(async () => {
     const { rows } = await allDocs();
