@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { PouchDB } from 'react-pouchdb/browser';
+import Dynamic from 'Dynamic';
 import AddDynamicElements from 'DynamicElements/Add';
 import AddResourceBundles from 'ResourceBundles/Add';
 import useT from 'useT';
@@ -10,11 +10,6 @@ import useResetDynamicElements, {
 import useResetResourceBundles, {
   dbName as resourceBundles
 } from 'ResourceBundles/useReset';
-import Container from './Container';
-import Footer from './Footer';
-import Input from './Input';
-import List from './List';
-import ToggleAll from './ToggleAll';
 import { homepage } from '../package.json';
 import DBEditor from 'DBEditor';
 import elements from './dynamicElements';
@@ -52,25 +47,7 @@ function App() {
               />
             )}
           />
-          <Route
-            render={() => (
-              <PouchDB name="todoapp">
-                <Container>
-                  <section className="todoapp">
-                    <header>
-                      <h1>{t('header')}</h1>
-                    </header>
-                    <Input />
-                    <section className="main">
-                      <ToggleAll />
-                      <List />
-                      <Footer />
-                    </section>
-                  </section>
-                </Container>
-              </PouchDB>
-            )}
-          />
+          <Route render={() => <Dynamic id="todoapp" />} />
         </Switch>
       </BrowserRouter>
     </Suspense>
