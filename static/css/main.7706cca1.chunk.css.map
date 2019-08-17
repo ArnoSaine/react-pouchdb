@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.module.css"],"names":[],"mappings":"AAAA,yBACE,yBACE,iBAAkB,CAClB,mBAAoB,CACpB,cACF,CACF","file":"main.7706cca1.chunk.css","sourcesContent":["@media (min-width: 899px) {\n  .learn-bar {\n    margin-left: 150px;\n    margin-right: -150px;\n    padding-left: 0;\n  }\n}\n"]}

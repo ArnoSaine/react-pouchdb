@@ -1,15 +1,17 @@
 {
-  "main.css": "/react-pouchdb/static/css/main.50272451.chunk.css",
-  "main.js": "/react-pouchdb/static/js/main.03ae56f0.chunk.js",
-  "main.js.map": "/react-pouchdb/static/js/main.03ae56f0.chunk.js.map",
-  "static/css/1.bb087b33.chunk.css": "/react-pouchdb/static/css/1.bb087b33.chunk.css",
-  "static/js/1.09abdfa4.chunk.js": "/react-pouchdb/static/js/1.09abdfa4.chunk.js",
-  "static/js/1.09abdfa4.chunk.js.map": "/react-pouchdb/static/js/1.09abdfa4.chunk.js.map",
-  "runtime~main.js": "/react-pouchdb/static/js/runtime~main.ce3e21fc.js",
-  "runtime~main.js.map": "/react-pouchdb/static/js/runtime~main.ce3e21fc.js.map",
-  "static/css/main.50272451.chunk.css.map": "/react-pouchdb/static/css/main.50272451.chunk.css.map",
-  "static/css/1.bb087b33.chunk.css.map": "/react-pouchdb/static/css/1.bb087b33.chunk.css.map",
-  "index.html": "/react-pouchdb/index.html",
-  "precache-manifest.31c839d6ca2f0bf1d4076d1727f500a1.js": "/react-pouchdb/precache-manifest.31c839d6ca2f0bf1d4076d1727f500a1.js",
-  "service-worker.js": "/react-pouchdb/service-worker.js"
+  "files": {
+    "main.css": "/react-pouchdb/static/css/main.7706cca1.chunk.css",
+    "main.js": "/react-pouchdb/static/js/main.5db402da.chunk.js",
+    "main.js.map": "/react-pouchdb/static/js/main.5db402da.chunk.js.map",
+    "runtime~main.js": "/react-pouchdb/static/js/runtime~main.3053164c.js",
+    "runtime~main.js.map": "/react-pouchdb/static/js/runtime~main.3053164c.js.map",
+    "static/css/2.13480f0e.chunk.css": "/react-pouchdb/static/css/2.13480f0e.chunk.css",
+    "static/js/2.1106d74e.chunk.js": "/react-pouchdb/static/js/2.1106d74e.chunk.js",
+    "static/js/2.1106d74e.chunk.js.map": "/react-pouchdb/static/js/2.1106d74e.chunk.js.map",
+    "index.html": "/react-pouchdb/index.html",
+    "precache-manifest.5e66e272ec04f7ea4feafe8a9a32ba68.js": "/react-pouchdb/precache-manifest.5e66e272ec04f7ea4feafe8a9a32ba68.js",
+    "service-worker.js": "/react-pouchdb/service-worker.js",
+    "static/css/2.13480f0e.chunk.css.map": "/react-pouchdb/static/css/2.13480f0e.chunk.css.map",
+    "static/css/main.7706cca1.chunk.css.map": "/react-pouchdb/static/css/main.7706cca1.chunk.css.map"
+  }
 }
