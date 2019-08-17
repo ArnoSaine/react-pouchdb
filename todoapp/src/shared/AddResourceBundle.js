@@ -1,21 +1,38 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDB, useGet } from 'react-pouchdb/browser';
+import useResetResourceBundle, { dbName } from 'useResetResourceBundle';
+import { useFind } from 'react-pouchdb/browser';
+import { availableLanguages } from '../i18n';
 
 export default function AddResourceBundle() {
-  useAddResourceBundle();
+  const { i18n } = useTranslation();
+  const resources = useFind(dbName, {
+    selector: { _id: { $in: i18n.languages } }
+  });
+  useEffect(() => {
+    resources.forEach(({ _id: lng, bundle }) =>
+      i18n.addResourceBundle(lng, 'translation', bundle)
+    );
+  }, [resources, i18n]);
+  useAddAvailableResourceBundles();
   return null;
 }
 
-export function useAddResourceBundle(reset) {
-  const { i18n } = useTranslation();
-  const resource = useGet('translations', { id: 'en' });
-  const { put } = useDB('translations');
+function useAddAvailableResourceBundles() {
+  const resources = useFind(dbName, {
+    selector: {}
+  });
+  const reset = useResetResourceBundle();
   useEffect(() => {
-    if (resource) {
-      i18n.addResourceBundle('en', 'translation', resource.bundle);
-    } else {
-      reset(put, resource);
-    }
-  }, [i18n, put, reset, resource]);
+    (async () => {
+      if (
+        !availableLanguages.every(lng =>
+          resources.find(({ _id }) => _id === lng)
+        )
+      ) {
+        reset();
+      }
+    })();
+  }, [resources, reset]);
+  return null;
 }

@@ -17,6 +17,7 @@ function App() {
   const t = useT();
   return (
     <Suspense fallback={`${t('loading')}...`}>
+      <AddResourceBundle />
       <BrowserRouter basename={basename}>
         <Switch>
           <Route path="/resource-editor" component={ResourceEditor} />
@@ -24,7 +25,6 @@ function App() {
             render={() => (
               <PouchDB name="todoapp">
                 <Container>
-                  <AddResourceBundle />
                   <section className="todoapp">
                     <header>
                       <h1>{t('header')}</h1>

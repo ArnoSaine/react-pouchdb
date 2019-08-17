@@ -1,0 +1,17 @@
+{
+  "header": "todos",
+  "resourceEditorHeader": "Resource Editor",
+  "resetResource": "Reset",
+  "loading": "loading",
+  "placeholder": "What needs to be done?",
+  "clearCompleted": "Clear completed ({{length}})",
+  "todoCount": "{{count}} item left",
+  "todoCount_plural": "{{count}} items left",
+  "filter": {
+    "": "All",
+    "active": "Active",
+    "completed": "Completed"
+  },
+  "en": "English",
+  "fi": "Finnish"
+}

@@ -1,0 +1,17 @@
+{
+  "header": "tehtävät",
+  "resourceEditorHeader": "Resurssieditori",
+  "resetResource": "Palauta",
+  "loading": "ladataan",
+  "placeholder": "Mitä pitää tehdä?",
+  "clearCompleted": "Tyhjennä valmiit ({{length}})",
+  "todoCount": "{{count}} tehtävä jäljellä",
+  "todoCount_plural": "{{count}} tehtävää jäljellä",
+  "filter": {
+    "": "Kaikki",
+    "active": "Vireillä",
+    "completed": "Suoritettu"
+  },
+  "en": "Englanti",
+  "fi": "Suomi"
+}
