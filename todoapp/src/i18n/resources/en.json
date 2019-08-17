@@ -1,7 +1,7 @@
 {
   "header": "todos",
   "resourceEditorHeader": "Resource Editor",
-  "resetResource": "Reset",
+  "reset": "Reset",
   "loading": "loading",
   "placeholder": "What needs to be done?",
   "clearCompleted": "Clear completed ({{length}})",

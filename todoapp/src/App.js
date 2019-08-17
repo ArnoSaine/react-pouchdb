@@ -1,15 +1,24 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { PouchDB } from 'react-pouchdb/browser';
-import AddResourceBundle from 'AddResourceBundle';
+import AddDynamicElements from 'DynamicElements/Add';
+import AddResourceBundles from 'ResourceBundles/Add';
 import useT from 'useT';
+import useResetDynamicElements, {
+  dbName as dynamicElements
+} from 'DynamicElements/useReset';
+import useResetResourceBundles, {
+  dbName as resourceBundles
+} from 'ResourceBundles/useReset';
 import Container from './Container';
 import Footer from './Footer';
 import Input from './Input';
 import List from './List';
 import ToggleAll from './ToggleAll';
 import { homepage } from '../package.json';
-import ResourceEditor from './ResourceEditor';
+import DBEditor from 'DBEditor';
+import elements from './dynamicElements';
+import { availableLanguages } from './i18n';
 
 const basename = process.env.NODE_ENV === 'development' ? undefined : homepage;
 
@@ -17,10 +26,32 @@ function App() {
   const t = useT();
   return (
     <Suspense fallback={`${t('loading')}...`}>
-      <AddResourceBundle />
+      <AddDynamicElements />
+      <AddResourceBundles />
       <BrowserRouter basename={basename}>
         <Switch>
-          <Route path="/resource-editor" component={ResourceEditor} />
+          <Route
+            path="/element-editor"
+            render={() => (
+              <DBEditor
+                ids={elements}
+                useReset={useResetDynamicElements}
+                dbName={dynamicElements}
+                propName="element"
+              />
+            )}
+          />
+          <Route
+            path="/resource-editor"
+            render={() => (
+              <DBEditor
+                ids={availableLanguages}
+                useReset={useResetResourceBundles}
+                dbName={resourceBundles}
+                propName="bundle"
+              />
+            )}
+          />
           <Route
             render={() => (
               <PouchDB name="todoapp">

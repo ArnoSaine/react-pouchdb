@@ -1,7 +1,7 @@
 {
   "header": "tehtävät",
   "resourceEditorHeader": "Resurssieditori",
-  "resetResource": "Palauta",
+  "reset": "Palauta",
   "loading": "ladataan",
   "placeholder": "Mitä pitää tehdä?",
   "clearCompleted": "Tyhjennä valmiit ({{length}})",

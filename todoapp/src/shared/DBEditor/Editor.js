@@ -2,31 +2,29 @@ import { useCallback } from 'react';
 import { useDB, useGet } from 'react-pouchdb/browser';
 import useT from 'useT';
 import JSONEditorComponent from 'JSONEditorComponent';
-import useResetResourceBundles, { dbName } from 'useResetResourceBundles';
 
-export default function Editor({ lng }) {
+export default function Editor({ id, propName, useReset, dbName }) {
   const t = useT();
-  const resource = useGet(dbName, { id: lng });
+  const resource = useGet(dbName, { id });
   const { put } = useDB(dbName);
   const onChangeJSON = useCallback(
-    bundle => {
+    json => {
       put({
         ...resource,
-        bundle
+        [propName]: json
       });
     },
-    [put, resource]
+    [propName, put, resource]
   );
-  const reset = useResetResourceBundles();
+  const reset = useReset();
   return (
     resource && (
       <>
-        <h1>{t('resourceEditorHeader')}</h1>
         <JSONEditorComponent
-          json={resource.bundle}
+          json={resource[propName]}
           onChangeJSON={onChangeJSON}
         />
-        <button onClick={reset}>{t('resetResource')}</button>
+        <button onClick={reset}>{t('reset')}</button>
       </>
     )
   );

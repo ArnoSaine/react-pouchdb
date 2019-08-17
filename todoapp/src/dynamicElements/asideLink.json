@@ -1,0 +1,13 @@
+{
+  "type": "li",
+  "children": [
+    "element",
+    {
+      "type": "a",
+      "props": {
+        "href": ["prop"]
+      },
+      "children": ["prop"]
+    }
+  ]
+}

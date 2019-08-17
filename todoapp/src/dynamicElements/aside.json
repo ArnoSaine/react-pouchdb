@@ -1,0 +1,89 @@
+{
+  "type": "aside",
+  "props": {
+    "className": "learn"
+  },
+  "children": [
+    [
+      [
+        "element",
+        {
+          "type": "header",
+          "children": [
+            [
+              [
+                "element",
+                {
+                  "type": "h3",
+                  "children": "react-pouchdb"
+                }
+              ],
+              [
+                "element",
+                {
+                  "type": "h5",
+                  "children": "Example"
+                }
+              ],
+              [
+                "element",
+                {
+                  "type": "a",
+                  "props": {
+                    "href": "https://github.com/ArnoSaine/react-pouchdb/tree/master/todoapp"
+                  },
+                  "children": "Source"
+                }
+              ],
+              ["element", { "type": "hr" }],
+              [
+                "element",
+                {
+                  "type": "ul",
+                  "children": [
+                    [
+                      [
+                        "element",
+                        {
+                          "type": "Dynamic",
+                          "props": {
+                            "id": "asideLink",
+                            "href": "https://github.com/ArnoSaine/react-pouchdb"
+                          },
+                          "children": "react-pouchdb"
+                        }
+                      ],
+                      [
+                        "element",
+                        {
+                          "type": "Dynamic",
+                          "props": {
+                            "id": "asideLink",
+                            "href": "https://pouchdb.com"
+                          },
+                          "children": "PouchDB"
+                        }
+                      ],
+                      [
+                        "element",
+                        {
+                          "type": "Dynamic",
+                          "props": {
+                            "id": "asideLink",
+                            "href": "http://couchdb.apache.org"
+                          },
+                          "children": "CouchDB"
+                        }
+                      ]
+                    ]
+                  ]
+                }
+              ]
+            ]
+          ]
+        }
+      ],
+      ["element", { "type": "label", "props": { "htmlFor": "toggle-all" } }]
+    ]
+  ]
+}

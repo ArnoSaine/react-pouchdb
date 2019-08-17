@@ -1,13 +1,11 @@
 import { useDB } from 'react-pouchdb/browser';
-import useT from 'useT';
+import Dynamic from 'Dynamic';
 
 export default function Input() {
   const { post } = useDB();
-  const t = useT();
   return (
-    <input
-      autoFocus
-      className="new-todo"
+    <Dynamic
+      id="input"
       onKeyDown={({ keyCode, target }) => {
         const title = target.value.trim();
         if (keyCode === 13 && title) {
@@ -15,8 +13,6 @@ export default function Input() {
           target.value = '';
         }
       }}
-      placeholder={t('placeholder')}
-      type="text"
     />
   );
 }

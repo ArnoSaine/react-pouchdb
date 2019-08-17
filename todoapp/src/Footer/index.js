@@ -1,11 +1,11 @@
+import Dynamic from 'Dynamic';
 import ClearCompleted from './ClearCompleted';
 import Counter from './Counter';
-import Filter from './Filter';
 
 export default () => (
   <footer className="footer">
     <Counter />
-    <Filter />
+    <Dynamic id="filter" />
     <ClearCompleted />
   </footer>
 );

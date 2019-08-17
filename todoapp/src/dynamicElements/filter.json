@@ -1,0 +1,43 @@
+{
+  "type": "ul",
+  "props": {
+    "className": "filters"
+  },
+  "children": [
+    [
+      [
+        "element",
+        {
+          "type": "Dynamic",
+          "props": {
+            "id": "filterLink",
+            "to": "/"
+          },
+          "children": ["trans", "filter."]
+        }
+      ],
+      [
+        "element",
+        {
+          "type": "Dynamic",
+          "props": {
+            "id": "filterLink",
+            "to": "/active"
+          },
+          "children": ["trans", "filter.active"]
+        }
+      ],
+      [
+        "element",
+        {
+          "type": "Dynamic",
+          "props": {
+            "id": "filterLink",
+            "to": "/completed"
+          },
+          "children": ["trans", "filter.completed"]
+        }
+      ]
+    ]
+  ]
+}

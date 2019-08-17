@@ -3,7 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
 export const availableLanguages = ['en', 'fi'];
-export const [fallbackLng] = availableLanguages;
+const [fallbackLng] = availableLanguages;
 
 i18n
   .use(LanguageDetector)

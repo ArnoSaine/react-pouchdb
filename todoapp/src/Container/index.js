@@ -1,9 +1,9 @@
-import Aside from './Aside';
+import Dynamic from 'Dynamic';
 import styles from './styles.module.css';
 
 export default ({ children }) => (
   <div className={`learn-bar ${styles['learn-bar']}`}>
-    <Aside />
+    <Dynamic id="aside" />
     {children}
   </div>
 );

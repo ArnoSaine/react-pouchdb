@@ -1,0 +1,10 @@
+{
+  "type": "input",
+  "props": {
+    "autoFocus": true,
+    "className": "new-todo",
+    "onKeyDown": ["prop"],
+    "placeholder": ["trans"],
+    "type": "text"
+  }
+}
