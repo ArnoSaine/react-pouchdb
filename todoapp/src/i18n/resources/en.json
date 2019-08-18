@@ -8,7 +8,7 @@
   "todoCount": "{{count}} item left",
   "todoCount_plural": "{{count}} items left",
   "filter": {
-    "": "All",
+    "all": "All",
     "active": "Active",
     "completed": "Completed"
   },

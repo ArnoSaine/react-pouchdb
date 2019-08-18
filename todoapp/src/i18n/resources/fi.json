@@ -8,7 +8,7 @@
   "todoCount": "{{count}} tehtävä jäljellä",
   "todoCount_plural": "{{count}} tehtävää jäljellä",
   "filter": {
-    "": "Kaikki",
+    "all": "Kaikki",
     "active": "Vireillä",
     "completed": "Suoritettu"
   },
