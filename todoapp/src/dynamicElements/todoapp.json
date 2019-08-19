@@ -1,59 +1,62 @@
-{
-  "type": "PouchDB",
-  "props": {
-    "name": "todoapp"
-  },
+[
+  "element",
+  {
+    "type": "PouchDB",
+    "props": {
+      "name": "todoapp"
+    },
 
-  "children": [
-    "element",
-    {
-      "type": "Container",
-      "children": [
-        "element",
-        {
-          "type": "section",
-          "props": {
-            "className": "todoapp"
-          },
-          "children": [
-            [
+    "children": [
+      "element",
+      {
+        "type": "Container",
+        "children": [
+          "element",
+          {
+            "type": "section",
+            "props": {
+              "className": "todoapp"
+            },
+            "children": [
               [
-                "element",
-                {
-                  "type": "header",
-                  "children": [
-                    "element",
-                    {
-                      "type": "h1",
-                      "children": ["trans", "header"]
-                    }
-                  ]
-                }
-              ],
-              [
-                "element",
-                {
-                  "type": "Input"
-                }
-              ],
-              [
-                "element",
-                {
-                  "type": "section",
-                  "props": { "className": "main" },
-                  "children": [
-                    [
-                      ["element", { "type": "ToggleAll" }],
-                      ["element", { "type": "List" }],
-                      ["element", { "type": "Footer" }]
+                [
+                  "element",
+                  {
+                    "type": "header",
+                    "children": [
+                      "element",
+                      {
+                        "type": "h1",
+                        "children": ["trans", "header"]
+                      }
                     ]
-                  ]
-                }
+                  }
+                ],
+                [
+                  "element",
+                  {
+                    "type": "Input"
+                  }
+                ],
+                [
+                  "element",
+                  {
+                    "type": "section",
+                    "props": { "className": "main" },
+                    "children": [
+                      [
+                        ["element", { "type": "ToggleAll" }],
+                        ["element", { "type": "List" }],
+                        ["element", { "type": "Footer" }]
+                      ]
+                    ]
+                  }
+                ]
               ]
             ]
-          ]
-        }
-      ]
-    }
-  ]
-}
+          }
+        ]
+      }
+    ]
+  }
+]

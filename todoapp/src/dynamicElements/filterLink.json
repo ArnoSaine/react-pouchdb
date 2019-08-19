@@ -1,16 +1,19 @@
-{
-  "type": "li",
-  "children": [
-    "element",
-    {
-      "type": "NavLink",
-      "props": {
-        "activeClassName": "selected",
-        "exact": true,
-        "replace": true,
-        "to": ["prop"]
-      },
-      "children": ["prop"]
-    }
-  ]
-}
+[
+  "element",
+  {
+    "type": "li",
+    "children": [
+      "element",
+      {
+        "type": "NavLink",
+        "props": {
+          "activeClassName": "selected",
+          "exact": true,
+          "replace": true,
+          "to": ["prop"]
+        },
+        "children": ["prop"]
+      }
+    ]
+  }
+]

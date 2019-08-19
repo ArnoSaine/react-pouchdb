@@ -1,21 +1,24 @@
-{
-  "type": "Fragment",
-  "children": [
-    [
+[
+  "element",
+  {
+    "type": "Fragment",
+    "children": [
       [
-        "element",
-        {
-          "type": "input",
-          "props": {
-            "id": "toggle-all",
-            "className": "toggle-all",
-            "checked": ["prop", "completed"],
-            "onChange": ["prop"],
-            "type": "checkbox"
+        [
+          "element",
+          {
+            "type": "input",
+            "props": {
+              "id": "toggle-all",
+              "className": "toggle-all",
+              "checked": ["prop", "completed"],
+              "onChange": ["prop"],
+              "type": "checkbox"
+            }
           }
-        }
-      ],
-      ["element", { "type": "label", "props": { "htmlFor": "toggle-all" } }]
+        ],
+        ["element", { "type": "label", "props": { "htmlFor": "toggle-all" } }]
+      ]
     ]
-  ]
-}
+  }
+]

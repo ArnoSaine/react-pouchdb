@@ -1,13 +1,16 @@
-{
-  "type": "li",
-  "children": [
-    "element",
-    {
-      "type": "a",
-      "props": {
-        "href": ["prop"]
-      },
-      "children": ["prop"]
-    }
-  ]
-}
+[
+  "element",
+  {
+    "type": "li",
+    "children": [
+      "element",
+      {
+        "type": "a",
+        "props": {
+          "href": ["prop"]
+        },
+        "children": ["prop"]
+      }
+    ]
+  }
+]
