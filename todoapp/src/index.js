@@ -4,6 +4,7 @@ import 'todomvc-common/base.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
+import './componentCatalog';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

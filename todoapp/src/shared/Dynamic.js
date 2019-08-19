@@ -3,13 +3,15 @@ import mapValues from 'mapValues';
 import useT from 'useT';
 import { useGet } from 'react-pouchdb/browser';
 import { dbName } from 'DynamicElements/useReset';
-import * as componentCatalog from '../componentCatalog';
 
 const components = {
   Fragment,
-  Dynamic,
-  ...componentCatalog
+  Dynamic
 };
+
+export function addComponents(...sources) {
+  Object.assign(components, ...sources);
+}
 
 export default function Dynamic({ id, ...otherProps }) {
   const { element } = useGet(dbName, { id });

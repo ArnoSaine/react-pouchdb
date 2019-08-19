@@ -1,7 +1,18 @@
-export { NavLink } from 'react-router-dom';
-export { PouchDB } from 'react-pouchdb/browser';
-export Container from './Container';
-export Footer from './Footer';
-export Input from './Input';
-export List from './List';
-export ToggleAll from './ToggleAll';
+import { addComponents } from 'Dynamic';
+import { NavLink } from 'react-router-dom';
+import { PouchDB } from 'react-pouchdb/browser';
+import Container from './Container';
+import Footer from './Footer';
+import Input from './Input';
+import List from './List';
+import ToggleAll from './ToggleAll';
+
+addComponents({
+  NavLink,
+  PouchDB,
+  Container,
+  Footer,
+  Input,
+  List,
+  ToggleAll
+});
