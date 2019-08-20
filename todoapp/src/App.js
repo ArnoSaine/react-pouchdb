@@ -4,15 +4,12 @@ import Dynamic from 'Dynamic';
 import AddDynamicElements from 'DynamicElements/Add';
 import AddResourceBundles from 'ResourceBundles/Add';
 import useT from 'useT';
-import useResetDynamicElements, {
-  dbName as dynamicElements
-} from 'DynamicElements/useReset';
+import ElementEditor from 'ElementEditor';
 import useResetResourceBundles, {
   dbName as resourceBundles
 } from 'ResourceBundles/useReset';
 import { homepage } from '../package.json';
 import DBEditor from 'DBEditor';
-import elements from './dynamicElements';
 import { availableLanguages } from './i18n';
 
 const basename = process.env.NODE_ENV === 'development' ? undefined : homepage;
@@ -25,17 +22,7 @@ function App() {
       <AddResourceBundles />
       <BrowserRouter basename={basename}>
         <Switch>
-          <Route
-            path="/element-editor"
-            render={() => (
-              <DBEditor
-                ids={elements}
-                useReset={useResetDynamicElements}
-                dbName={dynamicElements}
-                propName="element"
-              />
-            )}
-          />
+          <Route path="/element-editor" component={ElementEditor} />
           <Route
             path="/resource-editor"
             render={() => (

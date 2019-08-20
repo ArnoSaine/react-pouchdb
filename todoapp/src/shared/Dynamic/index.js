@@ -3,6 +3,8 @@ import mapValues from 'mapValues';
 import useT from 'useT';
 import { useGet } from 'react-pouchdb/browser';
 import { dbName } from 'DynamicElements/useReset';
+import jsxToAst from './jsxToAst';
+import astToElement from './astToElement';
 
 const components = {
   Fragment,
@@ -41,5 +43,5 @@ export default function Dynamic({ id, ...otherProps }) {
               }[option](...params);
         }
       : value;
-  })(element);
+  })(element |> jsxToAst |> astToElement);
 }
