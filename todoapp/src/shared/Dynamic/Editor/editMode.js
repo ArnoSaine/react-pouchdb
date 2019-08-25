@@ -7,7 +7,7 @@ const Context = createContext();
 export const useIsEnabled = () => useContext(Context);
 
 export const EditModeContext =
-  function EditModeContext({ history, location, children }) {
+  function EditModeContext({ location, children }) {
     const [enabled, setEnabled] = useState(
       Boolean(new URLSearchParams(location.search).get('edit'))
     );
