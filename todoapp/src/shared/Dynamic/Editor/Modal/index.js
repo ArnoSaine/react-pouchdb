@@ -20,7 +20,7 @@ export default (function Editor({ history, location }) {
       id={id}
       isOpen={isOpen}
       onRequestClose={() => {
-        urlSearchParams.delete(KEY);
+        urlSearchParams.set(KEY, '');
         history.replace({ search: urlSearchParams.toString() });
       }}
     />

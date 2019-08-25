@@ -10,7 +10,7 @@ import useResetResourceBundles, {
 import { homepage } from '../package.json';
 import DBEditor from 'DBEditor';
 import { availableLanguages } from './i18n';
-import { EditModeContext } from 'Dynamic/Editor/editMode';
+import EditModeHotkeyListener from 'Dynamic/Editor/EditModeHotkeyListener';
 import LanguageDetectorUrlSearchChange from 'LanguageDetectorUrlSearchChange';
 import DynamicElementEditorModal from 'Dynamic/Editor/Modal';
 
@@ -25,23 +25,22 @@ function App() {
       <BrowserRouter basename={basename}>
         <LanguageDetectorUrlSearchChange />
         <DynamicElementEditorModal />
-        <EditModeContext>
-          <Switch>
-            <Route
-              path="/resource-editor"
-              render={() => (
-                <DBEditor
-                  ids={availableLanguages}
-                  useReset={useResetResourceBundles}
-                  dbName={resourceBundles}
-                  propName="bundle"
-                  translate="lng"
-                />
-              )}
-            />
-            <Route render={() => <Dynamic id="todoapp" />} />
-          </Switch>
-        </EditModeContext>
+        <EditModeHotkeyListener />
+        <Switch>
+          <Route
+            path="/resource-editor"
+            render={() => (
+              <DBEditor
+                ids={availableLanguages}
+                useReset={useResetResourceBundles}
+                dbName={resourceBundles}
+                propName="bundle"
+                translate="lng"
+              />
+            )}
+          />
+          <Route render={() => <Dynamic id="todoapp" />} />
+        </Switch>
       </BrowserRouter>
     </Suspense>
   );

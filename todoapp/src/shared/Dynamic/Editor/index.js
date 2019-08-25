@@ -1,20 +1,14 @@
 import useT from 'useT';
 import { withRouter } from 'react-router-dom';
-import { useIsEnabled } from './editMode';
 
 export const KEY = 'edit';
 
-export default (function InlineEditor({
-  enabled,
-  id,
-  children,
-  history,
-  location
-}) {
+export default (function Editor({ enabled, id, children, history, location }) {
   const t = useT();
+  const urlSearchParams = new URLSearchParams(location.search);
   return (
     <>
-      {useIsEnabled() && (
+      {urlSearchParams.has(KEY) && (
         <span style={{ position: 'relative' }}>
           <span
             role="img"
@@ -29,7 +23,6 @@ export default (function InlineEditor({
               cursor: 'pointer'
             }}
             onClick={() => {
-              const urlSearchParams = new URLSearchParams(location.search);
               urlSearchParams.set(KEY, id);
               history.replace({ search: urlSearchParams.toString() });
             }}
