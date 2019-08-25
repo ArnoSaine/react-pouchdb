@@ -27,5 +27,8 @@ export default `<aside className="learn">
         <code>SHIFT+E</code>: toggle edit mode
       </li>
     </ul>
+    <hr />
+    <h5>Change language</h5>
+    <LanguageSelector availableLanguages={availableLanguages}/>
   </header>
 </aside>`;
