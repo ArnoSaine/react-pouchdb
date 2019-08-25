@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, withRouter } from 'react-router-dom';
 import { KEY } from 'LanguageDetectorUrlSearchChange';
+import useT from 'useT';
 
 const LANGUAGE_CHANGED = 'languageChanged';
 
 export default (function LanguageSelector({ availableLanguages, location }) {
-  const { t, i18n } = useTranslation();
+  const t = useT();
+  const { i18n } = useTranslation();
   const [lng, setLng] = useState(i18n.language);
   useEffect(() => {
     i18n.on(LANGUAGE_CHANGED, setLng);
