@@ -1,5 +1,5 @@
 import { addComponents } from 'Dynamic';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { PouchDB } from 'react-pouchdb/browser';
 import Container from './Container';
 import Footer from './Footer';
@@ -14,5 +14,6 @@ addComponents({
   Footer,
   Input,
   List,
+  Link,
   ToggleAll
 });

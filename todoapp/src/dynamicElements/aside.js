@@ -17,5 +17,15 @@ export default `<aside className="learn">
         CouchDB
       </Dynamic>
     </ul>
+    <hr />
+    <h5>Shortcuts</h5>
+    <ul>
+      <li>
+        <Link to="/resource-editor">Resource editor</Link>
+      </li>
+      <li>
+        <code>SHIFT+E</code>: toggle edit mode
+      </li>
+    </ul>
   </header>
 </aside>`;
