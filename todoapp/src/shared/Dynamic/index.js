@@ -17,7 +17,7 @@ export function addComponents(...sources) {
 }
 
 export default function Dynamic({ id, ...otherProps }) {
-  const doc = useGet({ name: dbName, maxListeners_: 100 }, { id });
+  const doc = useGet({ name: dbName, maxListeners: 100 }, { id });
   const t = useT();
   return (
     <Editor id={id}>
