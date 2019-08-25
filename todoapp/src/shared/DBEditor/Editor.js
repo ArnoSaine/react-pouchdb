@@ -20,11 +20,16 @@ export default function Editor({ id, propName, useReset, dbName }) {
   return (
     resource && (
       <>
-        <JSONEditorComponent
-          json={resource[propName]}
-          onChangeJSON={onChangeJSON}
-        />
-        <button onClick={reset}>{t('reset')}</button>
+        <div style={{ marginBottom: 10 }}>
+          <JSONEditorComponent
+            json={resource[propName]}
+            onChangeJSON={onChangeJSON}
+            mode="form"
+          />
+        </div>
+        <div className="cleanslate">
+          <button onClick={reset}>{t('reset')}</button>
+        </div>
       </>
     )
   );

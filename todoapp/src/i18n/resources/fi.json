@@ -1,7 +1,10 @@
 {
+  "cancel": "Peruuta",
+  "elementEditor": "Osan muokkaus",
   "header": "tehtävät",
   "resourceEditorHeader": "Resurssieditori",
   "reset": "Palauta",
+  "save": "Tallenna",
   "loading": "ladataan",
   "placeholder": "Mitä pitää tehdä?",
   "clearCompleted": "Tyhjennä valmiit ({{length}})",

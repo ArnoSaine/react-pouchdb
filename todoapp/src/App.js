@@ -1,16 +1,16 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Dynamic from 'Dynamic';
-import AddDynamicElements from 'DynamicElements/Add';
+import AddDynamicElements from 'Dynamic/Add';
 import AddResourceBundles from 'ResourceBundles/Add';
 import useT from 'useT';
-import ElementEditor from 'ElementEditor';
 import useResetResourceBundles, {
   dbName as resourceBundles
 } from 'ResourceBundles/useReset';
 import { homepage } from '../package.json';
 import DBEditor from 'DBEditor';
 import { availableLanguages } from './i18n';
+import { EditModeContext } from 'Dynamic/Editor/editMode';
 
 const basename = process.env.NODE_ENV === 'development' ? undefined : homepage;
 
@@ -21,22 +21,23 @@ function App() {
       <AddDynamicElements />
       <AddResourceBundles />
       <BrowserRouter basename={basename}>
-        <Switch>
-          <Route path="/element-editor" component={ElementEditor} />
-          <Route
-            path="/resource-editor"
-            render={() => (
-              <DBEditor
-                ids={availableLanguages}
-                useReset={useResetResourceBundles}
-                dbName={resourceBundles}
-                propName="bundle"
-                translate
-              />
-            )}
-          />
-          <Route render={() => <Dynamic id="todoapp" />} />
-        </Switch>
+        <EditModeContext>
+          <Switch>
+            <Route
+              path="/resource-editor"
+              render={() => (
+                <DBEditor
+                  ids={availableLanguages}
+                  useReset={useResetResourceBundles}
+                  dbName={resourceBundles}
+                  propName="bundle"
+                  translate
+                />
+              )}
+            />
+            <Route render={() => <Dynamic id="todoapp" />} />
+          </Switch>
+        </EditModeContext>
       </BrowserRouter>
     </Suspense>
   );

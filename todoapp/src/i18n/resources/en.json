@@ -1,7 +1,10 @@
 {
+  "cancel": "Cancel",
+  "elementEditor": "Element editor",
   "header": "todos",
   "resourceEditorHeader": "Resource Editor",
   "reset": "Reset",
+  "save": "Save",
   "loading": "loading",
   "placeholder": "What needs to be done?",
   "clearCompleted": "Clear completed ({{length}})",

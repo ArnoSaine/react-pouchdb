@@ -17,7 +17,8 @@ export default function JSONEditorComponent({
   useEffect(() => {
     jsoneditor.current = new JSONEditor(container.current, {
       mode,
-      onChangeJSON
+      onChangeJSON,
+      history: false
     });
     return () => {
       jsoneditor.current.destroy();
