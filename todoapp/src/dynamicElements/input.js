@@ -1,5 +1,5 @@
 export default `<input
-  autoFocus={true}
+  autoFocus
   className="new-todo"
   onKeyDown={onKeyDown}
   placeholder={t('placeholder')}
