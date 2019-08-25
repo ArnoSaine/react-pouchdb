@@ -10,6 +10,10 @@
     "completed": "Completed"
   },
   "header": "todos",
+  "lng": {
+    "en": "English",
+    "fi": "Finnish"
+  },
   "loading": "loading",
   "placeholder": "What needs to be done?",
   "resourceEditor": "Resource Editor",
@@ -19,7 +23,5 @@
   "source": "Source",
   "todoCount": "{{count}} item left",
   "todoCount_plural": "{{count}} items left",
-  "toggleEditMode": "Toggle edit mode",
-  "en": "English",
-  "fi": "Finnish"
+  "toggleEditMode": "Toggle edit mode"
 }

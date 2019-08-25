@@ -33,7 +33,7 @@ function App() {
                   useReset={useResetResourceBundles}
                   dbName={resourceBundles}
                   propName="bundle"
-                  translate
+                  translate="lng"
                 />
               )}
             />

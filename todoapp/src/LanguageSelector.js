@@ -16,27 +16,32 @@ export default (function LanguageSelector({ availableLanguages, location }) {
   }, [i18n]);
   return (
     <ul>
-      {availableLanguages.map(available => (
-        <li key={available}>
-          {available === lng ? (
-            t(available)
-          ) : (
-            <Link
-              replace
-              to={{
-                ...location,
-                search: do {
-                  const urlSearchParams = new URLSearchParams(location.search);
-                  urlSearchParams.set(KEY, available);
-                  urlSearchParams.toString();
-                }
-              }}
-            >
-              {t(available)}
-            </Link>
-          )}
-        </li>
-      ))}
+      {availableLanguages.map(available => {
+        const children = t(['lng', available].join('.'));
+        return (
+          <li key={available}>
+            {available === lng ? (
+              children
+            ) : (
+              <Link
+                replace
+                to={{
+                  ...location,
+                  search: do {
+                    const urlSearchParams = new URLSearchParams(
+                      location.search
+                    );
+                    urlSearchParams.set(KEY, available);
+                    urlSearchParams.toString();
+                  }
+                }}
+              >
+                {children}
+              </Link>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 } |> withRouter);

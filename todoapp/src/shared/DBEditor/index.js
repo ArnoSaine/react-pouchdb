@@ -11,7 +11,7 @@ export default function DBEditor({ translate, ids, ...props }) {
         <div className="cleanslate">
           {ids.map(id => (
             <button key={id} onClick={() => setId(id)}>
-              {translate ? t(id) : id}
+              {translate ? t([translate, id].join('.')) : id}
             </button>
           ))}
         </div>
