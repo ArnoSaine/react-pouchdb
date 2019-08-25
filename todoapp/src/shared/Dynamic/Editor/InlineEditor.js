@@ -1,6 +1,7 @@
 import useT from 'useT';
 import { withRouter } from 'react-router-dom';
 import { useIsEnabled } from './editMode';
+import { KEY } from '.';
 
 export default (function InlineEditor({
   enabled,
@@ -26,7 +27,11 @@ export default (function InlineEditor({
               boxSizing: 'border-box',
               cursor: 'pointer'
             }}
-            onClick={() => history.replace({ search: `?edit=${id}` })}
+            onClick={() => {
+              const urlSearchParams = new URLSearchParams(location.search);
+              urlSearchParams.set(KEY, id);
+              history.replace({ search: urlSearchParams.toString() });
+            }}
             title={id}
           >
             🔧
