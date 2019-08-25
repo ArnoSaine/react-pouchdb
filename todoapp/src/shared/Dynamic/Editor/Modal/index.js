@@ -1,30 +1,28 @@
-import { lazy } from 'react';
-import ReactModal from 'react-modal';
+import { lazy, useRef } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const Editor = lazy(() => import('./Editor'));
+const Modal = lazy(() => import('./Modal'));
 
-ReactModal.setAppElement('#root');
+export const KEY = 'edit';
 
-export default function Modal({ isOpen, onRequestClose, id }) {
-  return (
-    <ReactModal
+export default (function Editor({ history, location }) {
+  const urlSearchParams = new URLSearchParams(location.search);
+  const id = urlSearchParams.get(KEY);
+  const isOpen = Boolean(id);
+  const isOpened = useRef(isOpen);
+  if (!isOpened.current) {
+    if (isOpen) {
+      isOpened.current = true;
+    }
+  }
+  return isOpened.current ? (
+    <Modal
+      id={id}
       isOpen={isOpen}
       onRequestClose={() => {
-        onRequestClose();
+        urlSearchParams.delete(KEY);
+        history.replace({ search: urlSearchParams.toString() });
       }}
-      style={{
-        overlay: { zIndex: 100 },
-        content: {
-          width: 560,
-          height: 440,
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)'
-        }
-      }}
-    >
-      {id && isOpen ? <Editor id={id} onRequestClose={onRequestClose} /> : null}
-    </ReactModal>
-  );
-}
+    />
+  ) : null;
+} |> withRouter);

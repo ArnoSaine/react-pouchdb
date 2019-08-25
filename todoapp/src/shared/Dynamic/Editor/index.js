@@ -1,22 +1,45 @@
+import useT from 'useT';
 import { withRouter } from 'react-router-dom';
-import InlineEditor from './InlineEditor';
-import Modal from './Modal';
+import { useIsEnabled } from './editMode';
 
 export const KEY = 'edit';
 
-export default (function Editor({ id, children, history, location }) {
-  const urlSearchParams = new URLSearchParams(location.search);
+export default (function InlineEditor({
+  enabled,
+  id,
+  children,
+  history,
+  location
+}) {
+  const t = useT();
   return (
     <>
-      <InlineEditor id={id}>{children}</InlineEditor>
-      <Modal
-        id={id}
-        isOpen={urlSearchParams.get(KEY) === id}
-        onRequestClose={() => {
-          urlSearchParams.delete(KEY);
-          history.replace({ search: urlSearchParams.toString() });
-        }}
-      />
+      {useIsEnabled() && (
+        <span style={{ position: 'relative' }}>
+          <span
+            role="img"
+            aria-label={t('edit')}
+            style={{
+              top: 0,
+              right: 0,
+              zIndex: 1,
+              position: 'absolute',
+              transform: 'scale(1) translate(50%, -50%)',
+              boxSizing: 'border-box',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              const urlSearchParams = new URLSearchParams(location.search);
+              urlSearchParams.set(KEY, id);
+              history.replace({ search: urlSearchParams.toString() });
+            }}
+            title={id}
+          >
+            🔧
+          </span>
+        </span>
+      )}
+      {children}
     </>
   );
 } |> withRouter);

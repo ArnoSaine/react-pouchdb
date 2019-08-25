@@ -12,6 +12,7 @@ import DBEditor from 'DBEditor';
 import { availableLanguages } from './i18n';
 import { EditModeContext } from 'Dynamic/Editor/editMode';
 import LanguageDetectorUrlSearchChange from 'LanguageDetectorUrlSearchChange';
+import DynamicElementEditorModal from 'Dynamic/Editor/Modal';
 
 const basename = process.env.NODE_ENV === 'development' ? undefined : homepage;
 
@@ -23,6 +24,7 @@ function App() {
       <AddResourceBundles />
       <BrowserRouter basename={basename}>
         <LanguageDetectorUrlSearchChange />
+        <DynamicElementEditorModal />
         <EditModeContext>
           <Switch>
             <Route
