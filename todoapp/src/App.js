@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import SuspenseOverlay from 'SuspenseOverlay';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Dynamic from 'Dynamic';
 import AddDynamicElements from 'Dynamic/Add';
@@ -19,7 +19,7 @@ const basename = process.env.NODE_ENV === 'development' ? undefined : homepage;
 function App() {
   const t = useT();
   return (
-    <Suspense fallback={`${t('loading')}...`}>
+    <SuspenseOverlay fallback={`${t('loading')}...`}>
       <AddDynamicElements />
       <AddResourceBundles />
       <BrowserRouter basename={basename}>
@@ -42,7 +42,7 @@ function App() {
           <Route render={() => <Dynamic id="todoapp" />} />
         </Switch>
       </BrowserRouter>
-    </Suspense>
+    </SuspenseOverlay>
   );
 }
 
