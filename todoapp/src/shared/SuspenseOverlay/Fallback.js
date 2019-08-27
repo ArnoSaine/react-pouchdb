@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom';
+import replaceFirstChild from 'replaceFirstChild';
 
 export default function Fallback({
   contentWrapper,
@@ -27,7 +28,16 @@ export default function Fallback({
   return (
     <>
       <WrapperComponent
-        dangerouslySetInnerHTML={{ __html: contentWrapper.current?.innerHTML }}
+        ref={
+          contentWrapper.current &&
+          (elem => {
+            if (elem) {
+              const clone = contentWrapper.current.cloneNode(true);
+              clone.style.removeProperty('display');
+              elem::replaceFirstChild(clone);
+            }
+          })
+        }
       />
       {createPortal(
         <OverlayComponent style={overlayStyle}>
