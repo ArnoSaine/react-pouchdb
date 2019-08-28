@@ -1,11 +1,6 @@
-import {
-  Suspense,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useState
-} from 'react';
+import { Suspense, useRef } from 'react';
 import Fallback from './Fallback';
+import MinDurationHandler from './MinDurationHandler';
 
 export default function SuspenseOverlay({
   children,
@@ -32,26 +27,3 @@ export default function SuspenseOverlay({
     </Suspense>
   );
 }
-
-const MinDurationHandler = forwardRef(function MinDurationHandler(
-  { minDuration, children },
-  ref
-) {
-  const [suspend, setSuspend] = useState();
-  useImperativeHandle(ref, () => ({
-    startMinDuration: minDuration
-      ? () => {
-          setSuspend(true);
-        }
-      : undefined
-  }));
-  if (suspend) {
-    throw new Promise(resolve =>
-      setTimeout(() => {
-        setSuspend(false);
-        resolve();
-      }, minDuration)
-    );
-  }
-  return children;
-});
