@@ -1,17 +1,22 @@
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import replaceFirstChild from 'replaceFirstChild';
+import useStateIfMounted from 'useStateIfMounted';
 
 export default function Fallback({
   contentWrapper,
   fallback,
-  overlayStyle = {
+  overlayDelayStyle = {
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     zIndex: 1000
+  },
+  overlayStyle = {
+    ...overlayDelayStyle,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)'
   },
   fallbackStyle = {
     position: 'absolute',
@@ -23,8 +28,23 @@ export default function Fallback({
   root = '#root',
   WrapperComponent,
   OverlayComponent = 'div',
-  FallbackWrapperComponent = 'div'
+  FallbackWrapperComponent = 'div',
+  delay = 100,
+  startMinDuration
 }) {
+  const [delayed, setDelayed] = useStateIfMounted(Boolean(delay));
+  useEffect(() => {
+    if (delayed) {
+      const timeout = setTimeout(() => {
+        if (setDelayed(false) && startMinDuration) {
+          startMinDuration();
+        }
+      }, delay);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [delay, delayed, setDelayed, startMinDuration]);
   return (
     <>
       <WrapperComponent
@@ -40,10 +60,12 @@ export default function Fallback({
         }
       />
       {createPortal(
-        <OverlayComponent style={overlayStyle}>
-          <FallbackWrapperComponent style={fallbackStyle}>
-            {fallback}
-          </FallbackWrapperComponent>
+        <OverlayComponent style={delayed ? overlayDelayStyle : overlayStyle}>
+          {!delayed && (
+            <FallbackWrapperComponent style={fallbackStyle}>
+              {fallback}
+            </FallbackWrapperComponent>
+          )}
         </OverlayComponent>,
         document.querySelector(root)
       )}
