@@ -3,27 +3,36 @@ import Fallback from './Fallback';
 import MinDurationHandler from './MinDurationHandler';
 
 export default function SuspenseOverlay({
-  children,
+  ContainerComponent = 'div',
   WrapperComponent = 'div',
+  children,
+  contained,
+  containerStyle = { position: 'relative' },
   minDuration = 500,
   ...otherProps
 }) {
-  const wrapper = useRef();
+  const contentRef = useRef();
   const minDurationHandler = useRef();
-  return (
+  const suspense = (
     <Suspense
       fallback={
         <Fallback
           startMinDuration={minDurationHandler.current?.startMinDuration}
-          contentWrapper={wrapper}
+          contentRef={contentRef}
           WrapperComponent={WrapperComponent}
+          contained={contained}
           {...otherProps}
         />
       }
     >
       <MinDurationHandler ref={minDurationHandler} minDuration={minDuration}>
-        <WrapperComponent ref={wrapper}>{children}</WrapperComponent>
+        <WrapperComponent ref={contentRef}>{children}</WrapperComponent>
       </MinDurationHandler>
     </Suspense>
+  );
+  return contained ? (
+    <ContainerComponent style={containerStyle}>{suspense}</ContainerComponent>
+  ) : (
+    suspense
   );
 }
