@@ -3,9 +3,7 @@ import Dynamic from 'Dynamic';
 
 export default function ToggleAll() {
   const docs = useFind({
-    selector: {
-      timestamp: { $gte: null }
-    }
+    selector: {}
   });
   const { bulkDocs } = useDB();
   return docs.length
