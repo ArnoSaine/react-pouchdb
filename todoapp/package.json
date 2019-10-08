@@ -3,15 +3,15 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
-    "@arnosaine/react-scripts": "^3.0.1",
-    "@visma/create-react-app-template": "^0.5.0",
+    "@arnosaine/react-scripts": "^3.2.0",
+    "@visma/create-react-app-template": "^0.5.2",
     "classnames": "^2.2.6",
     "pouchdb-browser": "^7.1.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-pouchdb": "^2.0.0-beta.3",
-    "react-router-dom": "^5.0.1",
-    "todomvc-app-css": "^2.2.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-pouchdb": "^2.0.0",
+    "react-router-dom": "^5.1.2",
+    "todomvc-app-css": "^2.3.0",
     "todomvc-common": "^1.0.5"
   },
   "scripts": {
