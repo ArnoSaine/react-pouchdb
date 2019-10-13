@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@arnosaine/react-scripts": "^3.2.0",
-    "@visma/create-react-app-template": "^0.5.2",
     "classnames": "^2.2.6",
     "pouchdb-browser": "^7.1.1",
     "react": "^16.10.2",
