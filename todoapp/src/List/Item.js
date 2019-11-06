@@ -16,11 +16,13 @@ export default function Item({ doc, doc: { completed = false, title } }) {
   }, [focus, setFocus]);
 
   function handleSave() {
-    setIsEditing(false);
-    put({
-      ...doc,
-      title: inputRef.current.value.trim()
-    });
+    if (isEditing) {
+      setIsEditing(false);
+      put({
+        ...doc,
+        title: inputRef.current.value.trim()
+      });
+    }
   }
 
   return (
@@ -44,15 +46,15 @@ export default function Item({ doc, doc: { completed = false, title } }) {
           type="checkbox"
         />
         <label>{title}</label>
-        <button className="destroy" onClick={() => remove(doc)} type="button" />
+        <button className="destroy" onClick={() => remove(doc)} />
       </div>
       <input
         className="edit"
         ref={inputRef}
         type="text"
         defaultValue={title}
-        onKeyDown={({ keyCode }) => {
-          if (keyCode === 13) {
+        onKeyDown={({ key }) => {
+          if (key === 'Enter') {
             handleSave();
           }
         }}

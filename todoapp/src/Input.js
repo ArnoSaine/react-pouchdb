@@ -6,9 +6,9 @@ export default function Input() {
   return (
     <Dynamic
       id="input"
-      onKeyDown={({ keyCode, target }) => {
+      onKeyDown={({ key, target }) => {
         const title = target.value.trim();
-        if (keyCode === 13 && title) {
+        if (key === 'Enter' && title) {
           post({ title, timestamp: Date.now() });
           target.value = '';
         }

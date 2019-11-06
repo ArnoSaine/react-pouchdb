@@ -14,7 +14,6 @@ export default function ClearCompleted() {
     <button
       className="clear-completed"
       onClick={() => bulkDocs(docs.map(doc => ({ ...doc, _deleted: true })))}
-      type="button"
     >
       {t('clearCompleted', { length })}
     </button>
