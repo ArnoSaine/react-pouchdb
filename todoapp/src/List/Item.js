@@ -51,8 +51,8 @@ export default function Item({ doc, doc: { completed = false, title } }) {
         ref={inputRef}
         type="text"
         defaultValue={title}
-        onKeyDown={({ keyCode }) => {
-          if (keyCode === 13) {
+        onKeyDown={({ key }) => {
+          if (key === 'Enter') {
             handleSave();
           }
         }}
