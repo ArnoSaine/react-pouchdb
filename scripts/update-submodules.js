@@ -1,6 +1,4 @@
-import fsExtra from 'fs-extra';
-
-const { ensureDirSync, readJsonSync, writeJsonSync } = fsExtra;
+import { ensureDirSync, readJsonSync, writeJsonSync } from 'fs-extra';
 
 const updateJsonSync = (file, updater) =>
   writeJsonSync(file, updater(readJsonSync(file)), { spaces: 2 });

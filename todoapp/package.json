@@ -7,7 +7,6 @@
     "@babel/generator": "^7.5.5",
     "@babel/parser": "^7.5.5",
     "@reecelucas/react-use-hotkeys": "^1.1.2",
-    "@visma/create-react-app-template": "^0.5.2",
     "classnames": "^2.2.6",
     "i18next": "^17.0.11",
     "i18next-browser-languagedetector": "^3.0.3",
