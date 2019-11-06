@@ -44,7 +44,7 @@ export default function Item({ doc, doc: { completed = false, title } }) {
           type="checkbox"
         />
         <label>{title}</label>
-        <button className="destroy" onClick={() => remove(doc)} type="button" />
+        <button className="destroy" onClick={() => remove(doc)} />
       </div>
       <input
         className="edit"
