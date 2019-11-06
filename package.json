@@ -11,7 +11,7 @@
     "dev:testapp": "concurrently \"npm run watch\" \"npm link && cd testapp && npm link react-pouchdb && npm start\"",
     "dev:todoapp": "concurrently \"npm run watch\" \"npm link && cd todoapp && npm link react-pouchdb && npm start\"",
     "eslint": "eslint {{.,testapp,todoapp},{scripts,src,testapp/src,todoapp/src}/**}/*.js --fix",
-    "inbuild": "node --experimental-modules scripts/build --source-maps",
+    "inbuild": "node -r esm scripts/build --source-maps",
     "lint": "npm run eslint && npm run prettier",
     "postbuild": "npm run update-submodules",
     "postpublish": "cd testapp && npm install react-pouchdb@latest && cd ../todoapp && npm install react-pouchdb@latest",
@@ -20,7 +20,7 @@
     "prettier": "npm run prettier:write -- {{.,testapp,todoapp},{scripts,src,testapp/src,todoapp/src}/**}/*.{js,json} !./package-lock.json",
     "prettier:write": "prettier --config .prettierrc.js --write",
     "preversion": "npm run lint",
-    "update-submodules": "node --experimental-modules scripts/update-submodules",
+    "update-submodules": "node -r esm scripts/update-submodules",
     "version": "npm run update-submodules --",
     "watch": "npm run build && concurrently \"npm run inbuild -- --watch --skip-initial-build\" \"npm run update-submodules\""
   },
@@ -49,7 +49,7 @@
     "react": "^16.8 || 17"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.5",
+    "@babel/runtime": "^7.6.3",
     "@postinumero/map-get-with-default": "^0.1.0",
     "fast-json-stable-stringify": "^2.0.0",
     "hoist-non-react-statics": "^3.3.0",
@@ -57,23 +57,24 @@
     "pouchdb-collate": "^7.1.1",
     "pouchdb-find": "^7.1.1",
     "pouchdb-selector-core": "^7.1.1",
-    "use-subscription": "^1.0.0"
+    "use-subscription": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.6.4",
     "@babel/preset-flow": "^7.0.0",
     "babel-plugin-codegen": "^3.0.0",
     "babel-plugin-transform-rename-import": "^2.3.0",
-    "concurrently": "^4.1.1",
-    "cross-spawn": "^6.0.5",
+    "concurrently": "^5.0.0",
+    "cross-spawn": "^7.0.1",
+    "esm": "^3.2.25",
     "fs-extra": "^8.1.0",
     "gh-pages": "^2.1.1",
     "library-util": "^0.5.0",
     "pouchdb": "^7.1.1",
     "pouchdb-browser": "^7.1.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "yargs": "^13.3.0"
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "yargs": "^14.2.0"
   },
   "lint-staged": {
     "*.js": [
