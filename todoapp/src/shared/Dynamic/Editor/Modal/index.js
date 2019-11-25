@@ -1,9 +1,8 @@
 import { lazy, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
+import { KEY } from '..';
 
 const Modal = lazy(() => import('./Modal'));
-
-export const KEY = 'edit';
 
 export default (function Editor({ history, location }) {
   const urlSearchParams = new URLSearchParams(location.search);
