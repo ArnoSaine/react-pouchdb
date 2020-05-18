@@ -1,4 +1,13 @@
-import get from '@postinumero/map-get-with-default';
+// import get from '@postinumero/map-get-with-default';
+const get = function(key, getDefault) {
+  return this.has(key)
+    ? this.get(key)
+    : (() => {
+        const defaultValue = getDefault();
+        this.set(key, defaultValue);
+        return defaultValue;
+      })();
+};
 
 export default function createStore() {
   const root = new Map();
