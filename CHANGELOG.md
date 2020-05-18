@@ -1,3 +1,7 @@
+# 2.0.1
+
+- Inline a dependency that uses ES module syntax (Fix [#13](https://github.com/ArnoSaine/react-pouchdb/issues/13))
+
 # 2.0.0
 
 - (No changes)
