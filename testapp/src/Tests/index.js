@@ -1,6 +1,7 @@
 import { config } from 'Test';
 import FindDocument from './FindDocument';
 import GetDocument from './GetDocument';
+import AllDocuments from './AllDocuments';
 import DontSwallowErrors from './DontSwallowErrors';
 
 export default function Tests() {
@@ -36,6 +37,22 @@ export default function Tests() {
               'deleted'
             ],
             synchronous: ['loading', 'null', 'created', 'update', 'deleted']
+          }}
+        />
+      )}
+      {config.allDocs && config.existing && (
+        <AllDocuments
+          id="a"
+          message="All existing documents"
+          expected={{
+            concurrent: [
+              'undefined',
+              'loading',
+              'created',
+              'update',
+              'empty array'
+            ],
+            synchronous: ['loading', 'created', 'update', 'empty array']
           }}
         />
       )}

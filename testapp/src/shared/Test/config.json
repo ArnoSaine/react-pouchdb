@@ -1,5 +1,6 @@
 {
   "get": true,
+  "allDocs": true,
   "find": true,
   "existing": true,
   "missing": true,
