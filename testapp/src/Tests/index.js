@@ -42,7 +42,7 @@ export default function Tests() {
       )}
       {config.allDocs && config.existing && (
         <AllDocuments
-          id="a"
+          keys={['a']}
           message="All existing documents"
           expected={{
             concurrent: [

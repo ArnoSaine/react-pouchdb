@@ -1,9 +1,9 @@
 import { useTestRender, SynchronousAndConcurrentAPIs } from 'Test';
 
-export default function AllDocuments({ id, ...otherProps }) {
+export default function AllDocuments({ keys, ...otherProps }) {
   return (
     <SynchronousAndConcurrentAPIs {...otherProps}>
-      {api => <Test {...{ api, id }} />}
+      {api => <Test {...{ api, keys, include_docs: true }} />}
     </SynchronousAndConcurrentAPIs>
   );
 }
@@ -11,6 +11,6 @@ export default function AllDocuments({ id, ...otherProps }) {
 function Test({ api: { useAllDocs }, ...otherProps }) {
   const docs = useAllDocs(otherProps);
   return useTestRender(
-    docs ? (docs.length ? docs[0].value : 'empty array') : docs
+    docs ? (docs.length ? docs[0].doc.value : 'empty array') : docs
   );
 }
