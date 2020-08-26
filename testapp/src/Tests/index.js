@@ -50,9 +50,9 @@ export default function Tests() {
               'loading',
               'created',
               'update',
-              'empty array'
+              'deleted'
             ],
-            synchronous: ['loading', 'created', 'update', 'empty array']
+            synchronous: ['loading', 'created', 'update', 'deleted']
           }}
         />
       )}

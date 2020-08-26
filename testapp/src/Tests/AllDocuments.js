@@ -11,6 +11,12 @@ export default function AllDocuments({ keys, ...otherProps }) {
 function Test({ api: { useAllDocs }, ...otherProps }) {
   const docs = useAllDocs(otherProps);
   return useTestRender(
-    docs ? (docs.length ? docs[0].doc.value : 'empty array') : docs
+    docs
+      ? docs.length
+        ? docs[0].doc
+          ? docs[0].doc.value
+          : 'deleted'
+        : 'empty array'
+      : docs
   );
 }
