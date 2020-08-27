@@ -75,6 +75,8 @@ export default useListen =>
 
     const optionsWithAttachmentAndBinaryOption = useMemo(
       () => ({
+        // binary option will be overwritten by otherOptions.binary
+        // so that a Blob can be used.
         binary,
         startkey,
         endkey,
@@ -125,7 +127,7 @@ export default useListen =>
       const toRow = transformToRow.bind(null, options.include_docs, binary);
 
       return db::changes(changesOptions, async change => {
-        const { id } = change;
+        const { id, deleted } = change;
 
         // guards that check if the document's id is between startkey and endkey.
         // But only if they exist.
@@ -149,7 +151,7 @@ export default useListen =>
         const found = index !== -1;
 
         // Document was deleted
-        if (change.deleted) {
+        if (deleted) {
           if (found) {
             // remove row
             rows.splice(index, 1);
