@@ -1,6 +1,7 @@
 import { config } from 'Test';
 import FindDocument from './FindDocument';
 import GetDocument from './GetDocument';
+import AllDocuments from './AllDocuments';
 import DontSwallowErrors from './DontSwallowErrors';
 
 export default function Tests() {
@@ -36,6 +37,78 @@ export default function Tests() {
               'deleted'
             ],
             synchronous: ['loading', 'null', 'created', 'update', 'deleted']
+          }}
+        />
+      )}
+      {config.allDocs && config.existing && (
+        <AllDocuments
+          keys={['a']}
+          message="All existing documents with keys"
+          expected={{
+            concurrent: [
+              'undefined',
+              'loading',
+              'created',
+              'update',
+              'deleted'
+            ],
+            synchronous: ['loading', 'created', 'update', 'deleted']
+          }}
+        />
+      )}
+      {config.allDocs && config.missing && (
+        <AllDocuments
+          keys={['b']}
+          message="All documents with keys and missing docs"
+          expected={{
+            concurrent: [
+              'undefined',
+              'loading',
+              'deleted',
+              'deleted',
+              'deleted',
+              'deleted'
+            ],
+            synchronous: ['loading', 'deleted', 'deleted', 'deleted', 'deleted']
+          }}
+        />
+      )}
+      {config.allDocs && config.existing && (
+        <AllDocuments
+          singleKey="a"
+          message="All documents with a key"
+          expected={{
+            concurrent: [
+              'undefined',
+              'loading',
+              'created',
+              'update',
+              'empty array'
+            ],
+            synchronous: ['loading', 'created', 'update', 'empty array']
+          }}
+        />
+      )}
+      {config.allDocs && config.missing && (
+        <AllDocuments
+          singleKey="b"
+          message="All documents with a key of a missing doc"
+          expected={{
+            concurrent: [
+              'undefined',
+              'loading',
+              'empty array',
+              'created',
+              'update',
+              'empty array'
+            ],
+            synchronous: [
+              'loading',
+              'empty array',
+              'created',
+              'update',
+              'empty array'
+            ]
           }}
         />
       )}
