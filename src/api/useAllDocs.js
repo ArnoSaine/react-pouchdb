@@ -56,7 +56,7 @@ function formatRowsAttachments(binary, rows) {
 }
 
 export default useListen =>
-  reverseArgs(function useAllDocs(options, db) {
+  reverseArgs(function useAllDocs(options = {}, db) {
     db = useDB(db, {
       callee: 'useAllDocs',
       example: 'useAllDocs(db, options)'
