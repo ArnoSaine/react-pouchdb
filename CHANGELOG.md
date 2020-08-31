@@ -1,3 +1,7 @@
+# 2.1.0
+
+- Add `useAllDocs` and `<AllDocs>` [#23](https://github.com/ArnoSaine/react-pouchdb/pull/23) ([@Terreii](https://github.com/Terreii))
+
 # 2.0.1
 
 - Inline a dependency that uses ES module syntax (Fix [#13](https://github.com/ArnoSaine/react-pouchdb/issues/13))

@@ -1,6 +1,6 @@
 {
   "name": "react-pouchdb-todoapp",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "private": true,
   "dependencies": {
     "@arnosaine/react-scripts": "^3.2.0",
@@ -8,7 +8,7 @@
     "pouchdb-browser": "^7.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-pouchdb": "^2.0.1",
+    "react-pouchdb": "^2.1.0",
     "react-router-dom": "^5.1.2",
     "todomvc-app-css": "^2.3.0",
     "todomvc-common": "^1.0.5"
