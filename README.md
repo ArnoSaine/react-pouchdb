@@ -136,6 +136,10 @@ Override the context value or use as an alternative to `<PouchDB>`.
 
 Options to [`find`](https://pouchdb.com/api.html#query_index).
 
+**`options.sort: (string|object)[]` (optional)**
+
+If **sort** is present, then it will be used to create a mango index with [`createIndex`](https://pouchdb.com/api.html#create_index).
+
 **Returns**
 
 | Value | Description | Example |
@@ -302,6 +306,8 @@ Override the context value or use as an alternative to `<PouchDB>`.
 **`selector: object`**
 
 **`sort: array`**
+
+If **sort** is present, then it will be used to create a mango index with [`createIndex`](https://pouchdb.com/api.html#create_index).
 
 **`limit: number`**
 
