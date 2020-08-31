@@ -12,10 +12,12 @@ React wrapper for PouchDB that also subscribes to changes.
 - [API](#api)
   - [`useGet`](#usegetdb-options)
   - [`useFind`](#usefinddb-options)
+  - [`useAllDocs`](#usealldocsdb-options)
   - [`useDB`](#usedbdb)
   - [`<PouchDB>`](#pouchdb)
   - [`<Get>`](#get)
   - [`<Find>`](#find)
+  - [`<AllDocs>`](#alldocs)
   - [`withDB`](#withdbdb-component)
 - [API Variants](#api-variants)
   - [Synchronous](#synchronous)
@@ -134,6 +136,10 @@ Override the context value or use as an alternative to `<PouchDB>`.
 
 Options to [`find`](https://pouchdb.com/api.html#query_index).
 
+**`options.sort: (string|object)[]` (optional)**
+
+If **sort** is present, then it will be used to create a mango index with [`createIndex`](https://pouchdb.com/api.html#create_index).
+
 **Returns**
 
 | Value | Description | Example |
@@ -155,6 +161,48 @@ function MyComponent() {
     <ul>
       {docs.map(doc => (
         <li key={doc._id}>{doc.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### `useAllDocs([db,] options)`
+
+Get multiple rows of document meta-data (**id** and **rev**) with optional the documents and listen to changes.
+
+**`db: string|object` (optional)**
+
+Override the context value or use as an alternative to `<PouchDB>`.
+
+**`options: object`**
+
+Options to [`allDocs`](https://pouchdb.com/api.html#batch_fetch).
+
+**`options.attachments: bool|string` (optional)**
+
+Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s.
+
+**Returns**
+
+| Value | Description | Example |
+| --- | --- | --- |
+| undefined | Request is pending (only in [Concurrent API](#concurrent)) | `undefined` |
+| Array | List of document meta data with the document. The rows-field from `allDocs`. | `[{"id": "doc_id", "key": "doc_id", "value": { "rev": ... }, "doc": { ... } }, ...]` |
+
+```js
+import { useAllDocs } from "react-pouchdb";
+
+function MyComponent() {
+  const rows = useAllDocs({
+    include_docs: true,
+    startkey: "profile_",
+    endkey: "profile_\uffff"
+  });
+  return (
+    <ul>
+      {rows.map(row => (
+        <li key={row.id}>{row.doc.name}</li>
       ))}
     </ul>
   );
@@ -259,6 +307,8 @@ Override the context value or use as an alternative to `<PouchDB>`.
 
 **`sort: array`**
 
+If **sort** is present, then it will be used to create a mango index with [`createIndex`](https://pouchdb.com/api.html#create_index).
+
 **`limit: number`**
 
 **`skip: number`**
@@ -279,6 +329,59 @@ Function is called / component is rendered / element is cloned with props `db` a
     <ul>
       {docs.map(doc => (
         <li key={doc._id}>{doc.name}</li>
+      ))}
+    </ul>
+  )}
+/>
+```
+
+### `<AllDocs>`
+
+Get multiple rows of document meta-data (**id** and **rev**) with optional the documents and listen to changes.
+
+**`db: string|object` (optional)**
+
+Override the context value or use as an alternative to `<PouchDB>`.
+
+```js
+<AllDocs db="dbname" include_docs ... />
+```
+
+**`include_docs: bool`**
+
+**`conflicts: bool`**
+
+**`attachments: bool|string`**
+
+Include document attachments. Set to `"u8a"` to get attachments as `Uint8Array`s.
+
+**`startkey: string`**
+
+**`endkey: string`**
+
+**`descending: bool`**
+
+**`keys: string[]`**
+
+**`limit: number`**
+
+**`skip: number`**
+
+See [`allDocs`](https://pouchdb.com/api.html#batch_fetch).
+
+**`children: func|component|element`**
+
+Function is called / component is rendered / element is cloned with props `db` and `rows`. See [`useAllDocs`](#usealldocsdb-options) return value for possible values for `rows`.
+
+```js
+<AllDocs
+  include_docs
+  startkey="profile_"
+  endkey="profile_\uffff"
+  children={({ rows }) => (
+    <ul>
+      {rows.map(row => (
+        <li key={doc.id}>{row.doc.name}</li>
       ))}
     </ul>
   )}
