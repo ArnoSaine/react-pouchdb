@@ -1,6 +1,6 @@
 import renderProps from '../renderProps';
 
-export default renderProps(doc => ({ doc }), {
+export default renderProps(rows => ({ rows }), {
   callee: '<AllDocs>',
   example: '<AllDocs db={name|options} ... />'
 });
