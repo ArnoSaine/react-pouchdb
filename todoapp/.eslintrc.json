@@ -1,3 +1,0 @@
-{
-  "extends": ["./node_modules/@visma/create-react-app-template/eslintrc.json"]
-}

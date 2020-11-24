@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { useDB } from 'react-pouchdb/browser';
 
 export default function Item({ doc, doc: { completed = false, title } }) {
@@ -27,7 +27,7 @@ export default function Item({ doc, doc: { completed = false, title } }) {
 
   return (
     <li
-      className={classNames(completed && 'completed', isEditing && 'editing')}
+      className={clsx(completed && 'completed', isEditing && 'editing')}
       onDoubleClick={() => {
         setFocus(true);
         setIsEditing(true);
