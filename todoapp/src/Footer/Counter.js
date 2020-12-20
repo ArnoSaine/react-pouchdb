@@ -1,10 +1,10 @@
-import { useFind } from 'react-pouchdb/browser';
+import { useFind } from 'react-pouchdb';
 
 export default function Counter() {
   const docs = useFind({
     selector: {
-      completed: { $ne: true }
-    }
+      completed: { $ne: true },
+    },
   });
   const { length } = docs;
   return (

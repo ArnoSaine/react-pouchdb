@@ -5,10 +5,10 @@
   "homepage": "/react-pouchdb",
   "type": "module",
   "scripts": {
-    "build": "npm link ../ && react-scripts build",
+    "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "start": "npm link ../ && react-scripts start",
-    "test": "npm link ../ && react-scripts test"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
@@ -41,7 +41,6 @@
     "react-pouchdb": "^2.1.0",
     "react-router-dom": "^5.2.0",
     "todomvc-app-css": "^2.3.0",
-    "todomvc-common": "^1.0.5",
-    "web-vitals": "^0.2.4"
+    "todomvc-common": "^1.0.5"
   }
 }

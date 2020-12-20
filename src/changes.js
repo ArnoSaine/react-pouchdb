@@ -1,22 +1,21 @@
-import createStore from './utils/createStore';
-import processQueue from './utils/processQueue';
+import memoize from 'memoizee';
+import stringify from 'fast-json-stable-stringify';
+import processQueue from './utils/processQueue.js';
 
-const store = createStore();
+const eventEmitterMemoized = memoize((options, db) => db.changes(options), {
+  refCounter: true,
+  dispose(eventEmitter) {
+    eventEmitter.cancel();
+  },
+  normalizer: ([options, db]) => [stringify(options), db],
+});
 
 export default function changes(options, handleChange) {
-  const [eventEmitter, cleanup] = store([this, options], () => {
-    const eventEmitter = this.changes(options);
-    return [
-      eventEmitter,
-      eventEmitter => {
-        eventEmitter.cancel();
-      }
-    ];
-  });
+  const eventEmitter = eventEmitterMemoized(options, this);
   const handleChangeQueued = processQueue(handleChange);
   eventEmitter.on('change', handleChangeQueued);
-  return function cancel() {
+  return function cleanup() {
     eventEmitter.removeListener('change', handleChangeQueued);
-    cleanup();
+    eventEmitterMemoized.deleteRef(options, this);
   };
 }

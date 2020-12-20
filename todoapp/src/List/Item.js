@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { useDB } from 'react-pouchdb/browser';
+import { useDB } from 'react-pouchdb';
 
 export default function Item({ doc, doc: { completed = false, title } }) {
   const { put, remove } = useDB();
@@ -20,7 +20,7 @@ export default function Item({ doc, doc: { completed = false, title } }) {
       setIsEditing(false);
       put({
         ...doc,
-        title: inputRef.current.value.trim()
+        title: inputRef.current.value.trim(),
       });
     }
   }
@@ -40,7 +40,7 @@ export default function Item({ doc, doc: { completed = false, title } }) {
           onChange={() =>
             put({
               ...doc,
-              completed: !completed
+              completed: !completed,
             })
           }
           type="checkbox"

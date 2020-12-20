@@ -2,28 +2,6 @@
   "name": "react-pouchdb",
   "version": "2.1.0",
   "description": "React wrapper for PouchDB that also subscribes to changes.",
-  "main": "cjs",
-  "module": "es",
-  "scripts": {
-    "build": "npm run inbuild --",
-    "build:todoapp": "npx babel src --out-dir todoapp/node_modules/react-pouchdb/browser/es",
-    "deploy": "cd todoapp && npm run build && cd .. && gh-pages --dist todoapp/build",
-    "dev:testapp": "concurrently \"npm run watch\" \"npm link && cd testapp && npm link react-pouchdb && npm start\"",
-    "dev:todoapp": "concurrently \"npm run watch\" \"npm link && cd todoapp && npm link react-pouchdb && npm start\"",
-    "eslint": "eslint {{.,testapp,todoapp},{scripts,src,testapp/src,todoapp/src}/**}/*.js --fix",
-    "inbuild": "node -r esm scripts/build --source-maps",
-    "lint": "npm run eslint && npm run prettier",
-    "postbuild": "npm run update-submodules",
-    "postpublish": "cd testapp && npm install react-pouchdb@latest && cd ../todoapp && npm install react-pouchdb@latest",
-    "prebuild": "rimraf browser cjs es node",
-    "prepack": "npm run build",
-    "prettier": "npm run prettier:write -- {{.,testapp,todoapp},{scripts,src,testapp/src,todoapp/src}/**}/*.{js,json} !./package-lock.json",
-    "prettier:write": "prettier --config .prettierrc.js --write",
-    "preversion": "npm run lint",
-    "update-submodules": "node -r esm scripts/update-submodules",
-    "version": "npm run update-submodules --",
-    "watch": "npm run build && concurrently \"npm run inbuild -- --watch --skip-initial-build\" \"npm run update-submodules\""
-  },
   "keywords": [
     "react",
     "pouchdb",
@@ -38,57 +16,82 @@
     "name": "Arno Saine",
     "email": "arno@mowhi.com"
   },
+  "type": "module",
+  "exports": {
+    ".": "./mjs/main.js",
+    "./concurrent": "./mjs/concurrent/main.js",
+    "./loading-state": "./mjs/loading-state/main.js",
+    "./browser": "./mjs/browser/main.js",
+    "./browser/concurrent": "./mjs/browser/concurrent/main.js",
+    "./browser/loading-state": "./mjs/browser/loading-state/main.js",
+    "./node": "./mjs/node/main.js",
+    "./node/concurrent": "./mjs/node/concurrent/main.js",
+    "./node/loading-state": "./mjs/node/loading-state/main.js",
+    "./create": "./mjs/create.js",
+    "./loading-state/create": "./mjs/loading-state/create.js"
+  },
+  "main": "./cjs/main.js",
+  "module": "./mjs/main.js",
   "files": [
     "browser",
     "cjs",
-    "es",
-    "node",
-    "concurrent"
+    "concurrent",
+    "loading-state",
+    "mjs",
+    "node"
   ],
-  "peerDependencies": {
-    "react": "^16.8 || 17"
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:app": "react-scripts build",
+    "build:lib": "npm-run-all build:lib-*",
+    "postbuild:lib": "npm run update-packages",
+    "build:lib-cjs": "library-scripts build --type cjs --out-dir cjs",
+    "build:lib-mjs": "library-scripts build --type mjs --out-dir mjs",
+    "deploy": "cd todoapp && npm run build && cd .. && gh-pages --dist todoapp/build",
+    "dev:todoapp": "concurrently \"npm run watch:lib-mjs\" \"cd todoapp && npm link ../ && npm start\"",
+    "prepare": "npm run build:lib",
+    "prepublishOnly": "npm run build:lib && cross-env CI=true npm run testOnly",
+    "postpublish": "cd todoapp && npm install react-pouchdb@latest",
+    "start": "concurrently \"npm run watch:lib-mjs\" \"react-scripts start\"",
+    "startOnly": "react-scripts start",
+    "test": "concurrently \"npm run watch:lib-mjs\" \"react-scripts test\"",
+    "testOnly": "react-scripts test",
+    "update-packages": "node scripts/update-packages",
+    "watch": "concurrently \"npm:watch:*\"",
+    "watch:lib-cjs": "library-scripts watch --type cjs --out-dir cjs",
+    "watch:lib-mjs": "library-scripts watch --type mjs --out-dir mjs"
   },
   "dependencies": {
-    "@babel/runtime": "^7.6.3",
-    "fast-json-stable-stringify": "^2.0.0",
-    "hoist-non-react-statics": "^3.3.0",
-    "lodash": "^4.17.15",
-    "pouchdb-collate": "^7.1.1",
-    "pouchdb-find": "^7.1.1",
-    "pouchdb-selector-core": "^7.1.1",
-    "use-subscription": "^1.1.1"
+    "@babel/runtime": "^7.12.5",
+    "@postinumero/map-get-with-default": "^0.1.2",
+    "@postinumero/use-async": "^0.1.2",
+    "@repeaterjs/repeater": "^3.0.4",
+    "fast-json-stable-stringify": "^2.1.0",
+    "hoist-non-react-statics": "^3.3.2",
+    "lodash": "^4.17.20",
+    "memoizee": "^0.4.14",
+    "pouchdb-collate": "^7.2.2",
+    "pouchdb-find": "^7.2.2",
+    "pouchdb-selector-core": "^7.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-flow": "^7.0.0",
-    "babel-plugin-codegen": "^3.0.0",
-    "babel-plugin-transform-rename-import": "^2.3.0",
-    "concurrently": "^5.0.0",
-    "cross-spawn": "^7.0.1",
-    "esm": "^3.2.25",
-    "fs-extra": "^8.1.0",
-    "gh-pages": "^2.1.1",
-    "library-util": "^0.5.0",
-    "pouchdb": "^7.1.1",
-    "pouchdb-browser": "^7.1.1",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "yargs": "^14.2.0"
+    "@arnosaine/react-scripts": "^4.0.0-4",
+    "@postinumero/library-scripts": "^0.1.3",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.2.2",
+    "babel-plugin-codegen": "^4.0.1",
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
+    "fs-extra": "^9.0.1",
+    "gh-pages": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "pouchdb": "^7.2.2",
+    "pouchdb-browser": "^7.2.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "npm run prettier:write",
-      "git add"
-    ],
-    "*.{css,json,md}": [
-      "npm run prettier:write",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "peerDependencies": {
+    "react": "^16.8 || 17"
   }
 }

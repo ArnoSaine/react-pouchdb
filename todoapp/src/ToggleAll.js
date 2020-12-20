@@ -2,7 +2,7 @@ import { useDB, useFind } from 'react-pouchdb/browser';
 
 export default function ToggleAll() {
   const docs = useFind({
-    selector: {}
+    selector: {},
   });
   const { bulkDocs } = useDB();
   return docs.length
@@ -15,7 +15,7 @@ export default function ToggleAll() {
               className="toggle-all"
               checked={completed}
               onChange={() =>
-                bulkDocs(docs.map(doc => ({ ...doc, completed: !completed })))
+                bulkDocs(docs.map((doc) => ({ ...doc, completed: !completed })))
               }
               type="checkbox"
             />

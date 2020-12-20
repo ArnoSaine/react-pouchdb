@@ -1,4 +1,4 @@
-import { useDB } from 'react-pouchdb/browser';
+import { useDB } from 'react-pouchdb';
 
 export default function Input() {
   const { post } = useDB();

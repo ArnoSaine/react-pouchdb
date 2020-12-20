@@ -1,4 +1,4 @@
-export default fn => {
+export default (fn) => {
   let processing;
   return async function queued(...args) {
     // 2.b. Overwrite current processing indicator with a promise that resolves after current processing has completed

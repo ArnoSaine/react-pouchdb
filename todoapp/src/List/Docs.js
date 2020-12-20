@@ -1,26 +1,26 @@
-import { useFind } from 'react-pouchdb/browser';
+import { useFind } from 'react-pouchdb';
 import Item from './Item';
 
 const filterByCompletedField = {
   active: { $ne: true },
-  completed: true
+  completed: true,
 };
 
 export default function Docs({
   match: {
-    params: { filter }
-  }
+    params: { filter },
+  },
 }) {
   const docs = useFind({
     selector: {
       timestamp: { $gte: null },
-      completed: filterByCompletedField[filter]
+      completed: filterByCompletedField[filter],
     },
-    sort: ['timestamp']
+    sort: ['timestamp'],
   });
   return (
     <ul className="todo-list">
-      {docs.map(doc => (
+      {docs.map((doc) => (
         <Item key={doc._id} doc={doc} />
       ))}
     </ul>

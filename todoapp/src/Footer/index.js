@@ -1,11 +1,11 @@
-import { useFind } from 'react-pouchdb/browser';
+import { useFind } from 'react-pouchdb';
 import ClearCompleted from './ClearCompleted';
 import Counter from './Counter';
 import Filter from './Filter';
 
 export default function Footer() {
   const docs = useFind({
-    selector: {}
+    selector: {},
   });
   const { length } = docs;
   return length ? (

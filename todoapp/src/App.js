@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { PouchDB } from 'react-pouchdb/browser';
+import { PouchDB } from 'react-pouchdb';
 import Container from './Container';
 import Footer from './Footer';
 import Input from './Input';

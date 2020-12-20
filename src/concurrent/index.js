@@ -1,2 +1,0 @@
-// @codegen
-require('../../api')(module);
